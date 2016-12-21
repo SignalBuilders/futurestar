@@ -2,6 +2,8 @@ package org.zhps.market.spi;
 
 import org.hjctp.entity.*;
 import org.hjctp.spi.MdSpi;
+import org.zhps.market.producer.MarketProducer;
+import org.zhps.util.PropertiesUtil;
 
 import java.io.BufferedWriter;
 
@@ -13,6 +15,16 @@ import java.io.BufferedWriter;
 public class MdSpiAdapter implements MdSpi {
 
     BufferedWriter bufWriter;
+
+    MarketProducer marketProducer;
+
+    public MdSpiAdapter(){
+
+    }
+
+    public MdSpiAdapter(MarketProducer marketProducer) {
+        this.marketProducer = marketProducer;
+    }
 
     @Override
     public void onFrontConnected() {
@@ -66,6 +78,11 @@ public class MdSpiAdapter implements MdSpi {
 
     @Override
     public void onRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
+        StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append(" ").append(pDepthMarketData.getLastPrice())
+                .append(" ").append(pDepthMarketData.getUpdateTime());
+        if(this.marketProducer != null){
+            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
+        }
 //        System.out.println(pDepthMarketData.getInstrumentId());
 //        try {
 //            bufWriter.newLine();

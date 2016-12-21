@@ -49,4 +49,4 @@ Temporary Items
 .idea
 *.iml
 *.properties
-*.class
+target

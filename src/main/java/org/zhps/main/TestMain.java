@@ -1,6 +1,7 @@
 package org.zhps.main;
 
 import org.hjctp.api.MdApi;
+import org.zhps.market.producer.MarketProducer;
 import org.zhps.market.spi.MdSpiAdapter;
 import org.zhps.util.PropertiesUtil;
 
@@ -12,7 +13,7 @@ import org.zhps.util.PropertiesUtil;
 public class TestMain {
     public static void main(String[] args) {
         final MdApi mdApi = new MdApi(PropertiesUtil.MK_FLOW_PATH, true, true);
-        MdSpiAdapter mdSpiA = new MdSpiAdapter();
+        MdSpiAdapter mdSpiA = new MdSpiAdapter(new MarketProducer());
 //        WriteUtil.startTimer(mdApi);
 //        WriteUtil.registerMdSpi(mdSpiA);
 

@@ -18,17 +18,6 @@ import java.util.TimerTask;
 public class WriteMarketToFileUtil {
     private static BufferedWriter bufWriter;
     private static MdSpi mdSpi;
-//    static {
-//        try {
-//            bufWriter = new BufferedWriter(new FileWriter("d:\\market\\market-20161219.txt", true));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public static BufferedWriter buildWrite(){
-//        return bufWriter;
-//    }
 
     public static void registerMdSpi(MdSpi mdSpi){
         WriteMarketToFileUtil.mdSpi = mdSpi;
