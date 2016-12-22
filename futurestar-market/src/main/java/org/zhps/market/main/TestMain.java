@@ -1,9 +1,9 @@
-package org.zhps.main;
+package org.zhps.market.main;
 
-import org.hjctp.api.MdApi;
+import org.zhps.base.util.PropertiesUtil;
+import org.zhps.hjctp.api.MdApi;
 import org.zhps.market.producer.MarketProducer;
 import org.zhps.market.spi.MdSpiAdapter;
-import org.zhps.util.PropertiesUtil;
 
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.

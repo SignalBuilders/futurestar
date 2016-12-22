@@ -1,9 +1,8 @@
 package org.zhps.market.spi;
 
-import org.hjctp.entity.*;
-import org.hjctp.spi.MdSpi;
+import org.zhps.hjctp.entity.*;
+import org.zhps.hjctp.spi.MdSpi;
 import org.zhps.market.producer.MarketProducer;
-import org.zhps.util.PropertiesUtil;
 
 import java.io.BufferedWriter;
 
@@ -80,9 +79,9 @@ public class MdSpiAdapter implements MdSpi {
     public void onRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
         StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append(" ").append(pDepthMarketData.getLastPrice())
                 .append(" ").append(pDepthMarketData.getUpdateTime());
-        if(this.marketProducer != null){
-            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
-        }
+//        if(this.marketProducer != null){
+//            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
+//        }
 //        System.out.println(pDepthMarketData.getInstrumentId());
 //        try {
 //            bufWriter.newLine();
@@ -92,7 +91,7 @@ public class MdSpiAdapter implements MdSpi {
 //            e.printStackTrace();
 //        } finally {
 //        }
-        System.out.println(pDepthMarketData.getInstrumentId() + " " + pDepthMarketData.getLastPrice() + " " + pDepthMarketData.getUpdateTime() + " " + pDepthMarketData.getTradingDay());
+        System.out.println(markets.toString());
 //        System.out.println(pDepthMarketData.getClosePrice());
 //        System.out.println(pDepthMarketData);
     }

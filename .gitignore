@@ -50,3 +50,5 @@ Temporary Items
 *.iml
 *.properties
 target
+*.class
+*.h

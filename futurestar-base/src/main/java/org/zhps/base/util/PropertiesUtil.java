@@ -1,4 +1,4 @@
-package org.zhps.util;
+package org.zhps.base.util;
 
 
 import org.apache.commons.io.IOUtils;

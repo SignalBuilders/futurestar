@@ -1,8 +1,8 @@
-package org.zhps.kafka;
+package org.zhps.base.kafka;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
-import org.zhps.util.PropertiesUtil;
+import org.zhps.base.util.PropertiesUtil;
 
 import java.util.Properties;
 
