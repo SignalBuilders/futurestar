@@ -1,5 +1,6 @@
 package org.zhps.market.spi;
 
+import org.zhps.base.util.PropertiesUtil;
 import org.zhps.hjctp.entity.*;
 import org.zhps.hjctp.spi.MdSpi;
 import org.zhps.market.producer.MarketProducer;
@@ -27,7 +28,7 @@ public class MdSpiAdapter implements MdSpi {
 
     @Override
     public void onFrontConnected() {
-        System.out.println("front connect success");
+//        System.out.println("front connect success");
     }
 
     @Override
@@ -38,10 +39,8 @@ public class MdSpiAdapter implements MdSpi {
     @Override
     public void onRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
                                int nRequestID, boolean bIsLast) {
-        System.out.println(pRspUserLogin);
-        System.out.println(pRspInfo);
-        System.out.println(nRequestID);
-        System.out.println(bIsLast);
+        StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay());
+        System.out.println(loginInfo.toString());
     }
 
     @Override
@@ -79,9 +78,9 @@ public class MdSpiAdapter implements MdSpi {
     public void onRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
         StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append(" ").append(pDepthMarketData.getLastPrice())
                 .append(" ").append(pDepthMarketData.getUpdateTime());
-//        if(this.marketProducer != null){
-//            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
-//        }
+        if(this.marketProducer != null){
+            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
+        }
 //        System.out.println(pDepthMarketData.getInstrumentId());
 //        try {
 //            bufWriter.newLine();
@@ -91,7 +90,7 @@ public class MdSpiAdapter implements MdSpi {
 //            e.printStackTrace();
 //        } finally {
 //        }
-        System.out.println(markets.toString());
+//        System.out.println(markets.toString());
 //        System.out.println(pDepthMarketData.getClosePrice());
 //        System.out.println(pDepthMarketData);
     }

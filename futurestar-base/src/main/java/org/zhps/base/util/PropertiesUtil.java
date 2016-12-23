@@ -41,6 +41,9 @@ public class PropertiesUtil {
     public static long BUFFER_MEMORY;
     public static String KEY_SERIALIZER;
     public static String VALUE_SERIALIZER;
+    public static String ZOOKEEPER_QUORUM;
+    public static String CONSUMER_GROUP_ID;
+
     static {
         Properties prop = new Properties();
         InputStream is = Objects.class.getResourceAsStream("/config.properties");
@@ -62,6 +65,8 @@ public class PropertiesUtil {
             BUFFER_MEMORY = Long.parseLong(prop.getProperty("buffer_memory"));
             KEY_SERIALIZER = prop.getProperty("key_serializer");
             VALUE_SERIALIZER = prop.getProperty("value_serializer");
+            ZOOKEEPER_QUORUM = prop.getProperty("zookeeper_quorum");
+            CONSUMER_GROUP_ID = prop.getProperty("consumer_group_id");
         } catch (IOException e) {
             //// TODO: 2016/12/21 add log 
             e.printStackTrace();
