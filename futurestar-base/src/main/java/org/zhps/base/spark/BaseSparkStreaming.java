@@ -43,54 +43,49 @@ public class BaseSparkStreaming {
     }
 
     public static void main(String[] args) {
-        new Thread(){
+        SparkConf sparkConf = new SparkConf().setAppName("market").setMaster("local[2]");
+        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(2000));
+        Map<String, Integer> topicMap = new HashMap<>();
+        String[] topicArray = "forward-quotation".split(",");
+        for (String topic: topicArray) {
+            topicMap.put(topic, 3);
+        }
+        JavaPairReceiverInputDStream<String, String> messages =
+                KafkaUtils.createStream(jssc, PropertiesUtil.ZOOKEEPER_QUORUM, PropertiesUtil.CONSUMER_GROUP_ID, topicMap);
+        JavaDStream<String> lines = messages.map(new Function<Tuple2<String, String>, String>() {
             @Override
-            public void run() {
-                SparkConf sparkConf = new SparkConf().setAppName("market").setMaster("local[2]");
-                JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(2000));
-                Map<String, Integer> topicMap = new HashMap<>();
-                String[] topicArray = "forward-quotation".split(",");
-                for (String topic: topicArray) {
-                    topicMap.put(topic, 3);
-                }
-                JavaPairReceiverInputDStream<String, String> messages =
-                        KafkaUtils.createStream(jssc, PropertiesUtil.ZOOKEEPER_QUORUM, PropertiesUtil.CONSUMER_GROUP_ID, topicMap);
-                JavaDStream<String> lines = messages.map(new Function<Tuple2<String, String>, String>() {
-                    @Override
-                    public String call(Tuple2<String, String> tuple2) {
-                        return tuple2._2();
-                    }
-                });
-
-                JavaDStream<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
-                    @Override
-                    public Iterator<String> call(String x) {
-                        return Arrays.asList(SPACE.split(x)).iterator();
-                    }
-                });
-
-                JavaPairDStream<String, Integer> wordCounts = words.mapToPair(
-                        new PairFunction<String, String, Integer>() {
-                            @Override
-                            public Tuple2<String, Integer> call(String s) {
-                                return new Tuple2<>(s, 1);
-                            }
-                        }).reduceByKey(new Function2<Integer, Integer, Integer>() {
-                    @Override
-                    public Integer call(Integer i1, Integer i2) {
-                        return i1 + i2;
-                    }
-                });
-
-                wordCounts.print();
-
-                jssc.start();
-                try {
-                    jssc.awaitTermination();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            public String call(Tuple2<String, String> tuple2) {
+                return tuple2._2();
             }
-        }.start();
+        });
+
+        JavaDStream<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
+            @Override
+            public Iterator<String> call(String x) {
+                return Arrays.asList(SPACE.split(x)).iterator();
+            }
+        });
+
+        JavaPairDStream<String, Integer> wordCounts = words.mapToPair(
+                new PairFunction<String, String, Integer>() {
+                    @Override
+                    public Tuple2<String, Integer> call(String s) {
+                        return new Tuple2<>(s, 1);
+                    }
+                }).reduceByKey(new Function2<Integer, Integer, Integer>() {
+            @Override
+            public Integer call(Integer i1, Integer i2) {
+                return i1 + i2;
+            }
+        });
+
+        wordCounts.print();
+
+        jssc.start();
+        try {
+            jssc.awaitTermination();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
