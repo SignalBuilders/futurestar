@@ -36,7 +36,7 @@ public class BaseSparkStreaming {
         SparkConf sparkConf = new SparkConf().setAppName("market").setMaster("local[*]");
         JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(10000));
         Map<String, Integer> topicMap = new HashMap<>();
-        String[] topicArray = "forward-quotation".split(",");
+        String[] topicArray = PropertiesUtil.MK_TOPIC.split(",");
         for (String topic : topicArray) {
             topicMap.put(topic, 3);
         }
