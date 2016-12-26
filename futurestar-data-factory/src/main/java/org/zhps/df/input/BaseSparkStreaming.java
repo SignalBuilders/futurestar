@@ -57,51 +57,28 @@ public class BaseSparkStreaming {
             }
         });
 
-//        words.foreachRDD(new VoidFunction2<JavaRDD<String>, Time>() {
-//            @Override
-//            public void call(JavaRDD<String> rdd, Time time) throws Exception {
-//                rdd.flatMap(new FlatMapFunction<String, Quotation>() {
-//                    @Override
-//                    public Iterator<Quotation> call(String s) throws Exception {
-//                        return null;
-//                    }
-//                });
-//                SparkSession spark = JavaSparkSessionSingleton.getInstance(rdd.context().getConf());
-//                JavaRDD<Quotation> rowRDD = rdd.map(new Function<String, Quotation>() {
-//                    @Override
-//                    public Quotation call(String s) throws Exception {
-//                        System.out.println(s + "++");
-//                        Quotation quotation = new Quotation();
-//                        quotation.setInstrumentId(s);
-//                        return null;
-//                    }
-//                });
-//                Dataset<Row> wordsDataFrame = spark.createDataFrame(rowRDD, Quotation.class);
-//
-//                wordsDataFrame.createOrReplaceTempView("quotations");
-//
-//                Dataset<Row> wordCountsDataFrame =
-//                        spark.sql("select quotation, count(*) as total from words group by quotations");
-//                System.out.println("========= " + time + "=========");
-//                wordCountsDataFrame.show();
-//            }
-//        });
-
-
-        JavaPairDStream<String, Integer> wordCounts = words.mapToPair(
-                new PairFunction<String, String, Integer>() {
-                    @Override
-                    public Tuple2<String, Integer> call(String s) {
-                        return new Tuple2<>(s, 1);
-                    }
-                }).reduceByKey(new Function2<Integer, Integer, Integer>() {
+        words.foreachRDD(new VoidFunction2<JavaRDD<String>, Time>() {
             @Override
-            public Integer call(Integer i1, Integer i2) {
-                return i1 + i2;
+            public void call(JavaRDD<String> stringJavaRDD, Time time) throws Exception {
+
             }
         });
 
-        wordCounts.print();
+
+//        JavaPairDStream<String, Integer> wordCounts = words.mapToPair(
+//                new PairFunction<String, String, Integer>() {
+//                    @Override
+//                    public Tuple2<String, Integer> call(String s) {
+//                        return new Tuple2<>(s, 1);
+//                    }
+//                }).reduceByKey(new Function2<Integer, Integer, Integer>() {
+//            @Override
+//            public Integer call(Integer i1, Integer i2) {
+//                return i1 + i2;
+//            }
+//        });
+//
+//        wordCounts.print();
 
         jssc.start();
         try {
