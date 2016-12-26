@@ -9,7 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>org.zhps</groupId>
     <artifactId>futurestar-data-factory</artifactId>
+    <packaging>jar</packaging>
 
-
+    <dependencies>
+        <!-- futurestar base -->
+        <dependency>
+            <groupId>org.zhps</groupId>
+            <artifactId>futurestar-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

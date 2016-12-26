@@ -77,11 +77,12 @@ public class MdSpiAdapter implements MdSpi {
     @Override
     public void onRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
         StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append(" ")
-                .append(pDepthMarketData.getOpenPrice()).append(" ")
                 .append(pDepthMarketData.getLastPrice()).append(" ")
+                .append(pDepthMarketData.getOpenPrice()).append(" ")
                 .append(pDepthMarketData.getUpperLimitPrice()).append(" ")
                 .append(pDepthMarketData.getLowerLimitPrice()).append(" ")
-                .append(pDepthMarketData.getUpdateTime()).append(" ");
+                .append(pDepthMarketData.getUpdateTime()).append(" ")
+                .append(pDepthMarketData.getTradingDay()).append(" ");
         if(this.marketProducer != null){
             marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
         }
