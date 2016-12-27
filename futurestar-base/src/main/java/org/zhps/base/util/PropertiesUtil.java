@@ -30,6 +30,13 @@ public class PropertiesUtil {
     public static String[] MK_CONTRACTS;
     public static int MK_SUB_NUM;
     public static String MK_FLOW_PATH;
+    public static int MK_QUO_INSTRUMENTID;
+    public static int MK_QUO_LASTPRICE;
+    public static int MK_QUO_OPENPRICE;
+    public static int MK_QUO_UPPERLIMITPRICE;
+    public static int MK_QUO_LOWERLIMITPRICE;
+    public static int MK_QUO_UPDATETIME;
+    public static int MK_QUO_TRADINGDAY;
     //market-kafka
     public static String MK_TOPIC;
     //kafka
@@ -56,6 +63,13 @@ public class PropertiesUtil {
             MK_SUB_NUM = Integer.parseInt(prop.getProperty("mk_sub_num"));
             MK_FLOW_PATH = prop.getProperty("mk_flow_path");
             MK_TOPIC = prop.getProperty("mk_topic");
+            MK_QUO_INSTRUMENTID = Integer.parseInt(prop.getProperty("mk_quotation_instrumentId"));
+            MK_QUO_LASTPRICE = Integer.parseInt(prop.getProperty("mk_quotation_lastPrice"));
+            MK_QUO_OPENPRICE = Integer.parseInt(prop.getProperty("mk_quotation_openPrice"));
+            MK_QUO_UPPERLIMITPRICE = Integer.parseInt(prop.getProperty("mk_quotation_upperLimitPrice"));
+            MK_QUO_LOWERLIMITPRICE = Integer.parseInt(prop.getProperty("mk_quotation_lowerLimitPrice"));
+            MK_QUO_UPDATETIME = Integer.parseInt(prop.getProperty("mk_quotation_updateTime"));
+            MK_QUO_TRADINGDAY = Integer.parseInt(prop.getProperty("mk_quotation_tradingDay"));
 
             BOOTSTRAP_SERVERS = prop.getProperty("bootstrap_servers");
             ACKS = prop.getProperty("acks");

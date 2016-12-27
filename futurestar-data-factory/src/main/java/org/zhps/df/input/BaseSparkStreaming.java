@@ -34,7 +34,7 @@ public class BaseSparkStreaming {
 
     public static void main(String[] args) {
         SparkConf sparkConf = new SparkConf().setAppName("market").setMaster("local[*]");
-        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(10000));
+        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(200));
         Map<String, Integer> topicMap = new HashMap<>();
         String[] topicArray = PropertiesUtil.MK_TOPIC.split(",");
         for (String topic : topicArray) {
@@ -50,17 +50,31 @@ public class BaseSparkStreaming {
             }
         });
 
-        JavaDStream<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
+        JavaDStream<Quotation> words = lines.flatMap(new FlatMapFunction<String, Quotation>() {
             @Override
-            public Iterator<String> call(String x) {
-                return Arrays.asList(SPACE.split(x)).iterator();
+            public Iterator<Quotation> call(String x) {
+                String[] quoStr = SPACE.split(x);
+                Quotation quotation = new Quotation();
+                quotation.setInstrumentId(quoStr[PropertiesUtil.MK_QUO_INSTRUMENTID]);
+                quotation.setLastPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LASTPRICE]));
+                quotation.setOpenPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_OPENPRICE]));
+                quotation.setUpperLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_UPPERLIMITPRICE]));
+                quotation.setLowerLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LOWERLIMITPRICE]));
+                quotation.setUpdateTime(quoStr[PropertiesUtil.MK_QUO_UPDATETIME]);
+                quotation.setTradingDay(quoStr[PropertiesUtil.MK_QUO_TRADINGDAY]);
+                return Arrays.asList(quotation).iterator();
             }
         });
 
-        words.foreachRDD(new VoidFunction2<JavaRDD<String>, Time>() {
+        words.foreachRDD(new VoidFunction2<JavaRDD<Quotation>, Time>() {
             @Override
-            public void call(JavaRDD<String> stringJavaRDD, Time time) throws Exception {
-
+            public void call(JavaRDD<Quotation> quotationJavaRDD, Time time) throws Exception {
+                quotationJavaRDD.foreach(new VoidFunction<Quotation>() {
+                    @Override
+                    public void call(Quotation quotation) throws Exception {
+                        System.out.println(quotation);
+                    }
+                });
             }
         });
 

@@ -88,9 +88,22 @@ public class Quotation implements Serializable {
         this.tradingDay = tradingDay;
     }
 
-    public static void main(String[] args) {
-        Quotation quotation = new Quotation();
-        quotation.setInstrumentId("TA234");
-        System.out.println(quotation.getInstrumentId());
+    @Override
+    public String toString() {
+        return "Quotation{" +
+                "instrumentId='" + instrumentId + '\'' +
+                ", lastPrice=" + lastPrice +
+                ", openPrice=" + openPrice +
+                ", upperLimitPrice=" + upperLimitPrice +
+                ", lowerLimitPrice=" + lowerLimitPrice +
+                ", updateTime='" + updateTime + '\'' +
+                ", tradingDay='" + tradingDay + '\'' +
+                '}';
     }
+
+    //    public static void main(String[] args) {
+//        Quotation quotation = new Quotation();
+//        quotation.setInstrumentId("TA234");
+//        System.out.println(quotation.getInstrumentId());
+//    }
 }
