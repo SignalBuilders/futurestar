@@ -5,6 +5,8 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -50,6 +52,20 @@ public class PropertiesUtil {
     public static String VALUE_SERIALIZER;
     public static String ZOOKEEPER_QUORUM;
     public static String CONSUMER_GROUP_ID;
+    //task interval
+    public static long HOURS_24 = 24 * 60 * 60 * 1000l;
+    public static long HOURS_12 = 12 * 60 * 60 * 1000l;
+    //task date
+    public static Date OPEN_MARKET_DATE;
+    public static Date CLOSE_MARKET_DATE;
+    //redis
+    public static String REDIS_IP;
+    public static int REDIS_PORT;
+    public static int REDIS_POOL_TOTAL;
+    public static int REDIS_POOL_IDLE;
+    public static long REDIS_POOL_WAIT_MILLIS;
+    public static boolean REDIS_POOL_BORROW;
+    public static boolean REDIS_POOL_RETURN;
 
     static {
         Properties prop = new Properties();
@@ -81,6 +97,26 @@ public class PropertiesUtil {
             VALUE_SERIALIZER = prop.getProperty("value_serializer");
             ZOOKEEPER_QUORUM = prop.getProperty("zookeeper_quorum");
             CONSUMER_GROUP_ID = prop.getProperty("consumer_group_id");
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 20);
+            calendar.set(Calendar.MINUTE, 50);
+            calendar.set(Calendar.SECOND, 0);
+            OPEN_MARKET_DATE = calendar.getTime();
+
+            calendar.set(Calendar.HOUR_OF_DAY, 15);
+            calendar.set(Calendar.MINUTE, 30);
+            calendar.set(Calendar.SECOND, 0);
+            CLOSE_MARKET_DATE = calendar.getTime();
+
+            REDIS_IP = prop.getProperty("redis_ip");
+            REDIS_PORT = Integer.parseInt(prop.getProperty("redis_port"));
+            REDIS_POOL_TOTAL = Integer.parseInt(prop.getProperty("redis_pool_total"));
+            REDIS_POOL_IDLE = Integer.parseInt(prop.getProperty("redis_pool_idle"));
+            REDIS_POOL_WAIT_MILLIS = Long.parseLong(prop.getProperty("redis_pool_wait_millis"));
+            REDIS_POOL_BORROW = Boolean.parseBoolean(prop.getProperty("redis_pool_borrow"));
+            REDIS_POOL_RETURN = Boolean.parseBoolean(prop.getProperty("redis_pool_return"));
+
         } catch (IOException e) {
             //// TODO: 2016/12/21 add log 
             e.printStackTrace();

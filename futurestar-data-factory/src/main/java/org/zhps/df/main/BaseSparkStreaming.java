@@ -1,21 +1,18 @@
-package org.zhps.df.input;
+package org.zhps.df.main;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.*;
-import org.apache.spark.sql.Dataset;
-import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.Time;
 import org.apache.spark.streaming.api.java.JavaDStream;
-import org.apache.spark.streaming.api.java.JavaPairDStream;
 import org.apache.spark.streaming.api.java.JavaPairReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.df.entity.Quotation;
+import org.zhps.df.task.TaskHelper;
 import scala.Tuple2;
 
 import java.util.Arrays;
@@ -30,6 +27,10 @@ import java.util.regex.Pattern;
  * Created on 2016/12/23.
  */
 public class BaseSparkStreaming {
+    static{
+        TaskHelper.openMarket();
+        TaskHelper.closeMarket();
+    }
     private static final Pattern SPACE = Pattern.compile(" ");
 
     public static void main(String[] args) {
