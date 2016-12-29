@@ -16,16 +16,7 @@ import java.util.Properties;
  * Created on 2016/12/21.
  */
 public class PropertiesUtil {
-    //kafka param name
-    final public static String BOOTSTRAP_SERVERS_NAME = "bootstrap.servers";
-    final public static String ACKS_NAME = "acks";
-    final public static String RETRIES_NAME = "retries";
-    final public static String BATCH_SIZE_NAME = "batch.size";
-    final public static String LINGER_MS_NAME = "linger.ms";
-    final public static String BUFFER_MEMORY_NAME = "buffer.memory";
-    final public static String KEY_SERIALIZER_NAME = "key.serializer";
-    final public static String VALUE_SERIALIZER_NAME = "value.serializer";
-    //market-base
+    //market
     public static String MK_SIM_TEST;
     public static String MK_SIM_FIRM;
     public static String MK_PROD;
@@ -39,8 +30,6 @@ public class PropertiesUtil {
     public static int MK_QUO_LOWERLIMITPRICE;
     public static int MK_QUO_UPDATETIME;
     public static int MK_QUO_TRADINGDAY;
-    //market-kafka
-    public static String MK_TOPIC;
     //kafka
     public static String BOOTSTRAP_SERVERS;
     public static String ACKS;
@@ -52,6 +41,7 @@ public class PropertiesUtil {
     public static String VALUE_SERIALIZER;
     public static String ZOOKEEPER_QUORUM;
     public static String CONSUMER_GROUP_ID;
+    public static String MK_TOPIC;
     //task interval
     public static long HOURS_24 = 24 * 60 * 60 * 1000l;
     public static long HOURS_12 = 12 * 60 * 60 * 1000l;
@@ -66,6 +56,8 @@ public class PropertiesUtil {
     public static long REDIS_POOL_WAIT_MILLIS;
     public static boolean REDIS_POOL_BORROW;
     public static boolean REDIS_POOL_RETURN;
+    //hbase
+    public static String HBASE_ZOOKEEPER_QUORUM;
 
     static {
         Properties prop = new Properties();
@@ -116,6 +108,8 @@ public class PropertiesUtil {
             REDIS_POOL_WAIT_MILLIS = Long.parseLong(prop.getProperty("redis_pool_wait_millis"));
             REDIS_POOL_BORROW = Boolean.parseBoolean(prop.getProperty("redis_pool_borrow"));
             REDIS_POOL_RETURN = Boolean.parseBoolean(prop.getProperty("redis_pool_return"));
+
+            HBASE_ZOOKEEPER_QUORUM = prop.getProperty("hbase_zookeeper_quorum");
 
         } catch (IOException e) {
             //// TODO: 2016/12/21 add log 

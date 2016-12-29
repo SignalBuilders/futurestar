@@ -15,14 +15,14 @@ public abstract class BaseProducer {
     protected static Producer<String, String> producer;
     static{
         Properties props = new Properties();
-        props.put(PropertiesUtil.BOOTSTRAP_SERVERS_NAME, PropertiesUtil.BOOTSTRAP_SERVERS);
-        props.put(PropertiesUtil.ACKS_NAME, PropertiesUtil.ACKS);
-        props.put(PropertiesUtil.RETRIES_NAME, PropertiesUtil.RETRIES);
-        props.put(PropertiesUtil.BATCH_SIZE_NAME, PropertiesUtil.BATCH_SIZE);
-        props.put(PropertiesUtil.LINGER_MS_NAME, PropertiesUtil.LINGER_MS);
-        props.put(PropertiesUtil.BUFFER_MEMORY_NAME, PropertiesUtil.BUFFER_MEMORY);
-        props.put(PropertiesUtil.KEY_SERIALIZER_NAME, PropertiesUtil.KEY_SERIALIZER);
-        props.put(PropertiesUtil.VALUE_SERIALIZER_NAME, PropertiesUtil.VALUE_SERIALIZER);
+        props.put("bootstrap.servers", PropertiesUtil.BOOTSTRAP_SERVERS);
+        props.put("acks", PropertiesUtil.ACKS);
+        props.put("retries", PropertiesUtil.RETRIES);
+        props.put("batch.size", PropertiesUtil.BATCH_SIZE);
+        props.put("linger.ms", PropertiesUtil.LINGER_MS);
+        props.put("buffer.memory", PropertiesUtil.BUFFER_MEMORY);
+        props.put("key.serializer", PropertiesUtil.KEY_SERIALIZER);
+        props.put("value.serializer", PropertiesUtil.VALUE_SERIALIZER);
         producer = new KafkaProducer<String, String>(props);
     }
 

@@ -27,10 +27,10 @@ import java.util.regex.Pattern;
  * Created on 2016/12/23.
  */
 public class BaseSparkStreaming {
-    static{
-        TaskHelper.openMarket();
-        TaskHelper.closeMarket();
-    }
+//    static{
+//        TaskHelper.openMarket();
+//        TaskHelper.closeMarket();
+//    }
     private static final Pattern SPACE = Pattern.compile(" ");
 
     public static void main(String[] args) {
