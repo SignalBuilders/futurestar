@@ -85,18 +85,18 @@ public class MdSpiAdapter implements MdSpi {
                 .append(pDepthMarketData.getUpdateTime()).append(" ")
                 .append(pDepthMarketData.getTradingDay()).append(" ")
                 .append(pDepthMarketData.getUpdateMillisec()).append(" ");
-        if(this.marketProducer != null){
-            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
-        }
-//        System.out.println(pDepthMarketData.getInstrumentId());
-        try {
-            bufWriter.newLine();
-            bufWriter.write(markets.toString());
-            bufWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-        }
+//        if(this.marketProducer != null){
+//            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
+//        }
+
+//        try {
+//            bufWriter.newLine();
+//            bufWriter.write(markets.toString());
+//            bufWriter.flush();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//        }
         System.out.println(markets.toString());
 //        System.out.println(pDepthMarketData.getClosePrice());
 //        System.out.println(pDepthMarketData);

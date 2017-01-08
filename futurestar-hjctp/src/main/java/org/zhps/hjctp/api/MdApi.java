@@ -15,16 +15,16 @@ public class MdApi {
         NativeLoader.createMdApi(pszFlowPath, bIsUsingUdp, bIsMulticast);
     };
 
-    public void registerMdSpi(MdSpi mdSpi){
-        NativeLoader.registerSpi(mdSpi);
+    public void registerSpi(MdSpi mdSpi){
+        NativeLoader.registerMdSpi(mdSpi);
     }
 
     public void registerFront(String frontAddress){
-        NativeLoader.registerFront(frontAddress);
+        NativeLoader.registerMdFront(frontAddress);
     }
 
     public void registerLoginInfo(String brokerId, String investorId, String password){
-        NativeLoader.registerLoginInfo(brokerId, investorId, password);
+        NativeLoader.registerMdLoginInfo(brokerId, investorId, password);
     }
 
     public void registerSubMarketData(String[] contracts, int iInstrumentID){
@@ -32,7 +32,7 @@ public class MdApi {
     }
 
     public void connect(){
-        NativeLoader.connect();
+        NativeLoader.connectMdServer();
     }
 
     public String getTradingDay(){

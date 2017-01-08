@@ -31,6 +31,10 @@ public class PropertiesUtil {
     public static int MK_QUO_UPDATETIME;
     public static int MK_QUO_TRADINGDAY;
     public static int MK_QUO_UPDATETIMEMILLISEC;
+    //trader
+    public static String TD_SIM_TEST;
+    public static String TD_SIM_FIRM;
+    public static String TD_PROD;
     //kafka
     public static String BOOTSTRAP_SERVERS;
     public static String ACKS;
@@ -82,6 +86,10 @@ public class PropertiesUtil {
             MK_QUO_UPDATETIME = Integer.parseInt(prop.getProperty("mk_quotation_updateTime"));
             MK_QUO_TRADINGDAY = Integer.parseInt(prop.getProperty("mk_quotation_tradingDay"));
             MK_QUO_UPDATETIMEMILLISEC = Integer.parseInt(prop.getProperty("mk_quotation_updateTimeMillisec"));
+
+            TD_SIM_TEST = prop.getProperty("td_sim_test");
+            TD_SIM_FIRM = prop.getProperty("td_sim_firm");
+            TD_PROD = prop.getProperty("td_prod");
 
             BOOTSTRAP_SERVERS = prop.getProperty("bootstrap_servers");
             ACKS = prop.getProperty("acks");

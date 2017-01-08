@@ -15,10 +15,10 @@ public class MarketRun {
     public static void main(String[] args) {
         final MdApi mdApi = new MdApi(PropertiesUtil.MK_FLOW_PATH, true, true);
         final MdSpiAdapter mdSpiA = new MdSpiAdapter(new MarketProducer());
-        WriteMarketToFileUtil.startTimer(mdApi);
-        WriteMarketToFileUtil.registerMdSpi(mdSpiA);
+//        WriteMarketToFileUtil.startTimer(mdApi);
+//        WriteMarketToFileUtil.registerMdSpi(mdSpiA);
 
-        mdApi.registerMdSpi(mdSpiA);
+        mdApi.registerSpi(mdSpiA);
         mdApi.registerFront(PropertiesUtil.MK_SIM_TEST);
         mdApi.registerLoginInfo("", "", "");
         mdApi.registerSubMarketData(PropertiesUtil.MK_CONTRACTS, PropertiesUtil.MK_SUB_NUM);
