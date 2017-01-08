@@ -27,6 +27,8 @@ public class Quotation implements Serializable {
 
     private String tradingDay;
 
+    private String updateMillisec;
+
     public String getInstrumentId() {
         return instrumentId;
     }
@@ -88,6 +90,14 @@ public class Quotation implements Serializable {
         this.tradingDay = tradingDay;
     }
 
+    public String getUpdateMillisec() {
+        return updateMillisec;
+    }
+
+    public void setUpdateMillisec(String updateMillisec) {
+        this.updateMillisec = updateMillisec;
+    }
+
     @Override
     public String toString() {
         return "Quotation{" +
@@ -98,6 +108,7 @@ public class Quotation implements Serializable {
                 ", lowerLimitPrice=" + lowerLimitPrice +
                 ", updateTime='" + updateTime + '\'' +
                 ", tradingDay='" + tradingDay + '\'' +
+                ", updateMillisec='" + updateMillisec + '\'' +
                 '}';
     }
 

@@ -23,14 +23,16 @@ import java.util.concurrent.Executors;
  */
 public class TaskHelper {
     public static void openMarket(){
-//        Jedis jedis = BaseRedis.getJedis();
-        HBaseClient hbaseClient = new HBaseClient("192.168.4.30:2181", "/hbase", Executors.newCachedThreadPool());
+        Jedis jedis = BaseRedis.getJedis();
+//        System.out.println(jedis.get("test"));
 
-        GetRequest getRequest = new GetRequest("test", "row1");
+        HBaseClient hbaseClient = BaseHbase.gethBaseClient();
+
+        GetRequest getRequest = new GetRequest("test", "row2");
         try {
             ArrayList<KeyValue> kvs = hbaseClient.get(getRequest).join();
-            System.out.println(kvs.get(0));
-            hbaseClient.shutdown();
+            System.out.println(kvs);
+            hbaseClient.shutdown().joinUninterruptibly();
         } catch (Exception e) {
             e.printStackTrace();
         }

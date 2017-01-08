@@ -30,6 +30,7 @@ public class PropertiesUtil {
     public static int MK_QUO_LOWERLIMITPRICE;
     public static int MK_QUO_UPDATETIME;
     public static int MK_QUO_TRADINGDAY;
+    public static int MK_QUO_UPDATETIMEMILLISEC;
     //kafka
     public static String BOOTSTRAP_SERVERS;
     public static String ACKS;
@@ -58,6 +59,8 @@ public class PropertiesUtil {
     public static boolean REDIS_POOL_RETURN;
     //hbase
     public static String HBASE_ZOOKEEPER_QUORUM;
+    public static String HBASE_BUFFERED_FLUSH_INTERVAL;
+    public static String HBASE_BATCH_SIZE;
 
     static {
         Properties prop = new Properties();
@@ -78,6 +81,7 @@ public class PropertiesUtil {
             MK_QUO_LOWERLIMITPRICE = Integer.parseInt(prop.getProperty("mk_quotation_lowerLimitPrice"));
             MK_QUO_UPDATETIME = Integer.parseInt(prop.getProperty("mk_quotation_updateTime"));
             MK_QUO_TRADINGDAY = Integer.parseInt(prop.getProperty("mk_quotation_tradingDay"));
+            MK_QUO_UPDATETIMEMILLISEC = Integer.parseInt(prop.getProperty("mk_quotation_updateTimeMillisec"));
 
             BOOTSTRAP_SERVERS = prop.getProperty("bootstrap_servers");
             ACKS = prop.getProperty("acks");
@@ -110,6 +114,8 @@ public class PropertiesUtil {
             REDIS_POOL_RETURN = Boolean.parseBoolean(prop.getProperty("redis_pool_return"));
 
             HBASE_ZOOKEEPER_QUORUM = prop.getProperty("hbase_zookeeper_quorum");
+            HBASE_BUFFERED_FLUSH_INTERVAL = prop.getProperty("hbase_buffered_flush_interval");
+            HBASE_BATCH_SIZE = prop.getProperty("hbase_batch_size");
 
         } catch (IOException e) {
             //// TODO: 2016/12/21 add log 

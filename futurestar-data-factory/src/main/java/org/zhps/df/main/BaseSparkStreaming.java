@@ -10,11 +10,17 @@ import org.apache.spark.streaming.api.java.JavaDStream;
 import org.apache.spark.streaming.api.java.JavaPairReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
+import org.hbase.async.HBaseClient;
+import org.hbase.async.PutRequest;
+import org.zhps.base.hbase.BaseHbase;
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.df.entity.Quotation;
 import org.zhps.df.task.TaskHelper;
 import scala.Tuple2;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,10 +38,14 @@ public class BaseSparkStreaming {
 //        TaskHelper.closeMarket();
 //    }
     private static final Pattern SPACE = Pattern.compile(" ");
+    private static final byte[] TABLE_NAME = "quotation".getBytes();
+    private static final byte[] COLUMN_FAMILY = "quo".getBytes();
+    private static final HBaseClient hBaseClient = BaseHbase.gethBaseClient();
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException {
         SparkConf sparkConf = new SparkConf().setAppName("market").setMaster("local[*]");
-        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(200));
+        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(100));
         Map<String, Integer> topicMap = new HashMap<>();
         String[] topicArray = PropertiesUtil.MK_TOPIC.split(",");
         for (String topic : topicArray) {
@@ -63,6 +73,7 @@ public class BaseSparkStreaming {
                 quotation.setLowerLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LOWERLIMITPRICE]));
                 quotation.setUpdateTime(quoStr[PropertiesUtil.MK_QUO_UPDATETIME]);
                 quotation.setTradingDay(quoStr[PropertiesUtil.MK_QUO_TRADINGDAY]);
+                quotation.setUpdateMillisec(quoStr[PropertiesUtil.MK_QUO_UPDATETIMEMILLISEC]);
                 return Arrays.asList(quotation).iterator();
             }
         });
@@ -73,7 +84,18 @@ public class BaseSparkStreaming {
                 quotationJavaRDD.foreach(new VoidFunction<Quotation>() {
                     @Override
                     public void call(Quotation quotation) throws Exception {
-                        System.out.println(quotation);
+                        byte[] rowKey = (quotation.getTradingDay() + "|" + quotation.getInstrumentId() + "|"
+                                + quotation.getUpdateTime() + "|" + quotation.getUpdateMillisec()).getBytes();
+                        byte[] last = String.valueOf(quotation.getLastPrice()).getBytes();
+                        byte[] open = String.valueOf(quotation.getOpenPrice()).getBytes();
+                        byte[] upper = String.valueOf(quotation.getUpperLimitPrice()).getBytes();
+                        byte[] lower = String.valueOf(quotation.getLowerLimitPrice()).getBytes();
+                        byte[][] colBytes = {"last".getBytes(),"open".getBytes(),"upper".getBytes(),"lower".getBytes()};
+                        byte[][] valBytes = {last,open,upper,lower};
+
+                        PutRequest put = new PutRequest(TABLE_NAME, rowKey, COLUMN_FAMILY, colBytes, valBytes);
+                        put.setDurable(false);
+                        hBaseClient.put(put);
                     }
                 });
             }

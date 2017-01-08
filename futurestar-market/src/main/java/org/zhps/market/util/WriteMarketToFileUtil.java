@@ -26,7 +26,7 @@ public class WriteMarketToFileUtil {
 
     public static void initBufWriter(){
         try {
-            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("d:\\market\\market-20161226.txt", true));
+            BufferedWriter bufWriter = new BufferedWriter(new FileWriter("d:\\market\\market-20170107.txt", true));
             mdSpi.onResetBufferWriter(bufWriter);
         } catch (IOException e) {
             e.printStackTrace();
