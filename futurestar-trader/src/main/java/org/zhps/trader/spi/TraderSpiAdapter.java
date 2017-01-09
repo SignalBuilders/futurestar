@@ -18,12 +18,12 @@ public class TraderSpiAdapter implements TraderSpi {
 
     @Override
     public void onFrontDisconnected(int nReason) {
-
     }
 
     @Override
     public void onRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-
+        StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay());
+        System.out.println(loginInfo.toString());
     }
 
 

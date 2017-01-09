@@ -9,31 +9,31 @@ import java.io.Serializable;
  */
 public class CThostFtdcRspInfoField implements Serializable {
 
-    private int ErrorID;
+    private int errorID;
 
-    private String ErrorMsg;
+    private String errorMsg;
 
     public int getErrorID() {
-        return ErrorID;
+        return errorID;
     }
 
     public void setErrorID(int errorID) {
-        ErrorID = errorID;
-    }
-
-    public String getErrorMsg() {
-        return ErrorMsg;
-    }
-
-    public void setErrorMsg(String errorMsg) {
-        ErrorMsg = errorMsg;
+        this.errorID = errorID;
     }
 
     @Override
     public String toString() {
         return "CThostFtdcRspInfoField{" +
-                "ErrorID=" + ErrorID +
-                ", ErrorMsg='" + ErrorMsg + '\'' +
+                "errorID=" + errorID +
+                ", errorMsg='" + errorMsg + '\'' +
                 '}';
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }
