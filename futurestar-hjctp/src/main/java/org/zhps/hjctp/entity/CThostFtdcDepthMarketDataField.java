@@ -450,51 +450,51 @@ public class CThostFtdcDepthMarketDataField implements Serializable {
 
     @Override
     public String toString() {
-        return "CThostFtdcDepthMarketDataField{" +
-                "tradingDay='" + tradingDay + '\'' +
-                ", instrumentId='" + instrumentId + '\'' +
-                ", exchangeId='" + exchangeId + '\'' +
-                ", exchangeInstId='" + exchangeInstId + '\'' +
-                ", lastPrice=" + lastPrice +
-                ", preSettlementPrice=" + preSettlementPrice +
-                ", preClosePrice=" + preClosePrice +
-                ", preOpenInterest=" + preOpenInterest +
-                ", openPrice=" + openPrice +
-                ", highestPrice=" + highestPrice +
-                ", lowestPrice=" + lowestPrice +
-                ", volume=" + volume +
-                ", turnover=" + turnover +
-                ", openInterest=" + openInterest +
-                ", closePrice=" + closePrice +
-                ", settlementPrice=" + settlementPrice +
-                ", upperLimitPrice=" + upperLimitPrice +
-                ", lowerLimitPrice=" + lowerLimitPrice +
-                ", preDelta=" + preDelta +
-                ", currDelta=" + currDelta +
-                ", updateTime='" + updateTime + '\'' +
-                ", updateMillisec=" + updateMillisec +
-                ", bidPrice1=" + bidPrice1 +
-                ", bidVolume1=" + bidVolume1 +
-                ", askPrice1=" + askPrice1 +
-                ", askVolume1=" + askVolume1 +
-                ", bidPrice2=" + bidPrice2 +
-                ", bidVolume2=" + bidVolume2 +
-                ", askPrice2=" + askPrice2 +
-                ", askVolume2=" + askVolume2 +
-                ", bidPrice3=" + bidPrice3 +
-                ", bidVolume3=" + bidVolume3 +
-                ", askPrice3=" + askPrice3 +
-                ", askVolume3=" + askVolume3 +
-                ", bidPrice4=" + bidPrice4 +
-                ", bidVolume4=" + bidVolume4 +
-                ", askPrice4=" + askPrice4 +
-                ", askVolume4=" + askVolume4 +
-                ", bidPrice5=" + bidPrice5 +
-                ", bidVolume5=" + bidVolume5 +
-                ", askPrice5=" + askPrice5 +
-                ", askVolume5=" + askVolume5 +
-                ", averagePrice=" + averagePrice +
-                ", actionDay='" + actionDay + '\'' +
-                '}';
+        return new StringBuilder("CThostFtdcDepthMarketDataField{")
+                .append("tradingDay='").append(tradingDay).append("'")
+                .append(", instrumentId='").append(instrumentId).append("'")
+                .append(", exchangeId='").append(exchangeId).append("'")
+                .append(", exchangeInstId='").append(exchangeInstId).append("'")
+                .append(", lastPrice=").append(lastPrice)
+                .append(", preSettlementPrice=").append(preSettlementPrice)
+                .append(", preClosePrice=").append(preClosePrice)
+                .append(", preOpenInterest=").append(preOpenInterest)
+                .append(", openPrice=").append(openPrice)
+                .append(", highestPrice=").append(highestPrice)
+                .append(", lowestPrice=").append(lowestPrice)
+                .append(", volume=").append(volume)
+                .append(", turnover=").append(turnover)
+                .append(", openInterest=").append(openInterest)
+                .append(", closePrice=").append(closePrice)
+                .append(", settlementPrice=").append(settlementPrice)
+                .append(", upperLimitPrice=").append(upperLimitPrice)
+                .append(", lowerLimitPrice=").append(lowerLimitPrice)
+                .append(", preDelta=").append(preDelta)
+                .append(", currDelta=").append(currDelta)
+                .append(", updateTime='").append(updateTime).append("'")
+                .append(", updateMillisec=").append(updateMillisec)
+                .append(", bidPrice1=").append(bidPrice1)
+                .append(", bidVolume1=").append(bidVolume1)
+                .append(", askPrice1=").append(askPrice1)
+                .append(", askVolume1=").append(askVolume1)
+                .append(", bidPrice2=").append(bidPrice2)
+                .append(", bidVolume2=").append(bidVolume2)
+                .append(", askPrice2=").append(askPrice2)
+                .append(", askVolume2=").append(askVolume2)
+                .append(", bidPrice3=").append(bidPrice3)
+                .append(", bidVolume3=").append(bidVolume3)
+                .append(", askPrice3=").append(askPrice3)
+                .append(", askVolume3=").append(askVolume3)
+                .append(", bidPrice4=").append(bidPrice4)
+                .append(", bidVolume4=").append(bidVolume4)
+                .append(", askPrice4=").append(askPrice4)
+                .append(", askVolume4=").append(askVolume4)
+                .append(", bidPrice5=").append(bidPrice5)
+                .append(", bidVolume5=").append(bidVolume5)
+                .append(", askPrice5=").append(askPrice5)
+                .append(", askVolume5=").append(askVolume5)
+                .append(", averagePrice=").append(averagePrice)
+                .append(", actionDay='").append(actionDay).append("'")
+                .append("}").toString();
     }
 }

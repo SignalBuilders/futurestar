@@ -2,6 +2,7 @@ package org.zhps.trader.spi;
 
 import org.zhps.hjctp.entity.CThostFtdcRspInfoField;
 import org.zhps.hjctp.entity.CThostFtdcRspUserLoginField;
+import org.zhps.hjctp.entity.CThostFtdcSettlementInfoConfirmField;
 import org.zhps.hjctp.spi.TraderSpi;
 
 /**
@@ -13,7 +14,7 @@ public class TraderSpiAdapter implements TraderSpi {
 
     @Override
     public void onFrontConnected() {
-        System.out.println("trader connected.....");
+//        System.out.println("trader connected.....");
     }
 
     @Override
@@ -26,5 +27,11 @@ public class TraderSpiAdapter implements TraderSpi {
         System.out.println(loginInfo.toString());
     }
 
+    @Override
+    public void onRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField pSettlementInfoConfirm, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+        StringBuilder settlementInfo = new StringBuilder("Settlement Success: ").append(pSettlementInfoConfirm.getConfirmDate())
+                .append(" ").append(pSettlementInfoConfirm.getConfirmTime());
+        System.out.println(settlementInfo);
+    }
 
 }

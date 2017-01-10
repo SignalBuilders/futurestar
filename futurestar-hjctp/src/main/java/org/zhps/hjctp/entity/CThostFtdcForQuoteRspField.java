@@ -71,13 +71,13 @@ public class CThostFtdcForQuoteRspField implements Serializable {
 
     @Override
     public String toString() {
-        return "CThostFtdcForQuoteRspField{" +
-                "tradingDay='" + tradingDay + '\'' +
-                ", instrumentID='" + instrumentID + '\'' +
-                ", forQuoteSysID='" + forQuoteSysID + '\'' +
-                ", forQuoteTime='" + forQuoteTime + '\'' +
-                ", actionDay='" + actionDay + '\'' +
-                ", exchangeID='" + exchangeID + '\'' +
-                '}';
+        return new StringBuilder("CThostFtdcForQuoteRspField{")
+                .append("tradingDay='").append(tradingDay).append("'")
+                .append(", instrumentID='").append(instrumentID).append("'")
+                .append(", forQuoteSysID='").append(forQuoteSysID).append("'")
+                .append(", forQuoteTime='").append(forQuoteTime).append("'")
+                .append(", actionDay='").append(actionDay).append("'")
+                .append(", exchangeID='").append(exchangeID).append("'")
+                .append("}").toString();
     }
 }
