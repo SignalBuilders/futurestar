@@ -84,7 +84,7 @@ public class BaseSparkStreaming {
                 quotationJavaRDD.foreach(new VoidFunction<Quotation>() {
                     @Override
                     public void call(Quotation quotation) throws Exception {
-                        byte[] rowKey = (quotation.getTradingDay() + "|" + quotation.getInstrumentId() + "|"
+                        byte[] rowKey = (quotation.getInstrumentId() + "|" + quotation.getTradingDay() + "|"
                                 + quotation.getUpdateTime() + "|" + quotation.getUpdateMillisec()).getBytes();
                         byte[] last = String.valueOf(quotation.getLastPrice()).getBytes();
                         byte[] open = String.valueOf(quotation.getOpenPrice()).getBytes();
