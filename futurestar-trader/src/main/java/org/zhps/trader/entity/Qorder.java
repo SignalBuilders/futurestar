@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.
  * <p/>
- * Created on 2017/1/10.
+ * Created on 2017/1/11.
  */
-public class Iorder implements Serializable {
+public class Qorder implements Serializable {
+
 }

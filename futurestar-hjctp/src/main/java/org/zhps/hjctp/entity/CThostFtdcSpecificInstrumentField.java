@@ -21,8 +21,8 @@ public class CThostFtdcSpecificInstrumentField implements Serializable {
 
     @Override
     public String toString() {
-        return "CThostFtdcSpecificInstrumentField{" +
-                "InstrumentID='" + InstrumentID + '\'' +
-                '}';
+        return new StringBuilder("CThostFtdcSpecificInstrumentField{")
+                .append("InstrumentID='").append(InstrumentID).append("'")
+                .append("}").toString();
     }
 }

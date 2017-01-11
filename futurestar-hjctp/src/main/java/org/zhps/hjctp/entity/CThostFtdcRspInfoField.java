@@ -21,19 +21,19 @@ public class CThostFtdcRspInfoField implements Serializable {
         this.errorID = errorID;
     }
 
-    @Override
-    public String toString() {
-        return "CThostFtdcRspInfoField{" +
-                "errorID=" + errorID +
-                ", errorMsg='" + errorMsg + '\'' +
-                '}';
-    }
-
     public String getErrorMsg() {
         return errorMsg;
     }
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("CThostFtdcRspInfoField{")
+                .append("errorID=").append(errorID)
+                .append(", errorMsg='").append(errorMsg).append("'")
+                .append("}").toString();
     }
 }

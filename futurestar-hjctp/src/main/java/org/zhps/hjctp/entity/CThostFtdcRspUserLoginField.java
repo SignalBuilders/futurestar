@@ -141,20 +141,20 @@ public class CThostFtdcRspUserLoginField implements Serializable {
 
     @Override
     public String toString() {
-        return "CThostFtdcRspUserLoginField{" +
-                "tradingDay='" + tradingDay + '\'' +
-                ", loginTime='" + loginTime + '\'' +
-                ", brokerId='" + brokerId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", systemName='" + systemName + '\'' +
-                ", frontID=" + frontID +
-                ", sessionID=" + sessionID +
-                ", maxOrderRef='" + maxOrderRef + '\'' +
-                ", shfeTime='" + shfeTime + '\'' +
-                ", dcetime='" + dcetime + '\'' +
-                ", czceTime='" + czceTime + '\'' +
-                ", ffexTime='" + ffexTime + '\'' +
-                ", ineTime='" + ineTime + '\'' +
-                '}';
+        return new StringBuilder("CThostFtdcRspUserLoginField{")
+                .append("tradingDay='").append(tradingDay).append("'")
+                .append(", loginTime='").append(loginTime).append("'")
+                .append(", brokerId='").append(brokerId).append("'")
+                .append(", userId='").append(userId).append("'")
+                .append(", systemName='").append(systemName).append("'")
+                .append(", frontID=").append(frontID)
+                .append(", sessionID=").append(sessionID)
+                .append(", maxOrderRef='").append(maxOrderRef).append("'")
+                .append(", shfeTime='").append(shfeTime).append("'")
+                .append(", dcetime='").append(dcetime).append("'")
+                .append(", czceTime='").append(czceTime).append("'")
+                .append(", ffexTime='").append(ffexTime).append("'")
+                .append(", ineTime='").append(ineTime).append("'")
+                .append("}").toString();
     }
 }

@@ -31,9 +31,9 @@ public class CThostFtdcUserLogoutField implements Serializable {
 
     @Override
     public String toString() {
-        return "CThostFtdcUserLogoutField{" +
-                "brokerID='" + brokerID + '\'' +
-                ", userID='" + userID + '\'' +
-                '}';
+        return new StringBuilder("CThostFtdcUserLogoutField{")
+                .append("brokerID='").append(brokerID).append("'")
+                .append(", userID='").append(userID).append("'")
+                .append("}").toString();
     }
 }

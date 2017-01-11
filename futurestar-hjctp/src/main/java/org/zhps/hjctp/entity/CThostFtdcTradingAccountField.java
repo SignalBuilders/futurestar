@@ -251,31 +251,31 @@ public class CThostFtdcTradingAccountField implements Serializable {
 
     @Override
     public String toString() {
-        return "CThostFtdcTradingAccountField{" +
-                "brokerID='" + brokerID + '\'' +
-                ", accountID='" + accountID + '\'' +
-                ", preCredit=" + preCredit +
-                ", preDeposit=" + preDeposit +
-                ", preBalance=" + preBalance +
-                ", preMargin=" + preMargin +
-                ", deposit=" + deposit +
-                ", withdraw=" + withdraw +
-                ", frozenMargin=" + frozenMargin +
-                ", frozenCash=" + frozenCash +
-                ", frozenCommission=" + frozenCommission +
-                ", currMargin=" + currMargin +
-                ", cashIn=" + cashIn +
-                ", commission=" + commission +
-                ", closeProfit=" + closeProfit +
-                ", positionProfit=" + positionProfit +
-                ", balance=" + balance +
-                ", available=" + available +
-                ", withdrawQuota=" + withdrawQuota +
-                ", reserve=" + reserve +
-                ", tradingDay='" + tradingDay + '\'' +
-                ", settlementID=" + settlementID +
-                ", credit=" + credit +
-                ", exchangeMargin=" + exchangeMargin +
-                '}';
+        return new StringBuilder("CThostFtdcTradingAccountField{")
+                .append("brokerID='").append(brokerID).append("'")
+                .append(", accountID='").append(accountID).append("'")
+                .append(", preCredit=").append(preCredit)
+                .append(", preDeposit=").append(preDeposit)
+                .append(", preBalance=").append(preBalance)
+                .append(", preMargin=").append(preMargin)
+                .append(", deposit=").append(deposit)
+                .append(", withdraw=").append(withdraw)
+                .append(", frozenMargin=").append(frozenMargin)
+                .append(", frozenCash=").append(frozenCash)
+                .append(", frozenCommission=").append(frozenCommission)
+                .append(", currMargin=").append(currMargin)
+                .append(", cashIn=").append(cashIn)
+                .append(", commission=").append(commission)
+                .append(", closeProfit=").append(closeProfit)
+                .append(", positionProfit=").append(positionProfit)
+                .append(", balance=").append(balance)
+                .append(", available=").append(available)
+                .append(", withdrawQuota=").append(withdrawQuota)
+                .append(", reserve=").append(reserve)
+                .append(", tradingDay='").append(tradingDay).append("'")
+                .append(", settlementID=").append(settlementID)
+                .append(", credit=").append(credit)
+                .append(", exchangeMargin=").append(exchangeMargin)
+                .append("}").toString();
     }
 }

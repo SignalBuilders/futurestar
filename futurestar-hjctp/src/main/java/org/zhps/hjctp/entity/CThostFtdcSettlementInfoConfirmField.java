@@ -50,11 +50,11 @@ public class CThostFtdcSettlementInfoConfirmField implements Serializable {
 
     @Override
     public String toString() {
-        return "CThostFtdcSettlementInfoConfirmField{" +
-                "brokerID='" + brokerID + '\'' +
-                ", investorID='" + investorID + '\'' +
-                ", confirmDate='" + confirmDate + '\'' +
-                ", confirmTime='" + confirmTime + '\'' +
-                '}';
+        return new StringBuilder("CThostFtdcSettlementInfoConfirmField{")
+                .append("brokerID='").append(brokerID).append("'")
+                .append(", investorID='").append(investorID).append("'")
+                .append(", confirmDate='").append(confirmDate).append("'")
+                .append(", confirmTime='").append(confirmTime).append("'")
+                .append("}").toString();
     }
 }
