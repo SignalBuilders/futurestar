@@ -3,6 +3,7 @@ package org.zhps.hjctp.spi;
 import org.zhps.hjctp.entity.CThostFtdcRspInfoField;
 import org.zhps.hjctp.entity.CThostFtdcRspUserLoginField;
 import org.zhps.hjctp.entity.CThostFtdcSettlementInfoConfirmField;
+import org.zhps.hjctp.entity.CThostFtdcTradingAccountField;
 
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.
@@ -17,4 +18,6 @@ public interface TraderSpi {
     void onRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
 
     void onRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField pSettlementInfoConfirm, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
+
+    void onRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
 }

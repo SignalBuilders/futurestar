@@ -35,6 +35,9 @@ public class PropertiesUtil {
     public static String TD_SIM_TEST;
     public static String TD_SIM_FIRM;
     public static String TD_PROD;
+    public static String TD_BROKER_ID;
+    public static String TD_ACCOUNT_ID;
+    public static String TD_PASSWORD;
     //kafka
     public static String BOOTSTRAP_SERVERS;
     public static String ACKS;
@@ -90,6 +93,9 @@ public class PropertiesUtil {
             TD_SIM_TEST = prop.getProperty("td_sim_test");
             TD_SIM_FIRM = prop.getProperty("td_sim_firm");
             TD_PROD = prop.getProperty("td_prod");
+            TD_BROKER_ID = prop.getProperty("td_broker_id");
+            TD_ACCOUNT_ID = prop.getProperty("td_account_id");
+            TD_PASSWORD = prop.getProperty("td_password");
 
             BOOTSTRAP_SERVERS = prop.getProperty("bootstrap_servers");
             ACKS = prop.getProperty("acks");

@@ -1,6 +1,9 @@
 package org.zhps.hjctp.jni;
 
 
+import org.zhps.hjctp.entity.Iorder;
+import org.zhps.hjctp.entity.Korder;
+import org.zhps.hjctp.entity.Qorder;
 import org.zhps.hjctp.spi.MdSpi;
 import org.zhps.hjctp.spi.TraderSpi;
 
@@ -31,4 +34,12 @@ public class NativeLoader {
     public static native void registerTraderFront(String frontAddress);
     public static native void registerTraderLoginInfo(String brokerId, String investorId, String password);
     public static native void connectTraderServer();
+
+    public static native void insertOrder(Iorder iorder);
+    public static native void killOrder(Korder korder);
+    public static native void queryOrder(Qorder qorder);
+
+    public static native int queryTradingAccount();
+    public static native int queryInvestorPosition();
+    public static native int queryInvestorPositionDetail();
 }
