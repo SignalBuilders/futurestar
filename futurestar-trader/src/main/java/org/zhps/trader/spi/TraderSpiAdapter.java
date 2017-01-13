@@ -1,9 +1,6 @@
 package org.zhps.trader.spi;
 
-import org.zhps.hjctp.entity.CThostFtdcRspInfoField;
-import org.zhps.hjctp.entity.CThostFtdcRspUserLoginField;
-import org.zhps.hjctp.entity.CThostFtdcSettlementInfoConfirmField;
-import org.zhps.hjctp.entity.CThostFtdcTradingAccountField;
+import org.zhps.hjctp.entity.*;
 import org.zhps.hjctp.spi.TraderSpi;
 
 /**
@@ -38,5 +35,50 @@ public class TraderSpiAdapter implements TraderSpi {
     @Override
     public void onRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
         System.out.println("trading account: " + pTradingAccount);
+    }
+
+    @Override
+    public void onRspQryInvestorPosition(CThostFtdcInvestorPositionField pInvestorPosition, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+        System.out.println(pInvestorPosition);
+    }
+
+    @Override
+    public void onRspQryInvestorPositionDetail(CThostFtdcInvestorPositionDetailField pInvestorPositionDetail, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+        System.out.println(pInvestorPositionDetail);
+    }
+
+    @Override
+    public void onRtnOrder(CThostFtdcOrderField pOrder) {
+        System.out.println(pOrder);
+    }
+
+    @Override
+    public void onRspOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+        System.out.println(pInputOrder);
+    }
+
+    @Override
+    public void onErrRtnOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo) {
+        System.out.println(pInputOrder);
+    }
+
+    @Override
+    public void onRtnTrade(CThostFtdcTradeField pTrade) {
+        System.out.println(pTrade);
+    }
+
+    @Override
+    public void onRspOrderAction(CThostFtdcInputOrderActionField pInputOrderAction, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+        System.out.println(pInputOrderAction);
+    }
+
+    @Override
+    public void onErrRtnOrderAction(CThostFtdcOrderActionField pOrderAction, CThostFtdcRspInfoField pRspInfo) {
+        System.out.println(pOrderAction);
+    }
+
+    @Override
+    public void onRspQryOrder(CThostFtdcOrderField pOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
+        System.out.println(pOrder);
     }
 }

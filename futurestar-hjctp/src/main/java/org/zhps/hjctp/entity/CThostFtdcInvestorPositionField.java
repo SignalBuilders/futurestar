@@ -8,6 +8,7 @@ import java.io.Serializable;
  * Created on 2017/1/11.
  */
 public class CThostFtdcInvestorPositionField implements Serializable {
+
     private String instrumentID;
 
     private String brokerID;

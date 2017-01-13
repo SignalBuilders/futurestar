@@ -1,9 +1,6 @@
 package org.zhps.hjctp.spi;
 
-import org.zhps.hjctp.entity.CThostFtdcRspInfoField;
-import org.zhps.hjctp.entity.CThostFtdcRspUserLoginField;
-import org.zhps.hjctp.entity.CThostFtdcSettlementInfoConfirmField;
-import org.zhps.hjctp.entity.CThostFtdcTradingAccountField;
+import org.zhps.hjctp.entity.*;
 
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.
@@ -20,4 +17,22 @@ public interface TraderSpi {
     void onRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField pSettlementInfoConfirm, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
 
     void onRspQryTradingAccount(CThostFtdcTradingAccountField pTradingAccount, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
+
+    void onRspQryInvestorPosition(CThostFtdcInvestorPositionField pInvestorPosition, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
+
+    void onRspQryInvestorPositionDetail(CThostFtdcInvestorPositionDetailField pInvestorPositionDetail, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
+
+    void onRtnOrder(CThostFtdcOrderField pOrder);
+
+    void onRspOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
+
+    void onErrRtnOrderInsert(CThostFtdcInputOrderField pInputOrder, CThostFtdcRspInfoField pRspInfo);
+
+    void onRtnTrade(CThostFtdcTradeField pTrade);
+
+    void onRspOrderAction(CThostFtdcInputOrderActionField pInputOrderAction, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
+
+    void onErrRtnOrderAction(CThostFtdcOrderActionField pOrderAction, CThostFtdcRspInfoField pRspInfo);
+
+    void onRspQryOrder(CThostFtdcOrderField pOrder, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast);
 }

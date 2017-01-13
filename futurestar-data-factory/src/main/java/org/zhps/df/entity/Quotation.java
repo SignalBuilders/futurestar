@@ -120,19 +120,21 @@ public class Quotation implements Serializable {
 
     @Override
     public String toString() {
-        return "Quotation{" +
-                "instrumentId='" + instrumentId + '\'' +
-                ", lastPrice=" + lastPrice +
-                ", openPrice=" + openPrice +
-                ", upperLimitPrice=" + upperLimitPrice +
-                ", lowerLimitPrice=" + lowerLimitPrice +
-                ", updateTime='" + updateTime + '\'' +
-                ", tradingDay='" + tradingDay + '\'' +
-                ", updateMillisec='" + updateMillisec + '\'' +
-                '}';
+        return new StringBuilder("Quotation{")
+                .append("instrumentId='").append(instrumentId).append("'")
+                .append(", lastPrice=").append(lastPrice)
+                .append(", openPrice=").append(openPrice)
+                .append(", HighestPrice=").append(HighestPrice)
+                .append(", LowestPrice=").append(LowestPrice)
+                .append(", upperLimitPrice=").append(upperLimitPrice)
+                .append(", lowerLimitPrice=").append(lowerLimitPrice)
+                .append(", updateTime='").append(updateTime).append("'")
+                .append(", tradingDay='").append(tradingDay).append("'")
+                .append(", updateMillisec='").append(updateMillisec).append("'")
+                .append("}").toString();
     }
 
-    //    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        Quotation quotation = new Quotation();
 //        quotation.setInstrumentId("TA234");
 //        System.out.println(quotation.getInstrumentId());

@@ -1,5 +1,8 @@
 package org.zhps.hjctp.api;
 
+import org.zhps.hjctp.entity.Iorder;
+import org.zhps.hjctp.entity.Korder;
+import org.zhps.hjctp.entity.Qorder;
 import org.zhps.hjctp.jni.NativeLoader;
 import org.zhps.hjctp.spi.TraderSpi;
 
@@ -27,5 +30,29 @@ public class TraderApi {
 
     public void connect(){
         NativeLoader.connectTraderServer();
+    }
+
+    public int queryTradingAccount(){
+        return NativeLoader.queryTradingAccount();
+    }
+
+    public int queryInvestorPosition(){
+        return NativeLoader.queryInvestorPosition();
+    }
+
+    public int queryInvestorPositionDetail(){
+        return NativeLoader.queryInvestorPositionDetail();
+    }
+
+    public void kill(Korder korder){
+
+    }
+
+    public void insert(Iorder iorder){
+
+    }
+
+    public void query(Qorder qorder){
+
     }
 }
