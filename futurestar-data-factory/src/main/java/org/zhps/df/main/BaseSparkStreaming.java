@@ -67,10 +67,12 @@ public class BaseSparkStreaming {
                 String[] quoStr = SPACE.split(x);
                 Quotation quotation = new Quotation();
                 quotation.setInstrumentId(quoStr[PropertiesUtil.MK_QUO_INSTRUMENTID]);
-                quotation.setLastPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LASTPRICE]));
-                quotation.setOpenPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_OPENPRICE]));
-                quotation.setUpperLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_UPPERLIMITPRICE]));
-                quotation.setLowerLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LOWERLIMITPRICE]));
+                quotation.setLastPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LAST_PRICE]));
+                quotation.setOpenPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_OPEN_PRICE]));
+                quotation.setHighestPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_HIGHEST_PRICE]));
+                quotation.setLowestPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LOWEST_PRICE]));
+                quotation.setUpperLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_UPPERLIMIT_PRICE]));
+                quotation.setLowerLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LOWERLIMIT_PRICE]));
                 quotation.setUpdateTime(quoStr[PropertiesUtil.MK_QUO_UPDATETIME]);
                 quotation.setTradingDay(quoStr[PropertiesUtil.MK_QUO_TRADINGDAY]);
                 quotation.setUpdateMillisec(quoStr[PropertiesUtil.MK_QUO_UPDATETIMEMILLISEC]);

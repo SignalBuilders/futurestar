@@ -80,6 +80,8 @@ public class MdSpiAdapter implements MdSpi {
         StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append(" ")
                 .append(pDepthMarketData.getLastPrice()).append(" ")
                 .append(pDepthMarketData.getOpenPrice()).append(" ")
+                .append(pDepthMarketData.getHighestPrice()).append(" ")
+                .append(pDepthMarketData.getLowestPrice()).append(" ")
                 .append(pDepthMarketData.getUpperLimitPrice()).append(" ")
                 .append(pDepthMarketData.getLowerLimitPrice()).append(" ")
                 .append(pDepthMarketData.getUpdateTime()).append(" ")

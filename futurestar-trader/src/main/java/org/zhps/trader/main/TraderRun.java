@@ -19,7 +19,7 @@ public class TraderRun {
                 TraderApi traderApi = new TraderApi(PropertiesUtil.MK_FLOW_PATH);
                 TraderSpi traderSpi = new TraderSpiAdapter();
                 traderApi.registerSpi(traderSpi);
-                traderApi.registerFront(PropertiesUtil.TD_SIM_TEST);
+                traderApi.registerFront(PropertiesUtil.TD_SIM_FIRM);
                 traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
                 traderApi.connect();
             }

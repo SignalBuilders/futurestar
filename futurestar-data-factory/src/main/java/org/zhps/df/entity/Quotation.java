@@ -19,6 +19,10 @@ public class Quotation implements Serializable {
 
     private double openPrice;
 
+    private double HighestPrice;
+
+    private double LowestPrice;
+
     private double upperLimitPrice;
 
     private double lowerLimitPrice;
@@ -56,6 +60,22 @@ public class Quotation implements Serializable {
 
     public void setOpenPrice(double openPrice) {
         this.openPrice = openPrice;
+    }
+
+    public double getHighestPrice() {
+        return HighestPrice;
+    }
+
+    public void setHighestPrice(double highestPrice) {
+        HighestPrice = highestPrice;
+    }
+
+    public double getLowestPrice() {
+        return LowestPrice;
+    }
+
+    public void setLowestPrice(double lowestPrice) {
+        LowestPrice = lowestPrice;
     }
 
     public double getUpperLimitPrice() {
