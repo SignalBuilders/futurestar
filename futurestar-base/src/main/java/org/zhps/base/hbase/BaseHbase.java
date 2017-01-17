@@ -1,9 +1,13 @@
 package org.zhps.base.hbase;
 
+import com.stumbleupon.async.Callback;
 import org.hbase.async.Config;
+import org.hbase.async.GetRequest;
 import org.hbase.async.HBaseClient;
+import org.hbase.async.KeyValue;
 import org.zhps.base.util.PropertiesUtil;
 
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
 /**
@@ -24,4 +28,33 @@ public class BaseHbase {
     public static HBaseClient gethBaseClient(){
         return BaseHbase.hBaseClient;
     }
+
+//    public static void main(String[] args) {
+//        GetRequest getPropery = new GetRequest("test", "row1");
+//        try {
+//            hBaseClient.get(getPropery).addCallback(new Callback<Object, ArrayList<KeyValue>>() {
+//                @Override
+//                public Object call(ArrayList<KeyValue> keyValues) throws Exception {
+//                    Thread.sleep(5000);
+//                    System.out.println(keyValues);
+//                    return new String("aaa");
+//                }
+//            });
+//            for(KeyValue k : values){
+//                System.out.println(new String(k.key()) + "==" + new String(k.value()));
+//            }
+//            hBaseClient.shutdown().addCallback(new Callback<Object, Object>() {
+//                @Override
+//                public Object call(Object o) throws Exception {
+//                    System.out.println(o);
+//                    return null;
+//                }
+//            }).joinUninterruptibly();
+//            System.out.println(hBaseClient.stats().flushes());
+//
+//            System.out.println(123);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

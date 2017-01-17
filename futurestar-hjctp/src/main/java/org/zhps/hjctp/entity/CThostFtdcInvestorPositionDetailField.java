@@ -15,9 +15,9 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
     
     private String investorID;
     
-    private String hedgeFlag;
+    private int hedgeFlag;
     
-    private String direction;
+    private int direction;
     
     private String openDate;
     
@@ -31,7 +31,7 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
     
     private int settlementID;
     
-    private String tradeType;
+    private int tradeType;
     
     private String combInstrumentID;
     
@@ -85,22 +85,6 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
         this.investorID = investorID;
     }
 
-    public String getHedgeFlag() {
-        return hedgeFlag;
-    }
-
-    public void setHedgeFlag(String hedgeFlag) {
-        this.hedgeFlag = hedgeFlag;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
     public String getOpenDate() {
         return openDate;
     }
@@ -147,14 +131,6 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
 
     public void setSettlementID(int settlementID) {
         this.settlementID = settlementID;
-    }
-
-    public String getTradeType() {
-        return tradeType;
-    }
-
-    public void setTradeType(String tradeType) {
-        this.tradeType = tradeType;
     }
 
     public String getCombInstrumentID() {
@@ -269,19 +245,43 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
         this.closeAmount = closeAmount;
     }
 
+    public int getHedgeFlag() {
+        return hedgeFlag;
+    }
+
+    public void setHedgeFlag(int hedgeFlag) {
+        this.hedgeFlag = hedgeFlag;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public int getTradeType() {
+        return tradeType;
+    }
+
+    public void setTradeType(int tradeType) {
+        this.tradeType = tradeType;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder("CThostFtdcInvestorPositionDetailField{")
                 .append("instrumentID='").append(instrumentID).append("'")
                 .append(", brokerID='").append(brokerID).append("'")
                 .append(", investorID='").append(investorID).append("'")
-                .append(", hedgeFlag='").append(hedgeFlag).append("'")
-                .append(", direction='").append(direction).append("'")
+                .append(", hedgeFlag=").append(hedgeFlag)
+                .append(", direction=").append(direction)
                 .append(", openDate='").append(openDate).append("'")
                 .append(", tradeID='").append(tradeID).append("'")
                 .append(", volume=").append(volume)
                 .append(", openPrice=").append(openPrice)
-                .append(", tradingDay='").append(tradingDay).append("'")
+                .append(", tradingDay=").append(tradingDay)
                 .append(", settlementID=").append(settlementID)
                 .append(", tradeType='").append(tradeType).append("'")
                 .append(", combInstrumentID='").append(combInstrumentID).append("'")
