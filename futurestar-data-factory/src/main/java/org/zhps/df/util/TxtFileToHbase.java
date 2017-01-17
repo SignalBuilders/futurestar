@@ -49,7 +49,7 @@ public class TxtFileToHbase {
                 if(!s.trim().equals("")){
                     String[] values = SPACE.split(s);
                     quo.setInstrumentId(values[PropertiesUtil.MK_QUO_INSTRUMENTID]);
-                    quo.setLastPrice(Double.parseDouble(values[PropertiesUtil.MK_QUO_LASTPRICE]));
+                    quo.setLastPrice(Double.parseDouble(values[PropertiesUtil.MK_QUO_LAST_PRICE]));
                     quo.setUpdateTime(values[2]);
                     quo.setTradingDay("20161219");
                 }
