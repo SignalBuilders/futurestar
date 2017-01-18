@@ -19,9 +19,9 @@ public class CThostFtdcInputOrderField implements Serializable {
     
     private String userID;
     
-    private String orderPriceType;
+    private char orderPriceType;
     
-    private String direction;
+    private char direction;
     
     private String combOffsetFlag;
     
@@ -31,7 +31,7 @@ public class CThostFtdcInputOrderField implements Serializable {
     
     private int volumeTotalOriginal;
     
-    private String timeCondition;
+    private char timeCondition;
     
     private String gTDDate;
     
@@ -39,11 +39,11 @@ public class CThostFtdcInputOrderField implements Serializable {
     
     private int minVolume;
     
-    private String contingentCondition;
+    private char contingentCondition;
     
     private double stopPrice;
     
-    private String forceCloseReason;
+    private char forceCloseReason;
     
     private int isAutoSuspend;
     
@@ -107,19 +107,19 @@ public class CThostFtdcInputOrderField implements Serializable {
         this.userID = userID;
     }
 
-    public String getOrderPriceType() {
+    public char getOrderPriceType() {
         return orderPriceType;
     }
 
-    public void setOrderPriceType(String orderPriceType) {
+    public void setOrderPriceType(char orderPriceType) {
         this.orderPriceType = orderPriceType;
     }
 
-    public String getDirection() {
+    public char getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(char direction) {
         this.direction = direction;
     }
 
@@ -155,11 +155,11 @@ public class CThostFtdcInputOrderField implements Serializable {
         this.volumeTotalOriginal = volumeTotalOriginal;
     }
 
-    public String getTimeCondition() {
+    public char getTimeCondition() {
         return timeCondition;
     }
 
-    public void setTimeCondition(String timeCondition) {
+    public void setTimeCondition(char timeCondition) {
         this.timeCondition = timeCondition;
     }
 
@@ -187,11 +187,11 @@ public class CThostFtdcInputOrderField implements Serializable {
         this.minVolume = minVolume;
     }
 
-    public String getContingentCondition() {
+    public char getContingentCondition() {
         return contingentCondition;
     }
 
-    public void setContingentCondition(String contingentCondition) {
+    public void setContingentCondition(char contingentCondition) {
         this.contingentCondition = contingentCondition;
     }
 
@@ -203,11 +203,11 @@ public class CThostFtdcInputOrderField implements Serializable {
         this.stopPrice = stopPrice;
     }
 
-    public String getForceCloseReason() {
+    public char getForceCloseReason() {
         return forceCloseReason;
     }
 
-    public void setForceCloseReason(String forceCloseReason) {
+    public void setForceCloseReason(char forceCloseReason) {
         this.forceCloseReason = forceCloseReason;
     }
 
@@ -307,19 +307,19 @@ public class CThostFtdcInputOrderField implements Serializable {
                 .append(", instrumentID='").append(instrumentID).append("'")
                 .append(", orderRef='").append(orderRef).append("'")
                 .append(", userID='").append(userID).append("'")
-                .append(", orderPriceType='").append(orderPriceType).append("'")
-                .append(", direction='").append(direction).append("'")
+                .append(", orderPriceType=").append(orderPriceType)
+                .append(", direction=").append(direction)
                 .append(", combOffsetFlag='").append(combOffsetFlag).append("'")
                 .append(", combHedgeFlag='").append(combHedgeFlag).append("'")
                 .append(", limitPrice=").append(limitPrice)
                 .append(", volumeTotalOriginal=").append(volumeTotalOriginal)
-                .append(", timeCondition='").append(timeCondition).append("'")
+                .append(", timeCondition=").append(timeCondition)
                 .append(", gTDDate='").append(gTDDate).append("'")
                 .append(", volumeCondition=").append(volumeCondition)
                 .append(", minVolume=").append(minVolume)
-                .append(", contingentCondition='").append(contingentCondition).append("'")
+                .append(", contingentCondition=").append(contingentCondition)
                 .append(", stopPrice=").append(stopPrice)
-                .append(", forceCloseReason='").append(forceCloseReason).append("'")
+                .append(", forceCloseReason=").append(forceCloseReason)
                 .append(", isAutoSuspend=").append(isAutoSuspend)
                 .append(", businessUnit='").append(businessUnit).append("'")
                 .append(", requestID=").append(requestID)

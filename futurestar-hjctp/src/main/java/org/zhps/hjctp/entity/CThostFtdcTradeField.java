@@ -23,7 +23,7 @@ public class CThostFtdcTradeField implements Serializable {
 
     private String tradeID;
 
-    private String direction;
+    private char direction;
 
     private String orderSysID;
 
@@ -31,13 +31,13 @@ public class CThostFtdcTradeField implements Serializable {
 
     private String clientID;
 
-    private String tradingRole;
+    private char tradingRole;
 
     private String exchangeInstID;
 
-    private String offsetFlag;
+    private char offsetFlag;
 
-    private String hedgeFlag;
+    private char hedgeFlag;
 
     private double price;
 
@@ -47,9 +47,9 @@ public class CThostFtdcTradeField implements Serializable {
 
     private String tradeTime;
 
-    private String tradeType;
+    private char tradeType;
 
-    private String priceSource;
+    private char priceSource;
 
     private String traderID;
 
@@ -67,7 +67,7 @@ public class CThostFtdcTradeField implements Serializable {
 
     private int brokerOrderSeq;
 
-    private String tradeSource;
+    private char tradeSource;
 
     public String getBrokerID() {
         return brokerID;
@@ -125,11 +125,11 @@ public class CThostFtdcTradeField implements Serializable {
         this.tradeID = tradeID;
     }
 
-    public String getDirection() {
+    public char getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(char direction) {
         this.direction = direction;
     }
 
@@ -157,11 +157,11 @@ public class CThostFtdcTradeField implements Serializable {
         this.clientID = clientID;
     }
 
-    public String getTradingRole() {
+    public char getTradingRole() {
         return tradingRole;
     }
 
-    public void setTradingRole(String tradingRole) {
+    public void setTradingRole(char tradingRole) {
         this.tradingRole = tradingRole;
     }
 
@@ -173,19 +173,19 @@ public class CThostFtdcTradeField implements Serializable {
         this.exchangeInstID = exchangeInstID;
     }
 
-    public String getOffsetFlag() {
+    public char getOffsetFlag() {
         return offsetFlag;
     }
 
-    public void setOffsetFlag(String offsetFlag) {
+    public void setOffsetFlag(char offsetFlag) {
         this.offsetFlag = offsetFlag;
     }
 
-    public String getHedgeFlag() {
+    public char getHedgeFlag() {
         return hedgeFlag;
     }
 
-    public void setHedgeFlag(String hedgeFlag) {
+    public void setHedgeFlag(char hedgeFlag) {
         this.hedgeFlag = hedgeFlag;
     }
 
@@ -221,19 +221,19 @@ public class CThostFtdcTradeField implements Serializable {
         this.tradeTime = tradeTime;
     }
 
-    public String getTradeType() {
+    public char getTradeType() {
         return tradeType;
     }
 
-    public void setTradeType(String tradeType) {
+    public void setTradeType(char tradeType) {
         this.tradeType = tradeType;
     }
 
-    public String getPriceSource() {
+    public char getPriceSource() {
         return priceSource;
     }
 
-    public void setPriceSource(String priceSource) {
+    public void setPriceSource(char priceSource) {
         this.priceSource = priceSource;
     }
 
@@ -301,11 +301,11 @@ public class CThostFtdcTradeField implements Serializable {
         this.brokerOrderSeq = brokerOrderSeq;
     }
 
-    public String getTradeSource() {
+    public char getTradeSource() {
         return tradeSource;
     }
 
-    public void setTradeSource(String tradeSource) {
+    public void setTradeSource(char tradeSource) {
         this.tradeSource = tradeSource;
     }
 
@@ -319,20 +319,20 @@ public class CThostFtdcTradeField implements Serializable {
                 .append(", userID='").append(userID).append("'")
                 .append(", exchangeID='").append(exchangeID).append("'")
                 .append(", tradeID='").append(tradeID).append("'")
-                .append(", direction='").append(direction).append("'")
+                .append(", direction=").append(direction)
                 .append(", orderSysID='").append(orderSysID).append("'")
                 .append(", participantID='").append(participantID).append("'")
                 .append(", clientID='").append(clientID).append("'")
-                .append(", tradingRole='").append(tradingRole).append("'")
+                .append(", tradingRole=").append(tradingRole)
                 .append(", exchangeInstID='").append(exchangeInstID).append("'")
-                .append(", offsetFlag='").append(offsetFlag).append("'")
-                .append(", hedgeFlag='").append(hedgeFlag).append("'")
+                .append(", offsetFlag=").append(offsetFlag)
+                .append(", hedgeFlag=").append(hedgeFlag)
                 .append(", price=").append(price)
                 .append(", volume=").append(volume)
                 .append(", tradeDate='").append(tradeDate).append("'")
                 .append(", tradeTime='").append(tradeTime).append("'")
-                .append(", tradeType='").append(tradeType).append("'")
-                .append(", priceSource='").append(priceSource).append("'")
+                .append(", tradeType=").append(tradeType)
+                .append(", priceSource=").append(priceSource)
                 .append(", traderID='").append(traderID).append("'")
                 .append(", orderLocalID='").append(orderLocalID).append("'")
                 .append(", clearingPartID='").append(clearingPartID).append("'")
@@ -341,7 +341,7 @@ public class CThostFtdcTradeField implements Serializable {
                 .append(", tradingDay='").append(tradingDay).append("'")
                 .append(", settlementID=").append(settlementID)
                 .append(", brokerOrderSeq=").append(brokerOrderSeq)
-                .append(", tradeSource='").append(tradeSource).append("'")
+                .append(", tradeSource=").append(tradeSource)
                 .append("}").toString();
     }
 }

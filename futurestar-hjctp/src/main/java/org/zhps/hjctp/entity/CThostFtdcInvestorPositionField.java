@@ -15,11 +15,11 @@ public class CThostFtdcInvestorPositionField implements Serializable {
 
     private String investorID;
 
-    private String posiDirection;
+    private char posiDirection;
 
-    private String hedgeFlag;
+    private char hedgeFlag;
 
-    private String positionDate;
+    private char positionDate;
 
     private int ydPosition;
 
@@ -101,27 +101,27 @@ public class CThostFtdcInvestorPositionField implements Serializable {
         this.investorID = investorID;
     }
 
-    public String getPosiDirection() {
+    public char getPosiDirection() {
         return posiDirection;
     }
 
-    public void setPosiDirection(String posiDirection) {
+    public void setPosiDirection(char posiDirection) {
         this.posiDirection = posiDirection;
     }
 
-    public String getHedgeFlag() {
+    public char getHedgeFlag() {
         return hedgeFlag;
     }
 
-    public void setHedgeFlag(String hedgeFlag) {
+    public void setHedgeFlag(char hedgeFlag) {
         this.hedgeFlag = hedgeFlag;
     }
 
-    public String getPositionDate() {
+    public char getPositionDate() {
         return positionDate;
     }
 
-    public void setPositionDate(String positionDate) {
+    public void setPositionDate(char positionDate) {
         this.positionDate = positionDate;
     }
 
@@ -355,9 +355,9 @@ public class CThostFtdcInvestorPositionField implements Serializable {
                 .append("instrumentID='").append(instrumentID).append("'")
                 .append(", brokerID='").append(brokerID).append("'")
                 .append(", investorID='").append(investorID).append("'")
-                .append(", posiDirection='").append(posiDirection).append("'")
-                .append(", hedgeFlag='").append(hedgeFlag).append("'")
-                .append(", positionDate='").append(positionDate).append("'")
+                .append(", posiDirection=").append(posiDirection)
+                .append(", hedgeFlag=").append(hedgeFlag)
+                .append(", positionDate=").append(positionDate)
                 .append(", ydPosition=").append(ydPosition)
                 .append(", position=").append(position)
                 .append(", longFrozen=").append(longFrozen)

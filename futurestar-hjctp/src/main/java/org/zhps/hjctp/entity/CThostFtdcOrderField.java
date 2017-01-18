@@ -19,9 +19,9 @@ public class CThostFtdcOrderField implements Serializable {
 
     private String userID;
 
-    private String orderPriceType;
+    private char orderPriceType;
 
-    private String direction;
+    private char direction;
 
     private String combOffsetFlag;
 
@@ -31,7 +31,7 @@ public class CThostFtdcOrderField implements Serializable {
 
     private int volumeTotalOriginal;
 
-    private String timeCondition;
+    private char timeCondition;
 
     private String gTDDate;
 
@@ -39,11 +39,11 @@ public class CThostFtdcOrderField implements Serializable {
 
     private int minVolume;
 
-    private String contingentCondition;
+    private char contingentCondition;
 
     private double stopPrice;
 
-    private String forceCloseReason;
+    private char forceCloseReason;
 
     private int isAutoSuspend;
 
@@ -65,7 +65,7 @@ public class CThostFtdcOrderField implements Serializable {
     
     private int installID;
     
-    private String orderSubmitStatus;
+    private char orderSubmitStatus;
     
     private int notifySequence;
     
@@ -75,11 +75,11 @@ public class CThostFtdcOrderField implements Serializable {
     
     private String orderSysID;
     
-    private String orderSource;
+    private char orderSource;
     
-    private String orderStatus;
+    private char orderStatus;
     
-    private String orderType;
+    private char orderType;
     
     private int volumeTraded;
     
@@ -173,19 +173,19 @@ public class CThostFtdcOrderField implements Serializable {
         this.userID = userID;
     }
 
-    public String getOrderPriceType() {
+    public char getOrderPriceType() {
         return orderPriceType;
     }
 
-    public void setOrderPriceType(String orderPriceType) {
+    public void setOrderPriceType(char orderPriceType) {
         this.orderPriceType = orderPriceType;
     }
 
-    public String getDirection() {
+    public char getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(char direction) {
         this.direction = direction;
     }
 
@@ -221,11 +221,11 @@ public class CThostFtdcOrderField implements Serializable {
         this.volumeTotalOriginal = volumeTotalOriginal;
     }
 
-    public String getTimeCondition() {
+    public char getTimeCondition() {
         return timeCondition;
     }
 
-    public void setTimeCondition(String timeCondition) {
+    public void setTimeCondition(char timeCondition) {
         this.timeCondition = timeCondition;
     }
 
@@ -253,11 +253,11 @@ public class CThostFtdcOrderField implements Serializable {
         this.minVolume = minVolume;
     }
 
-    public String getContingentCondition() {
+    public char getContingentCondition() {
         return contingentCondition;
     }
 
-    public void setContingentCondition(String contingentCondition) {
+    public void setContingentCondition(char contingentCondition) {
         this.contingentCondition = contingentCondition;
     }
 
@@ -269,11 +269,11 @@ public class CThostFtdcOrderField implements Serializable {
         this.stopPrice = stopPrice;
     }
 
-    public String getForceCloseReason() {
+    public char getForceCloseReason() {
         return forceCloseReason;
     }
 
-    public void setForceCloseReason(String forceCloseReason) {
+    public void setForceCloseReason(char forceCloseReason) {
         this.forceCloseReason = forceCloseReason;
     }
 
@@ -357,11 +357,11 @@ public class CThostFtdcOrderField implements Serializable {
         this.installID = installID;
     }
 
-    public String getOrderSubmitStatus() {
+    public char getOrderSubmitStatus() {
         return orderSubmitStatus;
     }
 
-    public void setOrderSubmitStatus(String orderSubmitStatus) {
+    public void setOrderSubmitStatus(char orderSubmitStatus) {
         this.orderSubmitStatus = orderSubmitStatus;
     }
 
@@ -397,27 +397,27 @@ public class CThostFtdcOrderField implements Serializable {
         this.orderSysID = orderSysID;
     }
 
-    public String getOrderSource() {
+    public char getOrderSource() {
         return orderSource;
     }
 
-    public void setOrderSource(String orderSource) {
+    public void setOrderSource(char orderSource) {
         this.orderSource = orderSource;
     }
 
-    public String getOrderStatus() {
+    public char getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(char orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public String getOrderType() {
+    public char getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(String orderType) {
+    public void setOrderType(char orderType) {
         this.orderType = orderType;
     }
 
@@ -637,19 +637,19 @@ public class CThostFtdcOrderField implements Serializable {
                 .append(", instrumentID='").append(instrumentID).append("'")
                 .append(", orderRef='").append(orderRef).append("'")
                 .append(", userID='").append(userID).append("'")
-                .append(", orderPriceType='").append(orderPriceType).append("'")
-                .append(", direction='").append(direction).append("'")
+                .append(", orderPriceType=").append(orderPriceType)
+                .append(", direction=").append(direction)
                 .append(", combOffsetFlag='").append(combOffsetFlag).append("'")
                 .append(", combHedgeFlag='").append(combHedgeFlag).append("'")
                 .append(", limitPrice=").append(limitPrice)
                 .append(", volumeTotalOriginal=").append(volumeTotalOriginal)
-                .append(", timeCondition='").append(timeCondition).append("'")
+                .append(", timeCondition=").append(timeCondition)
                 .append(", gTDDate='").append(gTDDate).append("'")
                 .append(", volumeCondition=").append(volumeCondition)
                 .append(", minVolume=").append(minVolume)
-                .append(", contingentCondition='").append(contingentCondition).append("'")
+                .append(", contingentCondition=").append(contingentCondition)
                 .append(", stopPrice=").append(stopPrice)
-                .append(", forceCloseReason='").append(forceCloseReason).append("'")
+                .append(", forceCloseReason=").append(forceCloseReason)
                 .append(", isAutoSuspend=").append(isAutoSuspend)
                 .append(", businessUnit='").append(businessUnit).append("'")
                 .append(", requestID=").append(requestID)
@@ -660,14 +660,14 @@ public class CThostFtdcOrderField implements Serializable {
                 .append(", exchangeInstID='").append(exchangeInstID).append("'")
                 .append(", traderID='").append(traderID).append("'")
                 .append(", installID=").append(installID)
-                .append(", orderSubmitStatus='").append(orderSubmitStatus).append("'")
+                .append(", orderSubmitStatus=").append(orderSubmitStatus)
                 .append(", notifySequence=").append(notifySequence)
                 .append(", tradingDay='").append(tradingDay).append("'")
                 .append(", settlementID=").append(settlementID)
                 .append(", orderSysID='").append(orderSysID).append("'")
-                .append(", orderSource='").append(orderSource).append("'")
-                .append(", orderStatus='").append(orderStatus).append("'")
-                .append(", orderType='").append(orderType).append("'")
+                .append(", orderSource=").append(orderSource)
+                .append(", orderStatus=").append(orderStatus)
+                .append(", orderType=").append(orderType)
                 .append(", volumeTraded=").append(volumeTraded)
                 .append(", volumeTotal=").append(volumeTotal)
                 .append(", insertDate='").append(insertDate).append("'")

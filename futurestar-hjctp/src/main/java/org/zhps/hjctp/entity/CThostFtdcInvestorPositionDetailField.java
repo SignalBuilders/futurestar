@@ -15,9 +15,9 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
     
     private String investorID;
     
-    private int hedgeFlag;
+    private char hedgeFlag;
     
-    private int direction;
+    private char direction;
     
     private String openDate;
     
@@ -31,7 +31,7 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
     
     private int settlementID;
     
-    private int tradeType;
+    private char tradeType;
     
     private String combInstrumentID;
     
@@ -245,27 +245,27 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
         this.closeAmount = closeAmount;
     }
 
-    public int getHedgeFlag() {
+    public char getHedgeFlag() {
         return hedgeFlag;
     }
 
-    public void setHedgeFlag(int hedgeFlag) {
+    public void setHedgeFlag(char hedgeFlag) {
         this.hedgeFlag = hedgeFlag;
     }
 
-    public int getDirection() {
+    public char getDirection() {
         return direction;
     }
 
-    public void setDirection(int direction) {
+    public void setDirection(char direction) {
         this.direction = direction;
     }
 
-    public int getTradeType() {
+    public char getTradeType() {
         return tradeType;
     }
 
-    public void setTradeType(int tradeType) {
+    public void setTradeType(char tradeType) {
         this.tradeType = tradeType;
     }
 
@@ -283,7 +283,7 @@ public class CThostFtdcInvestorPositionDetailField implements Serializable {
                 .append(", openPrice=").append(openPrice)
                 .append(", tradingDay=").append(tradingDay)
                 .append(", settlementID=").append(settlementID)
-                .append(", tradeType='").append(tradeType).append("'")
+                .append(", tradeType=").append(tradeType)
                 .append(", combInstrumentID='").append(combInstrumentID).append("'")
                 .append(", exchangeID='").append(exchangeID).append("'")
                 .append(", closeProfitByDate=").append(closeProfitByDate)

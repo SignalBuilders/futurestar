@@ -23,6 +23,7 @@ public class TraderSpiAdapter implements TraderSpi {
     public void onRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
         StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay());
         System.out.println(loginInfo.toString());
+        System.out.println(pRspInfo.toString());
     }
 
     @Override

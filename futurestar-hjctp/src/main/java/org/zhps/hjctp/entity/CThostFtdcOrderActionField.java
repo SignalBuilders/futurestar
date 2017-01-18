@@ -27,7 +27,7 @@ public class CThostFtdcOrderActionField implements Serializable {
     
     private String orderSysID;
     
-    private String actionFlag;
+    private char actionFlag;
     
     private double limitPrice;
     
@@ -51,7 +51,7 @@ public class CThostFtdcOrderActionField implements Serializable {
     
     private String businessUnit;
     
-    private String orderActionStatus;
+    private char orderActionStatus;
     
     private String userID;
     
@@ -139,11 +139,11 @@ public class CThostFtdcOrderActionField implements Serializable {
         this.orderSysID = orderSysID;
     }
 
-    public String getActionFlag() {
+    public char getActionFlag() {
         return actionFlag;
     }
 
-    public void setActionFlag(String actionFlag) {
+    public void setActionFlag(char actionFlag) {
         this.actionFlag = actionFlag;
     }
 
@@ -235,11 +235,11 @@ public class CThostFtdcOrderActionField implements Serializable {
         this.businessUnit = businessUnit;
     }
 
-    public String getOrderActionStatus() {
+    public char getOrderActionStatus() {
         return orderActionStatus;
     }
 
-    public void setOrderActionStatus(String orderActionStatus) {
+    public void setOrderActionStatus(char orderActionStatus) {
         this.orderActionStatus = orderActionStatus;
     }
 
@@ -311,7 +311,7 @@ public class CThostFtdcOrderActionField implements Serializable {
                 .append(", sessionID=").append(sessionID)
                 .append(", exchangeID='").append(exchangeID).append("'")
                 .append(", orderSysID='").append(orderSysID).append("'")
-                .append(", actionFlag='").append(actionFlag).append("'")
+                .append(", actionFlag=").append(actionFlag)
                 .append(", limitPrice=").append(limitPrice)
                 .append(", volumeChange=").append(volumeChange)
                 .append(", actionDate='").append(actionDate).append("'")
@@ -323,7 +323,7 @@ public class CThostFtdcOrderActionField implements Serializable {
                 .append(", participantID='").append(participantID).append("'")
                 .append(", clientID='").append(clientID).append("'")
                 .append(", businessUnit='").append(businessUnit).append("'")
-                .append(", orderActionStatus='").append(orderActionStatus).append("'")
+                .append(", orderActionStatus=").append(orderActionStatus)
                 .append(", userID='").append(userID).append("'")
                 .append(", statusMsg='").append(statusMsg).append("'")
                 .append(", instrumentID='").append(instrumentID).append("'")

@@ -18,7 +18,7 @@ public class TraderRun {
             public void run() {
                 TraderSpi traderSpi = new TraderSpiAdapter();
                 traderApi.registerSpi(traderSpi);
-                traderApi.registerFront(PropertiesUtil.TD_SIM_FIRM);
+                traderApi.registerFront(PropertiesUtil.TD_SIM_TEST);
                 traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
                 traderApi.connect();
             }
@@ -33,7 +33,9 @@ public class TraderRun {
         new Thread(){
             @Override
             public void run() {
-                System.out.println(traderApi.queryInvestorPositionDetail());
+                traderApi.queryTradingAccount();
+//                System.out.println(traderApi.queryInvestorPositionDetail());
+//                System.out.println(traderApi.queryInvestorPosition());
             }
         }.start();
     }
