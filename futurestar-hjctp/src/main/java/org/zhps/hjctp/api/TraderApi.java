@@ -32,7 +32,7 @@ public class TraderApi {
         NativeLoader.connectTraderServer();
     }
 
-    public int queryTradingAccount(){
+    public static int queryTradingAccount(){
         return NativeLoader.queryTradingAccount();
     }
 
@@ -44,15 +44,15 @@ public class TraderApi {
         return NativeLoader.queryInvestorPositionDetail();
     }
 
-    public void kill(Korder korder){
+    public void killOrder(Korder korder){
 
     }
 
-    public void insert(Iorder iorder){
+    public void insertOrder(Iorder iorder){
 
     }
 
-    public void query(Qorder qorder){
-
+    public void queryOrder(Qorder qorder){
+        NativeLoader.queryOrder(qorder);
     }
 }

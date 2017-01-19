@@ -2,6 +2,7 @@ package org.zhps.trader.main;
 
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.hjctp.api.TraderApi;
+import org.zhps.hjctp.entity.Qorder;
 import org.zhps.hjctp.spi.TraderSpi;
 import org.zhps.trader.spi.TraderSpiAdapter;
 
@@ -36,6 +37,8 @@ public class TraderRun {
                 traderApi.queryTradingAccount();
 //                System.out.println(traderApi.queryInvestorPositionDetail());
 //                System.out.println(traderApi.queryInvestorPosition());
+//                Qorder qorder = new Qorder();
+//                traderApi.queryOrder(qorder);
             }
         }.start();
     }
