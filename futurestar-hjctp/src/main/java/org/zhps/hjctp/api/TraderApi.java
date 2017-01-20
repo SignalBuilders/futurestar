@@ -49,7 +49,7 @@ public class TraderApi {
     }
 
     public void insertOrder(Iorder iorder){
-
+        NativeLoader.insertOrder(iorder);
     }
 
     public void queryOrder(Qorder qorder){

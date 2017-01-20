@@ -40,6 +40,26 @@ public class PropertiesUtil {
     public static String TD_BROKER_ID;
     public static String TD_ACCOUNT_ID;
     public static String TD_PASSWORD;
+    public static String[] TD_CONTRACTS;
+    public static char TD_DIRECTION_BUY;
+    public static char TD_DIRECTION_SELL;
+    public static char TD_OFFSET_FLAG_OPEN;
+    public static char TD_OFFSET_FLAG_CLOSE;
+    public static char TD_OFFSET_FLAG_CLOSE_TODAY;
+    public static char TD_HEDGE_FLAG_SPECULATION;
+    public static char TD_CONTINGENT_CONDITION_IMMEDIATELY;
+    public static char TD_VOLUME_CONDITION_ANY;
+    public static char TD_VOLUME_CONDITION_MIN;
+    public static char TD_VOLUME_CONDITION_ALL;
+    public static char TD_TIME_CONDITION_IOC;
+    public static char TD_TIME_CONDITION_GFS;
+    public static char TD_TIME_CONDITION_GFD;
+    public static char TD_FORCE_CLOSE_REASON_NOT_FORCE_CLOSE;
+    public static char TD_FORCE_CLOSE_REASON_LACK_DEPOSIT;
+    public static char TD_ORDER_PRICE_TYPE_ANY_PRICE;
+    public static char TD_ORDER_PRICE_TYPE_LIMIT_PRICE;
+    public static char TD_ORDER_PRICE_TYPE_BEST_PRICE;
+    public static char TD_ORDER_PRICE_TYPE_LAST_PRICE;
     //kafka
     public static String BOOTSTRAP_SERVERS;
     public static String ACKS;
@@ -100,6 +120,27 @@ public class PropertiesUtil {
             TD_BROKER_ID = prop.getProperty("td_broker_id");
             TD_ACCOUNT_ID = prop.getProperty("td_account_id");
             TD_PASSWORD = prop.getProperty("td_password");
+            TD_CONTRACTS = prop.getProperty("td_contracts").split(",");
+            TD_DIRECTION_BUY = prop.getProperty("td_direction_buy").charAt(0);
+            TD_DIRECTION_SELL = prop.getProperty("td_direction_sell").charAt(0);
+            TD_OFFSET_FLAG_OPEN = prop.getProperty("td_offsetFlag_open").charAt(0);
+            TD_OFFSET_FLAG_CLOSE = prop.getProperty("td_offsetFlag_close").charAt(0);
+            TD_OFFSET_FLAG_CLOSE_TODAY = prop.getProperty("td_offsetFlag_closeToday").charAt(0);
+            TD_HEDGE_FLAG_SPECULATION = prop.getProperty("td_hedgeFlag_speculation").charAt(0);
+            TD_CONTINGENT_CONDITION_IMMEDIATELY = prop.getProperty("td_contingentCondition_immediately").charAt(0);
+            TD_VOLUME_CONDITION_ANY = prop.getProperty("td_volumeCondition_any").charAt(0);
+            TD_VOLUME_CONDITION_MIN = prop.getProperty("td_volumeCondition_min").charAt(0);
+            TD_VOLUME_CONDITION_ALL = prop.getProperty("td_volumeCondition_all").charAt(0);
+            TD_TIME_CONDITION_IOC = prop.getProperty("td_timeCondition_ioc").charAt(0);
+            TD_TIME_CONDITION_GFS = prop.getProperty("td_timeCondition_gfs").charAt(0);
+            TD_TIME_CONDITION_GFD = prop.getProperty("td_timeCondition_gfd").charAt(0);
+            TD_FORCE_CLOSE_REASON_NOT_FORCE_CLOSE = prop.getProperty("td_forceCloseReason_notForceClose").charAt(0);
+            TD_FORCE_CLOSE_REASON_LACK_DEPOSIT = prop.getProperty("td_forceCloseReason_lackDeposit").charAt(0);
+            TD_ORDER_PRICE_TYPE_ANY_PRICE = prop.getProperty("td_orderPriceType_anyPrice").charAt(0);
+            TD_ORDER_PRICE_TYPE_LIMIT_PRICE = prop.getProperty("td_orderPriceType_limitPrice").charAt(0);
+            TD_ORDER_PRICE_TYPE_BEST_PRICE = prop.getProperty("td_orderPriceType_bestPrice").charAt(0);
+            TD_ORDER_PRICE_TYPE_LAST_PRICE = prop.getProperty("td_orderPriceType_lastPrice").charAt(0);
+
 
             BOOTSTRAP_SERVERS = prop.getProperty("bootstrap_servers");
             ACKS = prop.getProperty("acks");

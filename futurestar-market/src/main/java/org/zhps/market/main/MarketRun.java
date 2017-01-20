@@ -19,7 +19,7 @@ public class MarketRun {
 //        WriteMarketToFileUtil.registerMdSpi(mdSpiA);
 
         mdApi.registerSpi(mdSpiA);
-        mdApi.registerFront(PropertiesUtil.MK_SIM_FIRM);
+        mdApi.registerFront(PropertiesUtil.MK_SIM_TEST);
         mdApi.registerLoginInfo("", "", "");
         mdApi.registerSubMarketData(PropertiesUtil.MK_CONTRACTS, PropertiesUtil.MK_SUB_NUM);
         mdApi.connect();

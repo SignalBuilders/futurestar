@@ -35,7 +35,7 @@ public class CThostFtdcInputOrderField implements Serializable {
     
     private String gTDDate;
     
-    private int volumeCondition;
+    private char volumeCondition;
     
     private int minVolume;
     
@@ -171,11 +171,11 @@ public class CThostFtdcInputOrderField implements Serializable {
         this.gTDDate = gTDDate;
     }
 
-    public int getVolumeCondition() {
+    public char getVolumeCondition() {
         return volumeCondition;
     }
 
-    public void setVolumeCondition(int volumeCondition) {
+    public void setVolumeCondition(char volumeCondition) {
         this.volumeCondition = volumeCondition;
     }
 
