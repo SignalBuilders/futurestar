@@ -12,7 +12,7 @@ public class TraderSpiAdapter implements TraderSpi {
 
     @Override
     public void onFrontConnected() {
-        System.out.println("trader connected.....");
+//        System.out.println("trader connected.....");
     }
 
     @Override

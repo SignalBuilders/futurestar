@@ -20,7 +20,7 @@ public class TraderRun {
             public void run() {
                 TraderSpi traderSpi = new TraderSpiAdapter();
                 traderApi.registerSpi(traderSpi);
-                traderApi.registerFront(PropertiesUtil.TD_SIM_TEST);
+                traderApi.registerFront(PropertiesUtil.TD_PROD);
                 traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
                 traderApi.connect();
             }
@@ -35,14 +35,15 @@ public class TraderRun {
         new Thread(){
             @Override
             public void run() {
-                insert(traderApi);
+//                insert(traderApi);
+
 //                traderApi.queryTradingAccount();
 
-//                System.out.println(traderApi.queryInvestorPositionDetail());
+//                traderApi.queryInvestorPositionDetail();
 
-                System.out.println(traderApi.queryInvestorPosition());
+//                traderApi.queryInvestorPosition();
 
-//                query(traderApi);
+                query(traderApi);
 
             }
         }.start();
@@ -58,7 +59,7 @@ public class TraderRun {
         iorder.setInstrumentID("RM705");
         iorder.setOrderRef("");
         //0.buy, 1.sell
-        iorder.setDirection(PropertiesUtil.TD_DIRECTION_BUY);
+        iorder.setDirection(PropertiesUtil.TD_DIRECTION_SELL);
         //0.open, 1.close, 3.closeToday
         iorder.setCombOffsetFlag(PropertiesUtil.TD_OFFSET_FLAG_CLOSE);
         //1.Speculation
@@ -77,7 +78,7 @@ public class TraderRun {
         iorder.setUserForceClose(0);
         //1.AnyPrice, 2.LimitPrice, 3.BestPrice, 4.LastPrice
         iorder.setOrderPriceType(PropertiesUtil.TD_ORDER_PRICE_TYPE_LIMIT_PRICE);
-        iorder.setLimitPrice(2464);
+        iorder.setLimitPrice(2429);
         traderApi.insertOrder(iorder);
     }
 }
