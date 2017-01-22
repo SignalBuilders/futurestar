@@ -69,6 +69,15 @@ public class Iorder implements Serializable {
 
     private String macAddress;
 
+    public Iorder(){}
+
+    public Iorder(String contract, double limitPrice, int volume){
+        this.instrumentID = contract;
+        this.limitPrice = limitPrice;
+        this.volumeTotalOriginal = volume;
+        this.minVolume = volume;
+    }
+
     public String getBrokerID() {
         return brokerID;
     }

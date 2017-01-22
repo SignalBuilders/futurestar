@@ -29,7 +29,7 @@ public class Korder implements Serializable {
     
     private String orderSysID;
     
-    private String actionFlag;
+    private char actionFlag;
     
     private double limitPrice;
     
@@ -44,6 +44,18 @@ public class Korder implements Serializable {
     private String iPAddress;
     
     private String macAddress;
+
+    public Korder(){}
+
+//    public Korder(){
+//
+//    }
+
+    public Korder(String contract, String exchangeID, String orderSysID){
+        this.instrumentID = contract;
+        this.exchangeID = exchangeID;
+        this.orderSysID = orderSysID;
+    }
 
     public String getBrokerID() {
         return brokerID;
@@ -117,11 +129,11 @@ public class Korder implements Serializable {
         this.orderSysID = orderSysID;
     }
 
-    public String getActionFlag() {
+    public char getActionFlag() {
         return actionFlag;
     }
 
-    public void setActionFlag(String actionFlag) {
+    public void setActionFlag(char actionFlag) {
         this.actionFlag = actionFlag;
     }
 
@@ -193,7 +205,7 @@ public class Korder implements Serializable {
                 .append(", sessionID=").append(sessionID)
                 .append(", exchangeID='").append(exchangeID).append("'")
                 .append(", orderSysID='").append(orderSysID).append("'")
-                .append(", actionFlag='").append(actionFlag).append("'")
+                .append(", actionFlag=").append(actionFlag)
                 .append(", limitPrice=").append(limitPrice)
                 .append(", volumeChange=").append(volumeChange)
                 .append(", userID='").append(userID).append("'")

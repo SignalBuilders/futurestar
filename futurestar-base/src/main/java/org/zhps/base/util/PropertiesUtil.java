@@ -60,6 +60,8 @@ public class PropertiesUtil {
     public static char TD_ORDER_PRICE_TYPE_LIMIT_PRICE;
     public static char TD_ORDER_PRICE_TYPE_BEST_PRICE;
     public static char TD_ORDER_PRICE_TYPE_LAST_PRICE;
+    public static char TD_ACTION_FLAG_DELETE;
+    public static char TD_ACTION_FLAG_MODIFY;
     //kafka
     public static String BOOTSTRAP_SERVERS;
     public static String ACKS;
@@ -140,7 +142,8 @@ public class PropertiesUtil {
             TD_ORDER_PRICE_TYPE_LIMIT_PRICE = prop.getProperty("td_orderPriceType_limitPrice").charAt(0);
             TD_ORDER_PRICE_TYPE_BEST_PRICE = prop.getProperty("td_orderPriceType_bestPrice").charAt(0);
             TD_ORDER_PRICE_TYPE_LAST_PRICE = prop.getProperty("td_orderPriceType_lastPrice").charAt(0);
-
+            TD_ACTION_FLAG_DELETE = prop.getProperty("td_actionFlag_delete").charAt(0);
+            TD_ACTION_FLAG_MODIFY = prop.getProperty("td_actionFlag_modify").charAt(0);
 
             BOOTSTRAP_SERVERS = prop.getProperty("bootstrap_servers");
             ACKS = prop.getProperty("acks");

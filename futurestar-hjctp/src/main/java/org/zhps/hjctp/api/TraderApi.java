@@ -45,7 +45,7 @@ public class TraderApi {
     }
 
     public void killOrder(Korder korder){
-
+        NativeLoader.killOrder(korder);
     }
 
     public void insertOrder(Iorder iorder){
