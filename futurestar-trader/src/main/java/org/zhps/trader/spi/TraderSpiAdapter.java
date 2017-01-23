@@ -55,66 +55,78 @@ public class TraderSpiAdapter implements TraderSpi {
     @Override
     public void onRspQryInvestorPosition(CThostFtdcInvestorPositionField pInvestorPosition, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 //        System.out.println(pInvestorPosition);
-        StringBuilder rtn = new StringBuilder("#onRspQryInvestorPosition#\n")
-                .append("tradingDay:").append(pInvestorPosition.getTradingDay())
-                .append("|instrumentID:").append(pInvestorPosition.getInstrumentID())
-                .append("|posiDirection:").append(pInvestorPosition.getPosiDirection())
-                .append("|positionDate:").append(pInvestorPosition.getPositionDate())
-                .append("|ydPosition:").append(pInvestorPosition.getYdPosition())
-                .append("|position:").append(pInvestorPosition.getPosition())
-                .append("|openVolume:").append(pInvestorPosition.getOpenVolume())
-                .append("|closeVolume:").append(pInvestorPosition.getCloseVolume())
-                .append("|useMargin:").append(pInvestorPosition.getUseMargin())
-                .append("|commission:").append(pInvestorPosition.getCommission())
-                .append("|positionProfit:").append(pInvestorPosition.getPositionProfit())
-                .append("|openCost:").append(pInvestorPosition.getOpenCost())
-                .append("|closeProfitByTrade:").append(pInvestorPosition.getCloseProfitByTrade())
-                .append("|todayPosition:").append(pInvestorPosition.getTodayPosition());
-        System.out.println(rtn);
+        if(pInvestorPosition != null){
+            StringBuilder rtn = new StringBuilder("#onRspQryInvestorPosition#\n")
+                    .append("tradingDay:").append(pInvestorPosition.getTradingDay())
+                    .append("|instrumentID:").append(pInvestorPosition.getInstrumentID())
+                    .append("|posiDirection:").append(pInvestorPosition.getPosiDirection())
+                    .append("|positionDate:").append(pInvestorPosition.getPositionDate())
+                    .append("|ydPosition:").append(pInvestorPosition.getYdPosition())
+                    .append("|position:").append(pInvestorPosition.getPosition())
+                    .append("|openVolume:").append(pInvestorPosition.getOpenVolume())
+                    .append("|closeVolume:").append(pInvestorPosition.getCloseVolume())
+                    .append("|useMargin:").append(pInvestorPosition.getUseMargin())
+                    .append("|commission:").append(pInvestorPosition.getCommission())
+                    .append("|positionProfit:").append(pInvestorPosition.getPositionProfit())
+                    .append("|openCost:").append(pInvestorPosition.getOpenCost())
+                    .append("|closeProfitByTrade:").append(pInvestorPosition.getCloseProfitByTrade())
+                    .append("|todayPosition:").append(pInvestorPosition.getTodayPosition());
+            System.out.println(rtn);
+        }else{
+            System.out.println("onRspQryInvestorPosition no message");
+        }
     }
 
     @Override
     public void onRspQryInvestorPositionDetail(CThostFtdcInvestorPositionDetailField pInvestorPositionDetail, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
 //        System.out.println(pInvestorPositionDetail);
-        StringBuilder rtn = new StringBuilder("#onRspQryInvestorPositionDetail#\n")
-                .append("tradingDay:").append(pInvestorPositionDetail.getTradingDay())
-                .append("|instrumentID:").append(pInvestorPositionDetail.getInstrumentID())
-                .append("|openDate:").append(pInvestorPositionDetail.getOpenDate())
-                .append("|direction:").append(pInvestorPositionDetail.getDirection())
-                .append("|openPrice:").append(pInvestorPositionDetail.getOpenPrice())
-                .append("|volume:").append(pInvestorPositionDetail.getVolume())
-                .append("|closeProfitByTrade:").append(pInvestorPositionDetail.getCloseProfitByTrade())
-                .append("|margin:").append(pInvestorPositionDetail.getMargin())
-                .append("|exchMargin:").append(pInvestorPositionDetail.getExchMargin())
-                .append("|closeVolume:").append(pInvestorPositionDetail.getCloseVolume())
-                .append("|closeAmount:").append(pInvestorPositionDetail.getCloseAmount());
-        System.out.println(rtn);
+        if(pInvestorPositionDetail != null){
+            StringBuilder rtn = new StringBuilder("#onRspQryInvestorPositionDetail#\n")
+                    .append("tradingDay:").append(pInvestorPositionDetail.getTradingDay())
+                    .append("|instrumentID:").append(pInvestorPositionDetail.getInstrumentID())
+                    .append("|openDate:").append(pInvestorPositionDetail.getOpenDate())
+                    .append("|direction:").append(pInvestorPositionDetail.getDirection())
+                    .append("|openPrice:").append(pInvestorPositionDetail.getOpenPrice())
+                    .append("|volume:").append(pInvestorPositionDetail.getVolume())
+                    .append("|closeProfitByTrade:").append(pInvestorPositionDetail.getCloseProfitByTrade())
+                    .append("|margin:").append(pInvestorPositionDetail.getMargin())
+                    .append("|exchMargin:").append(pInvestorPositionDetail.getExchMargin())
+                    .append("|closeVolume:").append(pInvestorPositionDetail.getCloseVolume())
+                    .append("|closeAmount:").append(pInvestorPositionDetail.getCloseAmount());
+            System.out.println(rtn);
+        }else{
+            System.out.println("onRspQryInvestorPositionDetail no message");
+        }
     }
 
     @Override
     public void onRtnOrder(CThostFtdcOrderField pOrder) {
 //        System.out.println("onRtnOrder++: " + pOrder);
-        StringBuilder rtn = new StringBuilder("#onRtnOrder#\n")
-                .append("tradingDay:").append(pOrder.getTradingDay())
-                .append("|instrumentID:").append(pOrder.getInstrumentID())
-                .append("|insertDate:").append(pOrder.getInsertDate())
-                .append("|insertTime:").append(pOrder.getInsertTime())
-                .append("|limitPrice:").append(pOrder.getLimitPrice())
-                .append("|direction:").append(pOrder.getDirection())
-                .append("|combOffsetFlag:").append(pOrder.getCombOffsetFlag())
-                .append("|volumeTotalOriginal:").append(pOrder.getVolumeTotalOriginal())
-                .append("|volumeTraded:").append(pOrder.getVolumeTraded())
-                .append("|volumeTotal:").append(pOrder.getVolumeTotal())
-                .append("|orderPriceType:").append(pOrder.getOrderPriceType())
-                .append("|timeCondition:").append(pOrder.getTimeCondition())
-                .append("|volumeCondition:").append(pOrder.getVolumeCondition())
-                .append("|contingentCondition:").append(pOrder.getContingentCondition())
-                .append("|exchangeID:").append(pOrder.getExchangeID())
-                .append("|orderSysID:").append(pOrder.getOrderSysID())
-                .append("|orderStatus:").append(pOrder.getOrderStatus())
-                .append("|orderType:").append(pOrder.getOrderType())
-                .append("|statusMsg:").append(pOrder.getStatusMsg());
-        System.out.println(rtn);
+        if(pOrder != null){
+            StringBuilder rtn = new StringBuilder("#onRtnOrder#\n")
+                    .append("tradingDay:").append(pOrder.getTradingDay())
+                    .append("|instrumentID:").append(pOrder.getInstrumentID())
+                    .append("|insertDate:").append(pOrder.getInsertDate())
+                    .append("|insertTime:").append(pOrder.getInsertTime())
+                    .append("|limitPrice:").append(pOrder.getLimitPrice())
+                    .append("|direction:").append(pOrder.getDirection())
+                    .append("|combOffsetFlag:").append(pOrder.getCombOffsetFlag())
+                    .append("|volumeTotalOriginal:").append(pOrder.getVolumeTotalOriginal())
+                    .append("|volumeTraded:").append(pOrder.getVolumeTraded())
+                    .append("|volumeTotal:").append(pOrder.getVolumeTotal())
+                    .append("|orderPriceType:").append(pOrder.getOrderPriceType())
+                    .append("|timeCondition:").append(pOrder.getTimeCondition())
+                    .append("|volumeCondition:").append(pOrder.getVolumeCondition())
+                    .append("|contingentCondition:").append(pOrder.getContingentCondition())
+                    .append("|exchangeID:").append(pOrder.getExchangeID())
+                    .append("|orderSysID:").append(pOrder.getOrderSysID())
+                    .append("|orderStatus:").append(pOrder.getOrderStatus())
+                    .append("|orderType:").append(pOrder.getOrderType())
+                    .append("|statusMsg:").append(pOrder.getStatusMsg());
+            System.out.println(rtn);
+        }else{
+            System.out.println("onRtnOrder no message");
+        }
     }
 
     @Override
