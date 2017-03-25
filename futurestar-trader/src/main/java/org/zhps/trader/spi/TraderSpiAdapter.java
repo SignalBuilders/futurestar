@@ -142,16 +142,16 @@ public class TraderSpiAdapter implements TraderSpi {
     @Override
     public void onRtnTrade(CThostFtdcTradeField pTrade) {
 //        System.out.println("onRtnTrade++: " + pTrade);
-        StringBuilder rtn = new StringBuilder("#onRtnTrade#/n")
-                .append("tradeDate:").append(pTrade.getTradeDate())
-                .append("tradeTime:").append(pTrade.getTradeTime())
-                .append("instrumentID:").append(pTrade.getInstrumentID())
-                .append("direction:").append(pTrade.getDirection())
-                .append("offsetFlag:").append(pTrade.getOffsetFlag())
-                .append("exchangeID:").append(pTrade.getExchangeID())
-                .append("orderSysID:").append(pTrade.getOrderSysID())
-                .append("price:").append(pTrade.getPrice())
-                .append("volume:").append(pTrade.getVolume());
+        StringBuilder rtn = new StringBuilder("#onRtnTrade#\n")
+                .append("|tradeDate:").append(pTrade.getTradeDate())
+                .append("|tradeTime:").append(pTrade.getTradeTime())
+                .append("|instrumentID:").append(pTrade.getInstrumentID())
+                .append("|direction:").append(pTrade.getDirection())
+                .append("|offsetFlag:").append(pTrade.getOffsetFlag())
+                .append("|exchangeID:").append(pTrade.getExchangeID())
+                .append("|orderSysID:").append(pTrade.getOrderSysID())
+                .append("|price:").append(pTrade.getPrice())
+                .append("|volume:").append(pTrade.getVolume());
         System.out.println(rtn);
     }
 

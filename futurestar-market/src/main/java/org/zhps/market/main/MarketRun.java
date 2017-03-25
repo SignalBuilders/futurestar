@@ -5,6 +5,7 @@ import org.zhps.hjctp.api.MdApi;
 import org.zhps.market.producer.MarketProducer;
 import org.zhps.market.spi.MdSpiAdapter;
 import org.zhps.market.util.WriteMarketToFileUtil;
+import org.zhps.market.util.WriteTradingDayToHbase;
 
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.
@@ -17,9 +18,10 @@ public class MarketRun {
         final MdSpiAdapter mdSpiA = new MdSpiAdapter(new MarketProducer());
 //        WriteMarketToFileUtil.startTimer(mdApi);
 //        WriteMarketToFileUtil.registerMdSpi(mdSpiA);
+//        WriteTradingDayToHbase.startTimer(mdApi);
 
         mdApi.registerSpi(mdSpiA);
-        mdApi.registerFront(PropertiesUtil.MK_SIM_TEST);
+        mdApi.registerFront(PropertiesUtil.MK_SIM_FIRM);
         mdApi.registerLoginInfo("", "", "");
         mdApi.registerSubMarketData(PropertiesUtil.MK_CONTRACTS, PropertiesUtil.MK_SUB_NUM);
         mdApi.connect();

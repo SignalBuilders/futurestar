@@ -24,7 +24,7 @@ public class BaseTask {
         return timer;
     }
 
-    public static int stopTask(Timer timer){
+    public static int stopTask(TimerTask timer){
         try{
             timer.cancel();
             return 0;

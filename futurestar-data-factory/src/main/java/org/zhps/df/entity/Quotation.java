@@ -19,9 +19,9 @@ public class Quotation implements Serializable {
 
     private double openPrice;
 
-    private double HighestPrice;
+    private double highestPrice;
 
-    private double LowestPrice;
+    private double lowestPrice;
 
     private double upperLimitPrice;
 
@@ -31,7 +31,9 @@ public class Quotation implements Serializable {
 
     private String tradingDay;
 
-    private String updateMillisec;
+    private long volume;
+
+    private double interest;
 
     public String getInstrumentId() {
         return instrumentId;
@@ -63,19 +65,19 @@ public class Quotation implements Serializable {
     }
 
     public double getHighestPrice() {
-        return HighestPrice;
+        return highestPrice;
     }
 
     public void setHighestPrice(double highestPrice) {
-        HighestPrice = highestPrice;
+        this.highestPrice = highestPrice;
     }
 
     public double getLowestPrice() {
-        return LowestPrice;
+        return lowestPrice;
     }
 
     public void setLowestPrice(double lowestPrice) {
-        LowestPrice = lowestPrice;
+        this.lowestPrice = lowestPrice;
     }
 
     public double getUpperLimitPrice() {
@@ -110,31 +112,40 @@ public class Quotation implements Serializable {
         this.tradingDay = tradingDay;
     }
 
-    public String getUpdateMillisec() {
-        return updateMillisec;
+    public long getVolume() {
+        return volume;
     }
 
-    public void setUpdateMillisec(String updateMillisec) {
-        this.updateMillisec = updateMillisec;
+    public void setVolume(long volume) {
+        this.volume = volume;
+    }
+
+    public double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(double interest) {
+        this.interest = interest;
     }
 
     @Override
     public String toString() {
-        return new StringBuilder("Quotation{")
-                .append("instrumentId='").append(instrumentId).append("'")
-                .append(", lastPrice=").append(lastPrice)
-                .append(", openPrice=").append(openPrice)
-                .append(", HighestPrice=").append(HighestPrice)
-                .append(", LowestPrice=").append(LowestPrice)
-                .append(", upperLimitPrice=").append(upperLimitPrice)
-                .append(", lowerLimitPrice=").append(lowerLimitPrice)
-                .append(", updateTime='").append(updateTime).append("'")
-                .append(", tradingDay='").append(tradingDay).append("'")
-                .append(", updateMillisec='").append(updateMillisec).append("'")
-                .append("}").toString();
+        return "Quotation{" +
+                "instrumentId='" + instrumentId + '\'' +
+                ", lastPrice=" + lastPrice +
+                ", openPrice=" + openPrice +
+                ", highestPrice=" + highestPrice +
+                ", lowestPrice=" + lowestPrice +
+                ", upperLimitPrice=" + upperLimitPrice +
+                ", lowerLimitPrice=" + lowerLimitPrice +
+                ", updateTime='" + updateTime + '\'' +
+                ", tradingDay='" + tradingDay + '\'' +
+                ", volume=" + volume +
+                ", interest=" + interest +
+                '}';
     }
 
-//    public static void main(String[] args) {
+    //    public static void main(String[] args) {
 //        Quotation quotation = new Quotation();
 //        quotation.setInstrumentId("TA234");
 //        System.out.println(quotation.getInstrumentId());

@@ -1,12 +1,15 @@
 package org.zhps.market.spi;
 
+import org.zhps.base.redis.BaseRedis;
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.hjctp.entity.*;
 import org.zhps.hjctp.spi.MdSpi;
 import org.zhps.market.producer.MarketProducer;
+import redis.clients.jedis.Jedis;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.
@@ -40,7 +43,10 @@ public class MdSpiAdapter implements MdSpi {
     @Override
     public void onRspUserLogin(CThostFtdcRspUserLoginField pRspUserLogin, CThostFtdcRspInfoField pRspInfo,
                                int nRequestID, boolean bIsLast) {
-        StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay());
+        StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay())
+                .append(" Date: ").append(new Date());
+        final Jedis jedis = BaseRedis.getJedis();
+        jedis.set("traday", pRspUserLogin.getTradingDay());
         System.out.println(loginInfo.toString());
     }
 
@@ -77,16 +83,17 @@ public class MdSpiAdapter implements MdSpi {
 
     @Override
     public void onRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
-        StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append(" ")
-                .append(pDepthMarketData.getLastPrice()).append(" ")
-                .append(pDepthMarketData.getOpenPrice()).append(" ")
-                .append(pDepthMarketData.getHighestPrice()).append(" ")
-                .append(pDepthMarketData.getLowestPrice()).append(" ")
-                .append(pDepthMarketData.getUpperLimitPrice()).append(" ")
-                .append(pDepthMarketData.getLowerLimitPrice()).append(" ")
-                .append(pDepthMarketData.getUpdateTime()).append(" ")
-                .append(pDepthMarketData.getTradingDay()).append(" ")
-                .append(pDepthMarketData.getUpdateMillisec()).append(" ");
+        StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append("|")
+                .append(pDepthMarketData.getLastPrice()).append("|")
+                .append(pDepthMarketData.getOpenPrice()).append("|")
+                .append(pDepthMarketData.getHighestPrice()).append("|")
+                .append(pDepthMarketData.getLowestPrice()).append("|")
+                .append(pDepthMarketData.getUpperLimitPrice()).append("|")
+                .append(pDepthMarketData.getLowerLimitPrice()).append("|")
+                .append(pDepthMarketData.getUpdateTime()).append("|")
+                .append(pDepthMarketData.getTradingDay()).append("|")
+                .append(pDepthMarketData.getVolume()).append("|")
+                .append(pDepthMarketData.getOpenInterest());
         if(this.marketProducer != null){
             marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
         }
@@ -99,7 +106,7 @@ public class MdSpiAdapter implements MdSpi {
 //            e.printStackTrace();
 //        } finally {
 //        }
-        System.out.println(markets.toString());
+//        System.out.println(markets.toString());
 //        System.out.println(pDepthMarketData.getClosePrice());
 //        System.out.println(pDepthMarketData);
     }

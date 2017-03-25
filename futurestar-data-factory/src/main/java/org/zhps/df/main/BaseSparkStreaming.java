@@ -1,5 +1,6 @@
 package org.zhps.df.main;
 
+import kafka.serializer.StringDecoder;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.function.*;
@@ -7,24 +8,24 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.Time;
 import org.apache.spark.streaming.api.java.JavaDStream;
+import org.apache.spark.streaming.api.java.JavaPairInputDStream;
 import org.apache.spark.streaming.api.java.JavaPairReceiverInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
 import org.apache.spark.streaming.kafka.KafkaUtils;
-import org.hbase.async.HBaseClient;
-import org.hbase.async.PutRequest;
+import org.hbase.async.*;
+import org.hbase.async.Scanner;
 import org.zhps.base.hbase.BaseHbase;
+import org.zhps.base.redis.BaseRedis;
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.df.entity.Quotation;
 import org.zhps.df.task.TaskHelper;
+import redis.clients.jedis.Jedis;
 import scala.Tuple2;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -33,26 +34,37 @@ import java.util.regex.Pattern;
  * Created on 2016/12/23.
  */
 public class BaseSparkStreaming {
-//    static{
-//        TaskHelper.openMarket();
-//        TaskHelper.closeMarket();
-//    }
-    private static final Pattern SPACE = Pattern.compile(" ");
+    static{
+        TaskHelper.openMarket();
+        TaskHelper.closeMarket();
+    }
+    private static final Pattern SPACE = Pattern.compile("\\|");
     private static final byte[] TABLE_NAME = "quotation".getBytes();
-    private static final byte[] COLUMN_FAMILY = "quo".getBytes();
+    private static final byte[] COLUMN_FAMILY = "q".getBytes();
     private static final HBaseClient hBaseClient = BaseHbase.gethBaseClient();
+    final static Jedis jedis = BaseRedis.getJedis();
+//    final static String openMarket = jedis.get("open");
 
 
     public static void main(String[] args) throws IOException {
         SparkConf sparkConf = new SparkConf().setAppName("market").setMaster("local[*]");
-        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(100));
-        Map<String, Integer> topicMap = new HashMap<>();
-        String[] topicArray = PropertiesUtil.MK_TOPIC.split(",");
-        for (String topic : topicArray) {
-            topicMap.put(topic, 3);
-        }
-        JavaPairReceiverInputDStream<String, String> messages =
-                KafkaUtils.createStream(jssc, PropertiesUtil.ZOOKEEPER_QUORUM, PropertiesUtil.CONSUMER_GROUP_ID, topicMap);
+        JavaStreamingContext jssc = new JavaStreamingContext(sparkConf, Durations.milliseconds(PropertiesUtil.SPARK_DURATIONS));
+        Set<String> topicSet = new HashSet<>(Arrays.asList(PropertiesUtil.MK_TOPIC.split(",")));
+//        String[] topicArray = PropertiesUtil.MK_TOPIC.split(",");
+//        for (String topic : topicArray) {
+//            topicMap.put(topic, 3);
+//        }
+        Map<String, String> kafkaParams = new HashMap<>();
+        kafkaParams.put("metadata.broker.list", PropertiesUtil.BOOTSTRAP_SERVERS);
+//        JavaPairReceiverInputDStream<String, String> messages =
+//                KafkaUtils.createStream(jssc, PropertiesUtil.ZOOKEEPER_QUORUM, PropertiesUtil.CONSUMER_GROUP_ID, topicMap);
+        JavaPairInputDStream<String, String> messages = KafkaUtils.createDirectStream(jssc,
+                String.class,
+                String.class,
+                StringDecoder.class,
+                StringDecoder.class,
+                kafkaParams,
+                topicSet);
 
         JavaDStream<String> lines = messages.map(new Function<Tuple2<String, String>, String>() {
             @Override
@@ -75,7 +87,8 @@ public class BaseSparkStreaming {
                 quotation.setLowerLimitPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LOWERLIMIT_PRICE]));
                 quotation.setUpdateTime(quoStr[PropertiesUtil.MK_QUO_UPDATETIME]);
                 quotation.setTradingDay(quoStr[PropertiesUtil.MK_QUO_TRADINGDAY]);
-                quotation.setUpdateMillisec(quoStr[PropertiesUtil.MK_QUO_UPDATETIMEMILLISEC]);
+                quotation.setVolume(Long.parseLong(quoStr[PropertiesUtil.MK_QUO_VOLUME]));
+                quotation.setInterest(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_INTEREST]));
                 return Arrays.asList(quotation).iterator();
             }
         });
@@ -86,38 +99,54 @@ public class BaseSparkStreaming {
                 quotationJavaRDD.foreach(new VoidFunction<Quotation>() {
                     @Override
                     public void call(Quotation quotation) throws Exception {
-                        byte[] rowKey = (quotation.getInstrumentId() + "|" + quotation.getTradingDay() + "|"
-                                + quotation.getUpdateTime() + "|" + quotation.getUpdateMillisec()).getBytes();
-                        byte[] last = String.valueOf(quotation.getLastPrice()).getBytes();
-                        byte[] open = String.valueOf(quotation.getOpenPrice()).getBytes();
-                        byte[] upper = String.valueOf(quotation.getUpperLimitPrice()).getBytes();
-                        byte[] lower = String.valueOf(quotation.getLowerLimitPrice()).getBytes();
-                        byte[][] colBytes = {"last".getBytes(),"open".getBytes(),"upper".getBytes(),"lower".getBytes()};
-                        byte[][] valBytes = {last,open,upper,lower};
+//                        byte[] rowKey = (quotation.getInstrumentId() + "|" + quotation.getTradingDay() + "|"
+//                                + quotation.getUpdateTime() + "|" + quotation.getUpdateMillisec()).getBytes();
+//                        byte[] last = String.valueOf(quotation.getLastPrice()).getBytes();
+//                        byte[] open = String.valueOf(quotation.getOpenPrice()).getBytes();
+//                        byte[] upper = String.valueOf(quotation.getUpperLimitPrice()).getBytes();
+//                        byte[] lower = String.valueOf(quotation.getLowerLimitPrice()).getBytes();
+//                        byte[][] colBytes = {"last".getBytes(),"open".getBytes(),"upper".getBytes(),"lower".getBytes()};
+//                        byte[][] valBytes = {last,open,upper,lower};
 
-                        PutRequest put = new PutRequest(TABLE_NAME, rowKey, COLUMN_FAMILY, colBytes, valBytes);
-                        put.setDurable(false);
-                        hBaseClient.put(put);
+//                        PutRequest put = new PutRequest(TABLE_NAME, rowKey, COLUMN_FAMILY, colBytes, valBytes);
+//                        put.setDurable(false);
+//                        hBaseClient.put(put);
+//                        Quotation{instrumentId='RM', lastPrice=2444.0, openPrice=2453.0, highestPrice=2457.0, lowestPrice=2427.0,
+//                                upperLimitPrice=2571.0, lowerLimitPrice=2325.0, updateTime='07:53:54', tradingDay='20170303', updateMillisec='500'}
+
+//                        System.out.println(quotation);
+
+                        String openMarket = jedis.get("open");
+
+                        double lastPrice = quotation.getLastPrice();
+                        String[] openMarkets = SPACE.split(openMarket);
+                        double ave5dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[1])) / 5;
+                        double ave10dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[2])) / 10;
+
+                        String day = quotation.getTradingDay();
+                        String updateTime = quotation.getUpdateTime().split(":")[0];
+                        if(quotation.getUpdateTime().equalsIgnoreCase("14:59:59")){
+                            updateTime = "15";
+                        }
+                        String open = String.valueOf(quotation.getOpenPrice());
+                        String highest = String.valueOf(quotation.getHighestPrice());
+                        String lowest = String.valueOf(quotation.getLowestPrice());
+                        String last = String.valueOf(quotation.getLastPrice());
+                        String ave5d = String.valueOf(ave5dPrice);
+                        String ave10d = String.valueOf(ave10dPrice);
+                        String volume = String.valueOf(quotation.getVolume());
+                        String interest = String.valueOf(quotation.getInterest());
+
+                        StringBuilder value = new StringBuilder(day).append("|").append(updateTime).append("|")
+                                .append(open).append("|").append(highest).append("|").append(lowest).append("|")
+                                .append(last).append("|").append(ave5d).append("|").append(ave10d).append("|")
+                                .append(volume).append("|").append(interest);
+
+                        jedis.set("close", value.toString());
                     }
                 });
             }
         });
-
-
-//        JavaPairDStream<String, Integer> wordCounts = words.mapToPair(
-//                new PairFunction<String, String, Integer>() {
-//                    @Override
-//                    public Tuple2<String, Integer> call(String s) {
-//                        return new Tuple2<>(s, 1);
-//                    }
-//                }).reduceByKey(new Function2<Integer, Integer, Integer>() {
-//            @Override
-//            public Integer call(Integer i1, Integer i2) {
-//                return i1 + i2;
-//            }
-//        });
-//
-//        wordCounts.print();
 
         jssc.start();
         try {
@@ -125,6 +154,39 @@ public class BaseSparkStreaming {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
+
+//        byte[][] colBytes = {"last".getBytes(),"open".getBytes(),"upper".getBytes(),"lower".getBytes()};
+//        byte[][] valBytes = {"6877".getBytes(),"6954".getBytes(),"7448".getBytes(),"6472".getBytes()};
+//        PutRequest put = new PutRequest(TABLE_NAME, "SR|20170204|11:16:40|500".getBytes(), COLUMN_FAMILY, colBytes, valBytes);
+//        put.setDurable(false);
+//        hBaseClient.put(put);
+//        BinaryComparator bc = new BinaryComparator("20170203".getBytes());
+//        RowFilter rowFilter = new RowFilter(CompareFilter.CompareOp.LESS_OR_EQUAL, bc);
+//        GetRequest get = new GetRequest("traday", "tdrow".getBytes());
+//        get.setFilter(rowFilter);
+//        try {
+//            ArrayList<KeyValue> al = hBaseClient.get(get).join();
+//            System.out.println(al.size());
+//            for(int i = al.size() - 1; i >= al.size() - 5; i--){
+//                System.out.println(new String(al.get(i).qualifier()));
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        Scanner scanner = hBaseClient.newScanner("traday");
+////        scanner.setStartKey("SR|20170203|11:16:40");
+//        scanner.setFilter(rowFilter);
+//        scanner.setMaxNumRows(9);
+//        try {
+//            ArrayList<ArrayList<KeyValue>> al = scanner.nextRows().join();
+//            for(ArrayList<KeyValue> kv : al){
+//                System.out.println(kv);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }
 

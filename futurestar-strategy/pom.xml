@@ -11,5 +11,19 @@
 
     <artifactId>futurestar-strategy</artifactId>
 
+    <dependencies>
+        <!-- futurestar hjctp -->
+        <dependency>
+            <groupId>org.zhps</groupId>
+            <artifactId>futurestar-hjctp</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- futurestar base -->
+        <dependency>
+            <groupId>org.zhps</groupId>
+            <artifactId>futurestar-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
