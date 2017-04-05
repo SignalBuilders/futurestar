@@ -102,6 +102,9 @@ public class DataFactoryRun {
                         String updateTime = quotation.getUpdateTime();
                         int hour = Integer.parseInt(updateTime.split(":")[0]);
                         if((hour >= 21 && hour <= 23) || (hour >= 9 && hour <= 15)){//open time
+                            dayLine(quotation);
+                            t3mLine(quotation);
+                            f5mLine(quotation);
                         }
                     }
                 });
@@ -116,6 +119,7 @@ public class DataFactoryRun {
         }
     }
 
+    private static void dayLine(Quotation quotation){
         String openMarket = jedis.get("open");
 
         double lastPrice = quotation.getLastPrice();
@@ -145,6 +149,7 @@ public class DataFactoryRun {
         jedis.set("close", value.toString());
     }
 
+    private static void t3mLine(Quotation quotation){
         String updateTime = quotation.getUpdateTime();
         int minute = Integer.parseInt(updateTime.split(":")[1]);
         int second = Integer.parseInt(updateTime.split(":")[2]);
@@ -158,6 +163,7 @@ public class DataFactoryRun {
         }
     }
 
+    private static void f5mLine(Quotation quotation){
         String updateTime = quotation.getUpdateTime();
         int minute = Integer.parseInt(updateTime.split(":")[1]);
         int second = Integer.parseInt(updateTime.split(":")[2]);
