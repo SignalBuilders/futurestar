@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
  * <p/>
  * Created on 2016/12/23.
  */
-public class BaseSparkStreaming {
+public class DataFactoryRun {
     static{
         TaskHelper.openMarket();
         TaskHelper.closeMarket();
@@ -99,50 +99,10 @@ public class BaseSparkStreaming {
                 quotationJavaRDD.foreach(new VoidFunction<Quotation>() {
                     @Override
                     public void call(Quotation quotation) throws Exception {
-//                        byte[] rowKey = (quotation.getInstrumentId() + "|" + quotation.getTradingDay() + "|"
-//                                + quotation.getUpdateTime() + "|" + quotation.getUpdateMillisec()).getBytes();
-//                        byte[] last = String.valueOf(quotation.getLastPrice()).getBytes();
-//                        byte[] open = String.valueOf(quotation.getOpenPrice()).getBytes();
-//                        byte[] upper = String.valueOf(quotation.getUpperLimitPrice()).getBytes();
-//                        byte[] lower = String.valueOf(quotation.getLowerLimitPrice()).getBytes();
-//                        byte[][] colBytes = {"last".getBytes(),"open".getBytes(),"upper".getBytes(),"lower".getBytes()};
-//                        byte[][] valBytes = {last,open,upper,lower};
-
-//                        PutRequest put = new PutRequest(TABLE_NAME, rowKey, COLUMN_FAMILY, colBytes, valBytes);
-//                        put.setDurable(false);
-//                        hBaseClient.put(put);
-//                        Quotation{instrumentId='RM', lastPrice=2444.0, openPrice=2453.0, highestPrice=2457.0, lowestPrice=2427.0,
-//                                upperLimitPrice=2571.0, lowerLimitPrice=2325.0, updateTime='07:53:54', tradingDay='20170303', updateMillisec='500'}
-
-//                        System.out.println(quotation);
-
-                        String openMarket = jedis.get("open");
-
-                        double lastPrice = quotation.getLastPrice();
-                        String[] openMarkets = SPACE.split(openMarket);
-                        double ave5dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[1])) / 5;
-                        double ave10dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[2])) / 10;
-
-                        String day = quotation.getTradingDay();
-                        String updateTime = quotation.getUpdateTime().split(":")[0];
-                        if(quotation.getUpdateTime().equalsIgnoreCase("14:59:59")){
-                            updateTime = "15";
+                        String updateTime = quotation.getUpdateTime();
+                        int hour = Integer.parseInt(updateTime.split(":")[0]);
+                        if((hour >= 21 && hour <= 23) || (hour >= 9 && hour <= 15)){//open time
                         }
-                        String open = String.valueOf(quotation.getOpenPrice());
-                        String highest = String.valueOf(quotation.getHighestPrice());
-                        String lowest = String.valueOf(quotation.getLowestPrice());
-                        String last = String.valueOf(quotation.getLastPrice());
-                        String ave5d = String.valueOf(ave5dPrice);
-                        String ave10d = String.valueOf(ave10dPrice);
-                        String volume = String.valueOf(quotation.getVolume());
-                        String interest = String.valueOf(quotation.getInterest());
-
-                        StringBuilder value = new StringBuilder(day).append("|").append(updateTime).append("|")
-                                .append(open).append("|").append(highest).append("|").append(lowest).append("|")
-                                .append(last).append("|").append(ave5d).append("|").append(ave10d).append("|")
-                                .append(volume).append("|").append(interest);
-
-                        jedis.set("close", value.toString());
                     }
                 });
             }
@@ -154,52 +114,73 @@ public class BaseSparkStreaming {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-
-//        byte[][] colBytes = {"last".getBytes(),"open".getBytes(),"upper".getBytes(),"lower".getBytes()};
-//        byte[][] valBytes = {"6877".getBytes(),"6954".getBytes(),"7448".getBytes(),"6472".getBytes()};
-//        PutRequest put = new PutRequest(TABLE_NAME, "SR|20170204|11:16:40|500".getBytes(), COLUMN_FAMILY, colBytes, valBytes);
-//        put.setDurable(false);
-//        hBaseClient.put(put);
-//        BinaryComparator bc = new BinaryComparator("20170203".getBytes());
-//        RowFilter rowFilter = new RowFilter(CompareFilter.CompareOp.LESS_OR_EQUAL, bc);
-//        GetRequest get = new GetRequest("traday", "tdrow".getBytes());
-//        get.setFilter(rowFilter);
-//        try {
-//            ArrayList<KeyValue> al = hBaseClient.get(get).join();
-//            System.out.println(al.size());
-//            for(int i = al.size() - 1; i >= al.size() - 5; i--){
-//                System.out.println(new String(al.get(i).qualifier()));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        Scanner scanner = hBaseClient.newScanner("traday");
-////        scanner.setStartKey("SR|20170203|11:16:40");
-//        scanner.setFilter(rowFilter);
-//        scanner.setMaxNumRows(9);
-//        try {
-//            ArrayList<ArrayList<KeyValue>> al = scanner.nextRows().join();
-//            for(ArrayList<KeyValue> kv : al){
-//                System.out.println(kv);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
-}
 
-/** Lazily instantiated singleton instance of SparkSession */
-class JavaSparkSessionSingleton {
-    private static transient SparkSession instance = null;
-    public static SparkSession getInstance(SparkConf sparkConf) {
-        if (instance == null) {
-            instance = SparkSession
-                    .builder()
-                    .config(sparkConf)
-                    .getOrCreate();
+        String openMarket = jedis.get("open");
+
+        double lastPrice = quotation.getLastPrice();
+        String[] openMarkets = SPACE.split(openMarket);
+        double ave5dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[1])) / 5;
+        double ave10dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[2])) / 10;
+
+        String day = quotation.getTradingDay();
+        String updateTime = quotation.getUpdateTime().split(":")[0];
+        if(quotation.getUpdateTime().equalsIgnoreCase("14:59:59")){
+            updateTime = "15";
         }
-        return instance;
+        String open = String.valueOf(quotation.getOpenPrice());
+        String highest = String.valueOf(quotation.getHighestPrice());
+        String lowest = String.valueOf(quotation.getLowestPrice());
+        String last = String.valueOf(quotation.getLastPrice());
+        String ave5d = String.valueOf(ave5dPrice);
+        String ave10d = String.valueOf(ave10dPrice);
+        String volume = String.valueOf(quotation.getVolume());
+        String interest = String.valueOf(quotation.getInterest());
+
+        StringBuilder value = new StringBuilder(day).append("|").append(updateTime).append("|")
+                .append(open).append("|").append(highest).append("|").append(lowest).append("|")
+                .append(last).append("|").append(ave5d).append("|").append(ave10d).append("|")
+                .append(volume).append("|").append(interest);
+
+        jedis.set("close", value.toString());
+    }
+
+        String updateTime = quotation.getUpdateTime();
+        int minute = Integer.parseInt(updateTime.split(":")[1]);
+        int second = Integer.parseInt(updateTime.split(":")[2]);
+        int mod = minute % 3;
+        if(mod == 0){
+            // TODO: 2017/4/5 save open to hbase,caculate ave15m, ave30m
+        }
+
+        if(mod + 2 == minute && second == 59){
+            /// TODO: 2017/4/5 save close to hbase
+        }
+    }
+
+        String updateTime = quotation.getUpdateTime();
+        int minute = Integer.parseInt(updateTime.split(":")[1]);
+        int second = Integer.parseInt(updateTime.split(":")[2]);
+        int mod = minute % 5;
+        if(mod == 0){
+            // TODO: 2017/4/5 save open to hbase,caculate ave15m, ave30m
+        }
+
+        if(mod + 4 == minute && second == 59){
+            /// TODO: 2017/4/5 save close to hbase
+        }
     }
 }
+
+//class JavaSparkSessionSingleton {
+//    private static transient SparkSession instance = null;
+//    public static SparkSession getInstance(SparkConf sparkConf) {
+//        if (instance == null) {
+//            instance = SparkSession
+//                    .builder()
+//                    .config(sparkConf)
+//                    .getOrCreate();
+//        }
+//        return instance;
+//    }
+//}
