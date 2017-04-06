@@ -1,4 +1,4 @@
-package org.zhps.df.entity;
+package org.zhps.market.entity;
 
 import java.io.Serializable;
 import java.util.regex.Matcher;
@@ -35,6 +35,10 @@ public class Quotation implements Serializable {
 
     private long interest;
 
+    private long ave5d;
+
+    private long ave10d;
+
     public String getInstrumentId() {
         return instrumentId;
     }
@@ -46,6 +50,7 @@ public class Quotation implements Serializable {
         }else{
             this.instrumentId = "UNKNOWN";
         }
+//        this.instrumentId = instrumentId;
     }
 
     public double getLastPrice() {
@@ -128,6 +133,22 @@ public class Quotation implements Serializable {
         this.interest = interest;
     }
 
+    public long getAve5d() {
+        return ave5d;
+    }
+
+    public void setAve5d(long ave5d) {
+        this.ave5d = ave5d;
+    }
+
+    public long getAve10d() {
+        return ave10d;
+    }
+
+    public void setAve10d(long ave10d) {
+        this.ave10d = ave10d;
+    }
+
     @Override
     public String toString() {
         return "Quotation{" +
@@ -142,6 +163,8 @@ public class Quotation implements Serializable {
                 ", tradingDay='" + tradingDay + '\'' +
                 ", volume=" + volume +
                 ", interest=" + interest +
+                ", ave5d=" + ave5d +
+                ", ave10d=" + ave10d +
                 '}';
     }
 

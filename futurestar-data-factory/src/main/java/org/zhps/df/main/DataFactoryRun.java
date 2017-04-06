@@ -98,7 +98,7 @@ public class DataFactoryRun {
                 quotation.setUpdateTime(quoStr[PropertiesUtil.MK_QUO_UPDATETIME]);
                 quotation.setTradingDay(quoStr[PropertiesUtil.MK_QUO_TRADINGDAY]);
                 quotation.setVolume(Long.parseLong(quoStr[PropertiesUtil.MK_QUO_VOLUME]));
-                quotation.setInterest(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_INTEREST]));
+                quotation.setInterest((long)Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_INTEREST]));
                 return Arrays.asList(quotation).iterator();
             }
         });
