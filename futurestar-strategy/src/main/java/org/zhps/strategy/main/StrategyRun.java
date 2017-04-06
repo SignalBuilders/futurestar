@@ -1,22 +1,12 @@
 package org.zhps.strategy.main;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import org.hbase.async.HBaseClient;
-import org.hbase.async.KeyValue;
-import org.hbase.async.Scanner;
-import org.hbase.async.generated.HBasePB;
-import org.zhps.base.hbase.BaseHbase;
 import org.zhps.base.redis.BaseRedis;
 import org.zhps.base.task.BaseTask;
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.strategy.average.Average5d10d;
-import org.zhps.strategy.util.LogMapUtil;
-import org.zhps.strategy.vo.Ave5d10dVO;
+import org.zhps.strategy.vo.QuotationVO;
 import redis.clients.jedis.Jedis;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.TimerTask;
 
 /**
@@ -31,7 +21,7 @@ public class StrategyRun {
         TimerTask startTask = new TimerTask() {
             @Override
             public void run() {
-                Ave5d10dVO ave5d10dVO = new Ave5d10dVO();
+                QuotationVO ave5d10dVO = new QuotationVO();
                 String[] position = jedis.get("position").split("\\|");
                 ave5d10dVO.setPosPrice(Double.parseDouble(position[1]));
                 ave5d10dVO.setPosDirection(Integer.parseInt(position[2]));

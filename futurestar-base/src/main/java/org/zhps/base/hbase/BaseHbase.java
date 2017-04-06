@@ -1,10 +1,7 @@
 package org.zhps.base.hbase;
 
 import com.stumbleupon.async.Callback;
-import org.hbase.async.Config;
-import org.hbase.async.GetRequest;
-import org.hbase.async.HBaseClient;
-import org.hbase.async.KeyValue;
+import org.hbase.async.*;
 import org.zhps.base.util.PropertiesUtil;
 
 import java.util.ArrayList;
@@ -27,6 +24,16 @@ public class BaseHbase {
 
     public static HBaseClient gethBaseClient(){
         return BaseHbase.hBaseClient;
+    }
+
+    public static ArrayList<ArrayList<KeyValue>> scanner(String tableName, int rowNum){
+        Scanner scanner = hBaseClient.newScanner(tableName);
+        try {
+            return scanner.nextRows(rowNum).join();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 //    public static void main(String[] args) {

@@ -43,8 +43,18 @@ public class DataFactoryRun {
     private static final byte[] COLUMN_FAMILY = "q".getBytes();
     private static final HBaseClient hBaseClient = BaseHbase.gethBaseClient();
     final static Jedis jedis = BaseRedis.getJedis();
-//    final static String openMarket = jedis.get("open");
 
+    //1m line
+    private static int ave1m5l = 0;
+    private static int ave1m10l = 0;
+
+    //3m line
+    private static int ave3m5l = 0;
+    private static int ave3m10l = 0;
+
+    //5m line
+    private static int ave5m5l = 0;
+    private static int ave5m10l = 0;
 
     public static void main(String[] args) throws IOException {
         SparkConf sparkConf = new SparkConf().setAppName("market").setMaster("local[*]");
@@ -103,6 +113,7 @@ public class DataFactoryRun {
                         int hour = Integer.parseInt(updateTime.split(":")[0]);
                         if((hour >= 21 && hour <= 23) || (hour >= 9 && hour <= 15)){//open time
                             dayLine(quotation);
+                            o1mLine(quotation);
                             t3mLine(quotation);
                             f5mLine(quotation);
                         }
@@ -149,12 +160,25 @@ public class DataFactoryRun {
         jedis.set("close", value.toString());
     }
 
+    private static void o1mLine(Quotation quotation){
+        String updateTime = quotation.getUpdateTime();
+        int minute = Integer.parseInt(updateTime.split(":")[1]);
+        int second = Integer.parseInt(updateTime.split(":")[2]);
+        if(second == 0){
+            init1mLine();
+            // TODO: 2017/4/6 save open to hbase,caculate ave3m, ave5m
+        }
+        if(second == 59){
+            // TODO: 2017/4/5 save close to hbase
+        }
+    }
+
     private static void t3mLine(Quotation quotation){
         String updateTime = quotation.getUpdateTime();
         int minute = Integer.parseInt(updateTime.split(":")[1]);
         int second = Integer.parseInt(updateTime.split(":")[2]);
         int mod = minute % 3;
-        if(mod == 0){
+        if(mod == 0 && second == 0){
             // TODO: 2017/4/5 save open to hbase,caculate ave15m, ave30m
         }
 
@@ -168,13 +192,17 @@ public class DataFactoryRun {
         int minute = Integer.parseInt(updateTime.split(":")[1]);
         int second = Integer.parseInt(updateTime.split(":")[2]);
         int mod = minute % 5;
-        if(mod == 0){
+        if(mod == 0 && second == 0){
             // TODO: 2017/4/5 save open to hbase,caculate ave15m, ave30m
         }
 
         if(mod + 4 == minute && second == 59){
-            /// TODO: 2017/4/5 save close to hbase
+            // TODO: 2017/4/5 save close to hbase
         }
+    }
+
+    private static void init1mLine(){
+//        ArrayList<ArrayList<KeyValue>> kvs = BaseHbase.scanner();
     }
 }
 

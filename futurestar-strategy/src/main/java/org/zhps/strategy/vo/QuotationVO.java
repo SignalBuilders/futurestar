@@ -1,11 +1,18 @@
 package org.zhps.strategy.vo;
 
+import java.util.List;
+
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.
  * <p>
  * Created on 2017/2/18.
  */
-public class Ave5d10dVO {
+public class QuotationVO {
+
+    private String tradingDay;
+
+    private String updateTime;
+
     private double last;
 
     private double open;
@@ -17,8 +24,6 @@ public class Ave5d10dVO {
     private double ave5d;
 
     private double ave10d;
-
-    private String tradingDay;
 
     private double posPrice;
 
@@ -33,6 +38,14 @@ public class Ave5d10dVO {
     private long volume;
 
     private long interest;
+
+    private List<Double> lasts1m;
+
+    private List<Double> lasts3m;
+
+    private List<Double> lasts5m;
+
+    private String type;
 
     public double getLast() {
         return last;
@@ -144,6 +157,46 @@ public class Ave5d10dVO {
 
     public void setInterest(long interest) {
         this.interest = interest;
+    }
+
+    public List<Double> getLasts1m() {
+        return lasts1m;
+    }
+
+    public void setLasts1m(List<Double> lasts1m) {
+        this.lasts1m = lasts1m;
+    }
+
+    public List<Double> getLasts3m() {
+        return lasts3m;
+    }
+
+    public void setLasts3m(List<Double> lasts3m) {
+        this.lasts3m = lasts3m;
+    }
+
+    public List<Double> getLasts5m() {
+        return lasts5m;
+    }
+
+    public void setLasts5m(List<Double> lasts5m) {
+        this.lasts5m = lasts5m;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override

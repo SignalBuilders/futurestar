@@ -6,7 +6,7 @@ import org.hbase.async.Scanner;
 import org.zhps.base.hbase.BaseHbase;
 import org.zhps.strategy.average.Average5d10d;
 import org.zhps.strategy.util.LogMapUtil;
-import org.zhps.strategy.vo.Ave5d10dVO;
+import org.zhps.strategy.vo.QuotationVO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +30,7 @@ public class BacktrackingRun {
             e.printStackTrace();
         }
         Collections.reverse(datas);
-        Ave5d10dVO ave5d10dVO = new Ave5d10dVO();
+        QuotationVO ave5d10dVO = new QuotationVO();
         if(datas != null){
             for(ArrayList<KeyValue> rows : datas){
                 for(KeyValue keyValue : rows){
