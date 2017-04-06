@@ -33,7 +33,7 @@ public class Quotation implements Serializable {
 
     private long volume;
 
-    private long interest;
+    private double interest;
 
     public String getInstrumentId() {
         return instrumentId;
@@ -120,11 +120,11 @@ public class Quotation implements Serializable {
         this.volume = volume;
     }
 
-    public long getInterest() {
+    public double getInterest() {
         return interest;
     }
 
-    public void setInterest(long interest) {
+    public void setInterest(double interest) {
         this.interest = interest;
     }
 
