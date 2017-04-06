@@ -21,8 +21,8 @@ public class BacktrackingRun {
 //        ArrayList<Ave5d10dVO> ave5d10dVOs = new ArrayList<Ave5d10dVO>();
         HBaseClient hBaseClient = BaseHbase.gethBaseClient();
         Scanner scanner = hBaseClient.newScanner("close");
-        scanner.setStartKey("rm|79829692|20170308");
-        scanner.setStopKey("rm|79829899|20170101");
+        scanner.setStartKey("rb|79848769|20151231");
+        scanner.setStopKey("rb|79849895|20150105");
         ArrayList<ArrayList<KeyValue>> datas = null;
         try {
             datas = scanner.nextRows(10000).joinUninterruptibly();

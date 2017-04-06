@@ -1,5 +1,8 @@
 package org.zhps.trader.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Copyright (c) 2012 Conversant Solutions. All rights reserved.
  * <p>
@@ -7,6 +10,6 @@ package org.zhps.trader.main;
  */
 public class Test {
     public static void main(String[] args) {
-        System.out.println(Math.abs("console-consumer-31785".hashCode()) % 50);
+        System.out.println();
     }
 }
