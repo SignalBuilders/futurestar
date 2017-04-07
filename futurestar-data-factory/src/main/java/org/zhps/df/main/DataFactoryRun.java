@@ -38,7 +38,7 @@ public class DataFactoryRun {
         TaskHelper.openMarket();
         TaskHelper.closeMarket();
     }
-    private static final Pattern SPACE = Pattern.compile("\\|");
+    private static final Pattern VERTICAL = Pattern.compile("\\|");
     private static final byte[] TABLE_NAME = "quotation".getBytes();
     private static final byte[] COLUMN_FAMILY = "q".getBytes();
     private static final HBaseClient hBaseClient = BaseHbase.gethBaseClient();
@@ -86,7 +86,7 @@ public class DataFactoryRun {
         JavaDStream<Quotation> words = lines.flatMap(new FlatMapFunction<String, Quotation>() {
             @Override
             public Iterator<Quotation> call(String x) {
-                String[] quoStr = SPACE.split(x);
+                String[] quoStr = VERTICAL.split(x);
                 Quotation quotation = new Quotation();
                 quotation.setInstrumentId(quoStr[PropertiesUtil.MK_QUO_INSTRUMENTID]);
                 quotation.setLastPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LAST_PRICE]));
@@ -134,7 +134,7 @@ public class DataFactoryRun {
         String openMarket = jedis.get("open");
 
         double lastPrice = quotation.getLastPrice();
-        String[] openMarkets = SPACE.split(openMarket);
+        String[] openMarkets = VERTICAL.split(openMarket);
         double ave5dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[1])) / 5;
         double ave10dPrice = Math.round(lastPrice + Double.parseDouble(openMarkets[2])) / 10;
 
@@ -166,7 +166,7 @@ public class DataFactoryRun {
         int second = Integer.parseInt(updateTime.split(":")[2]);
         if(second == 0){
             init1mLine();
-            // TODO: 2017/4/6 save open to hbase,caculate ave3m, ave5m
+            // TODO: 2017/4/6 save open to hbase,caculate ave1m5l, ave1m10l, write to redis
         }
         if(second == 59){
             // TODO: 2017/4/5 save close to hbase
@@ -179,7 +179,7 @@ public class DataFactoryRun {
         int second = Integer.parseInt(updateTime.split(":")[2]);
         int mod = minute % 3;
         if(mod == 0 && second == 0){
-            // TODO: 2017/4/5 save open to hbase,caculate ave15m, ave30m
+            // TODO: 2017/4/5 save open to hbase,caculate ave3m5l, ave3m10l, write to redis
         }
 
         if(mod + 2 == minute && second == 59){
@@ -193,7 +193,7 @@ public class DataFactoryRun {
         int second = Integer.parseInt(updateTime.split(":")[2]);
         int mod = minute % 5;
         if(mod == 0 && second == 0){
-            // TODO: 2017/4/5 save open to hbase,caculate ave15m, ave30m
+            // TODO: 2017/4/5 save open to hbase,caculate ave5m5l, ave5m10l, write to redis
         }
 
         if(mod + 4 == minute && second == 59){

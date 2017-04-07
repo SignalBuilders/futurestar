@@ -47,6 +47,12 @@ public class QuotationVO {
 
     private String type;
 
+    private int hour;
+
+    private int minute;
+
+    private int second;
+
     public double getLast() {
         return last;
     }
@@ -199,23 +205,27 @@ public class QuotationVO {
         this.updateTime = updateTime;
     }
 
-    @Override
-    public String toString() {
-        return "Ave5d10dVO{" +
-                "last=" + last +
-                ", open=" + open +
-                ", highest=" + highest +
-                ", lowest=" + lowest +
-                ", ave5d=" + ave5d +
-                ", ave10d=" + ave10d +
-                ", tradingDay='" + tradingDay + '\'' +
-                ", posPrice=" + posPrice +
-                ", last5d=" + last5d +
-                ", last10d=" + last10d +
-                ", posDirection=" + posDirection +
-                ", exec=" + exec +
-                ", volume=" + volume +
-                ", interest=" + interest +
-                '}';
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+
+    public void setSecond(int second) {
+        this.second = second;
     }
 }
