@@ -10,6 +10,6 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-        System.out.println();
+        System.out.println(100000000 - 20170330);      //"rm|79829670|20170330"
     }
 }
