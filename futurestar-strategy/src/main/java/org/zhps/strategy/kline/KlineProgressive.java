@@ -1,4 +1,4 @@
-package org.zhps.strategy.average;
+package org.zhps.strategy.kline;
 
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.strategy.vo.PositionVO;
@@ -16,6 +16,9 @@ public class KlineProgressive {
 
     private final static int OPEN_K_NUM = 5;
     private final static int CLOSE_K_NUM = 2;
+
+    private final static int PROFIT_GAP = 3;
+    private final static int LOSS_GAP = 5;
 
     private final static int PRICE_GAP = 3;
 
@@ -64,42 +67,30 @@ public class KlineProgressive {
      * @param strategyVO
      */
     private static void open3m(StrategyVO strategyVO){
-        final List<Double> lasts3m = strategyVO.getQuotationVO().getLasts3m();
-        final double pPrice = strategyVO.getPositionVO().getPrice();
-        int qSecond = strategyVO.getQuotationVO().getSecond();
+        double lastHighest = strategyVO.getQuotationVO().getLastHighest();
+        double lastLowest = strategyVO.getQuotationVO().getLastLowest();
+        double curPrice = strategyVO.getQuotationVO().getLast();
+        int curHour = strategyVO.getQuotationVO().getHour();
+        int curMinute = strategyVO.getQuotationVO().getMinute();
+        int curSecond = strategyVO.getQuotationVO().getSecond();
         boolean _buyOpen = false;
         boolean _sellOpen = false;
 
-        if(qSecond == 58){
-            _buyOpen = candleEnd(strategyVO, K_LINE_3M, PropertiesUtil.TD_OFFSET_FLAG_OPEN, new CandleEndOperate() {
-                @Override
-                public void run(int count, int index) {
-                    if(pPrice < lasts3m.get(index)){
-                        count++;
-                    }
-                }
-            });
-        }
-
-        if(!_buyOpen && qSecond == 58){
-            _sellOpen = candleEnd(strategyVO, K_LINE_3M, PropertiesUtil.TD_OFFSET_FLAG_OPEN, new CandleEndOperate() {
-                @Override
-                public void run(int count, int index) {
-                    if(pPrice > lasts3m.get(index)){
-                        count++;
-                    }
-                }
-            });
+        if(curSecond == 58){
+            if(curPrice > lastHighest){
+                _buyOpen = true;
+            }else if(curPrice < lastLowest){
+                _sellOpen = true;
+            }
         }
 
         if(_buyOpen || _sellOpen){
-            QuotationVO quotationVO = strategyVO.getQuotationVO();
             PositionVO positionVO = strategyVO.getPositionVO();
+            positionVO.setHour(curHour);
+            positionVO.setMinute(curMinute);
+            positionVO.setSecond(curSecond);
+            positionVO.setPrice(curPrice);
             positionVO.setExec(true);
-            positionVO.setHour(quotationVO.getHour());
-            positionVO.setMinute(quotationVO.getMinute());
-            positionVO.setSecond(quotationVO.getSecond());
-            positionVO.setPrice(quotationVO.getLast());
             if(_buyOpen){
                 buyOpen(positionVO);
             }else if(_sellOpen){
@@ -113,58 +104,30 @@ public class KlineProgressive {
      * @param strategyVO
      */
     private static void close3m(StrategyVO strategyVO){
-        final List<Double> lasts3m = strategyVO.getQuotationVO().getLasts3m();
         int pDirection = strategyVO.getPositionVO().getDirection();
         final double pPrice = strategyVO.getPositionVO().getPrice();
-        final double lastPrice = strategyVO.getQuotationVO().getLast();
-        int qSecond = strategyVO.getQuotationVO().getSecond();
+        final double curPrice = strategyVO.getQuotationVO().getLast();
+        double pHighest = strategyVO.getPositionVO().getHighest();
+        double pLowest = strategyVO.getPositionVO().getLowest();
         boolean _close = false;
 
         if(pDirection == PropertiesUtil.TD_DIRECTION_BUY){
-            //compare price gap
-            if(pPrice - lastPrice > PRICE_GAP){
+            if(curPrice - pPrice  > PROFIT_GAP || curPrice <= pLowest || pPrice - curPrice > LOSS_GAP){
                 _close = true;
-            }
-
-            //candleEnd
-            if(!_close && qSecond == 58){
-                _close = candleEnd(strategyVO, K_LINE_3M, PropertiesUtil.TD_OFFSET_FLAG_CLOSE, new CandleEndOperate() {
-                    @Override
-                    public void run(int count, int index) {
-                        if(lastPrice < lasts3m.get(index)){
-                            count++;
-                        }
-                    }
-                });
             }
 
             if(_close){
                 initPosition(strategyVO);
-                sellClose(lastPrice);
-                open3m(strategyVO);
+                sellClose(curPrice);
             }
         }else if(pDirection == PropertiesUtil.TD_DIRECTION_SELL){
-            //compare price gap
-            if(lastPrice - pPrice > PRICE_GAP){
+            if(pPrice - curPrice > PROFIT_GAP || curPrice >= pHighest || curPrice - pPrice > LOSS_GAP){
                 _close = true;
-            }
-
-            //candleEnd
-            if(!_close && qSecond == 58){
-                _close = candleEnd(strategyVO, K_LINE_3M, PropertiesUtil.TD_OFFSET_FLAG_CLOSE, new CandleEndOperate() {
-                    @Override
-                    public void run(int count, int index) {
-                        if(lastPrice > lasts3m.get(index)){
-                            count++;
-                        }
-                    }
-                });
             }
 
             if(_close){
                 initPosition(strategyVO);
-                buyClose(lastPrice);
-                open3m(strategyVO);
+                buyClose(curPrice);
             }
         }
     }
@@ -228,6 +191,9 @@ public class KlineProgressive {
     private static void initPosition(StrategyVO strategyVO){
         PositionVO positionVO = strategyVO.getPositionVO();
         positionVO.setPrice(0);
+        positionVO.setHighest(0);
+        positionVO.setLowest(0);
+        positionVO.setDirection(0);
         positionVO.setHour(0);
         positionVO.setMinute(0);
         positionVO.setSecond(0);

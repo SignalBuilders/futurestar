@@ -39,6 +39,16 @@ public class Quotation implements Serializable {
 
     private long ave10d;
 
+    private double lastHighest;
+
+    private double lastLowest;
+
+    private int hour;
+
+    private int minute;
+
+    private int second;
+
     public String getInstrumentId() {
         return instrumentId;
     }
@@ -46,7 +56,7 @@ public class Quotation implements Serializable {
     public void setInstrumentId(String instrumentId) {
         Matcher matcher = pattern.matcher(instrumentId);
         if(matcher.find()){
-            this.instrumentId = matcher.group(1).toUpperCase();
+            this.instrumentId = matcher.group(1).toLowerCase();
         }else{
             this.instrumentId = "UNKNOWN";
         }
@@ -147,6 +157,46 @@ public class Quotation implements Serializable {
 
     public void setAve10d(long ave10d) {
         this.ave10d = ave10d;
+    }
+
+    public double getLastHighest() {
+        return lastHighest;
+    }
+
+    public void setLastHighest(double lastHighest) {
+        this.lastHighest = lastHighest;
+    }
+
+    public double getLastLowest() {
+        return lastLowest;
+    }
+
+    public void setLastLowest(double lastLowest) {
+        this.lastLowest = lastLowest;
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+
+    public void setSecond(int second) {
+        this.second = second;
     }
 
     @Override

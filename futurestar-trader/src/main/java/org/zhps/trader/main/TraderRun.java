@@ -21,7 +21,7 @@ public class TraderRun {
             public void run() {
                 TraderSpi traderSpi = new TraderSpiAdapter();
                 traderApi.registerSpi(traderSpi);
-                traderApi.registerFront(PropertiesUtil.TD_SIM_TEST);
+                traderApi.registerFront(PropertiesUtil.TD_PROD);
                 traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
                 traderApi.connect();
             }
@@ -36,16 +36,16 @@ public class TraderRun {
         new Thread(){
             @Override
             public void run() {
-                Iorder iorder = new Iorder("RM705", 2330, 1);
+                Iorder iorder = new Iorder("RM709", 2335, 1);
 //                buyOpen(traderApi, iorder);
 //                buyClose(traderApi, iorder);
 //                sellOpen(traderApi, iorder);
 //                sellClose(traderApi, iorder);
 
-                Korder korder = new Korder("RM705", "CZCE", "        1242");
+//                Korder korder = new Korder("RM705", "CZCE", "2017041101235667");
 //                kill(traderApi, korder);
 
-                traderApi.queryTradingAccount();
+//                traderApi.queryTradingAccount();
 
 //                traderApi.queryInvestorPositionDetail();
 

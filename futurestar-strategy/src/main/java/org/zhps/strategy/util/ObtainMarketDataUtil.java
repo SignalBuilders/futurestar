@@ -23,7 +23,6 @@ public class ObtainMarketDataUtil {
         String values = jedis.get("current");
         if(values != null){
             String[] array = VERTICAL.split(values);
-
         }
 
         return strategyVO;

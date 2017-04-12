@@ -53,6 +53,10 @@ public class QuotationVO {
 
     private int second;
 
+    private double lastHighest;
+
+    private double lastLowest;
+
     public double getLast() {
         return last;
     }
@@ -227,5 +231,21 @@ public class QuotationVO {
 
     public void setSecond(int second) {
         this.second = second;
+    }
+
+    public double getLastHighest() {
+        return lastHighest;
+    }
+
+    public void setLastHighest(double lastHighest) {
+        this.lastHighest = lastHighest;
+    }
+
+    public double getLastLowest() {
+        return lastLowest;
+    }
+
+    public void setLastLowest(double lastLowest) {
+        this.lastLowest = lastLowest;
     }
 }

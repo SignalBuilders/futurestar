@@ -8,6 +8,10 @@ package org.zhps.strategy.vo;
 public class PositionVO {
     private double price;
 
+    private double highest;
+
+    private double lowest;
+
     private int direction;
 
     private boolean exec;
@@ -64,5 +68,21 @@ public class PositionVO {
 
     public void setSecond(int second) {
         this.second = second;
+    }
+
+    public double getHighest() {
+        return highest;
+    }
+
+    public void setHighest(double highest) {
+        this.highest = highest;
+    }
+
+    public double getLowest() {
+        return lowest;
+    }
+
+    public void setLowest(double lowest) {
+        this.lowest = lowest;
     }
 }

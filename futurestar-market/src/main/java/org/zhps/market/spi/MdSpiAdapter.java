@@ -1,11 +1,10 @@
 package org.zhps.market.spi;
 
-import org.zhps.base.redis.BaseRedis;
 import org.zhps.base.util.PropertiesUtil;
 import org.zhps.hjctp.entity.*;
 import org.zhps.hjctp.spi.MdSpi;
+import org.zhps.market.data.DataFactory;
 import org.zhps.market.producer.MarketProducer;
-import redis.clients.jedis.Jedis;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -45,8 +44,8 @@ public class MdSpiAdapter implements MdSpi {
                                int nRequestID, boolean bIsLast) {
         StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay())
                 .append(" Date: ").append(new Date());
-        final Jedis jedis = BaseRedis.getJedis();
-        jedis.set("traday", pRspUserLogin.getTradingDay());
+//        final Jedis jedis = BaseRedis.getJedis();
+//        jedis.set("traday", pRspUserLogin.getTradingDay());
         System.out.println(loginInfo.toString());
     }
 
@@ -83,7 +82,7 @@ public class MdSpiAdapter implements MdSpi {
 
     @Override
     public void onRtnDepthMarketData(CThostFtdcDepthMarketDataField pDepthMarketData) {
-        StringBuilder markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append("|")
+        String markets = new StringBuilder(pDepthMarketData.getInstrumentId()).append("|")
                 .append(pDepthMarketData.getLastPrice()).append("|")
                 .append(pDepthMarketData.getOpenPrice()).append("|")
                 .append(pDepthMarketData.getHighestPrice()).append("|")
@@ -93,22 +92,14 @@ public class MdSpiAdapter implements MdSpi {
                 .append(pDepthMarketData.getUpdateTime()).append("|")
                 .append(pDepthMarketData.getTradingDay()).append("|")
                 .append(pDepthMarketData.getVolume()).append("|")
-                .append(pDepthMarketData.getOpenInterest());
-        if(this.marketProducer != null){
-            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
-        }
+                .append(pDepthMarketData.getOpenInterest()).toString();
 
-//        try {
-//            bufWriter.newLine();
-//            bufWriter.write(markets.toString());
-//            bufWriter.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//        }
+//        writeToKafka(markets);
+//        writeToDisk(markets);
 //        System.out.println(markets.toString());
-//        System.out.println(pDepthMarketData.getClosePrice());
-//        System.out.println(pDepthMarketData);
+        DataFactory.format(markets);
+
+        System.out.println(markets);
     }
 
     @Override
@@ -119,5 +110,30 @@ public class MdSpiAdapter implements MdSpi {
     @Override
     public void onResetBufferWriter(BufferedWriter bufWriter) {
         this.bufWriter = bufWriter;
+    }
+
+    /**
+     *
+     * @param markets
+     */
+    private void writeToKafka(String markets){
+        if(this.marketProducer != null){
+            marketProducer.send(PropertiesUtil.MK_TOPIC, markets.toString());
+        }
+    }
+
+    /**
+     *
+     * @param markets
+     */
+    private void writeToDisk(String markets){
+        try {
+            bufWriter.newLine();
+            bufWriter.write(markets.toString());
+            bufWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        }
     }
 }

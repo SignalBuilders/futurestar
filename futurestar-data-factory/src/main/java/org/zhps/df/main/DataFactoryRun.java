@@ -174,17 +174,17 @@ public class DataFactoryRun {
     }
 
     private static void t3mLine(Quotation quotation){
-        String updateTime = quotation.getUpdateTime();
-        int minute = Integer.parseInt(updateTime.split(":")[1]);
-        int second = Integer.parseInt(updateTime.split(":")[2]);
-        int mod = minute % 3;
-        if(mod == 0 && second == 0){
-            // TODO: 2017/4/5 save open to hbase,caculate ave3m5l, ave3m10l, write to redis
-        }
-
-        if(mod + 2 == minute && second == 59){
-            /// TODO: 2017/4/5 save close to hbase
-        }
+//        String updateTime = quotation.getUpdateTime();
+//        int minute = Integer.parseInt(updateTime.split(":")[1]);
+//        int second = Integer.parseInt(updateTime.split(":")[2]);
+//        int mod = minute % 3;
+//        if(mod == 0 && second == 0){
+//            // TODO: 2017/4/5 save open to hbase,caculate ave3m5l, ave3m10l, write to redis
+//        }
+//
+//        if(mod + 2 == minute && second == 59){
+//            /// TODO: 2017/4/5 save close to hbase
+//        }
     }
 
     private static void f5mLine(Quotation quotation){
