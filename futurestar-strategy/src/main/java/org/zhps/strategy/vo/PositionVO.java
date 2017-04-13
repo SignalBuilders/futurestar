@@ -12,7 +12,7 @@ public class PositionVO {
 
     private double lowest;
 
-    private int direction;
+    private char direction;
 
     private boolean exec;
 
@@ -30,11 +30,11 @@ public class PositionVO {
         this.price = price;
     }
 
-    public int getDirection() {
+    public char getDirection() {
         return direction;
     }
 
-    public void setDirection(int direction) {
+    public void setDirection(char direction) {
         this.direction = direction;
     }
 
@@ -84,5 +84,19 @@ public class PositionVO {
 
     public void setLowest(double lowest) {
         this.lowest = lowest;
+    }
+
+    @Override
+    public String toString() {
+        return "PositionVO{" +
+                "price=" + price +
+                ", highest=" + highest +
+                ", lowest=" + lowest +
+                ", direction=" + direction +
+                ", exec=" + exec +
+                ", hour=" + hour +
+                ", minute=" + minute +
+                ", second=" + second +
+                '}';
     }
 }

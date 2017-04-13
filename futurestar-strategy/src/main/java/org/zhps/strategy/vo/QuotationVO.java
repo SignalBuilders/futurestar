@@ -248,4 +248,18 @@ public class QuotationVO {
     public void setLastLowest(double lastLowest) {
         this.lastLowest = lastLowest;
     }
+
+    @Override
+    public String toString() {
+        return "QuotationVO{" +
+                "highest=" + highest +
+                ", lowest=" + lowest +
+                ", hour=" + hour +
+                ", minute=" + minute +
+                ", second=" + second +
+                ", lastHighest=" + lastHighest +
+                ", lastLowest=" + lastLowest +
+                ", last=" + last +
+                '}';
+    }
 }
