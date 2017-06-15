@@ -1,6 +1,7 @@
 package org.zhps.market.entity;
 
 import java.io.Serializable;
+import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +16,7 @@ public class Quotation implements Serializable {
 
     private String instrumentId;
 
-    private double lastPrice;
+    private double latestPrice;
 
     private double openPrice;
 
@@ -63,12 +64,12 @@ public class Quotation implements Serializable {
 //        this.instrumentId = instrumentId;
     }
 
-    public double getLastPrice() {
-        return lastPrice;
+    public double getLatestPrice() {
+        return latestPrice;
     }
 
-    public void setLastPrice(double lastPrice) {
-        this.lastPrice = lastPrice;
+    public void setLatestPrice(double latestPrice) {
+        this.latestPrice = latestPrice;
     }
 
     public double getOpenPrice() {
@@ -203,7 +204,7 @@ public class Quotation implements Serializable {
     public String toString() {
         return "Quotation{" +
                 "instrumentId='" + instrumentId + '\'' +
-                ", lastPrice=" + lastPrice +
+                ", latestPrice=" + latestPrice +
                 ", openPrice=" + openPrice +
                 ", highestPrice=" + highestPrice +
                 ", lowestPrice=" + lowestPrice +

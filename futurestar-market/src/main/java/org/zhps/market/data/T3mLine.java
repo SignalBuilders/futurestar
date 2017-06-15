@@ -37,6 +37,6 @@ public class T3mLine {
             /// TODO: 2017/4/5 save close to hbase
         }
 
-        MemStorage.storage(quotation);
+        MemStorage.storage(quotation, null);
     }
 }

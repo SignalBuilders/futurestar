@@ -16,10 +16,14 @@ public class DataFactory {
 
     public static void format(String markets){
         Quotation quotation = assembleQuotation(markets);
-        String updateTime = quotation.getUpdateTime();
-        int hour = Integer.parseInt(updateTime.split(":")[0]);
-        if((hour >= 21 && hour <= 23) || (hour >= 9 && hour <= 15)){//open time
-            T3mLine.produce(quotation);
+        if(PropertiesUtil.MK_ENV.equalsIgnoreCase("prod")){
+            String updateTime = quotation.getUpdateTime();
+            int hour = Integer.parseInt(updateTime.split(":")[0]);
+            if((hour >= 21 && hour <= 23) || (hour >= 9 && hour <= 15)){//open time
+                F5mLine.produce(quotation);
+            }
+        }else{
+            F5mLine.produce(quotation);
         }
     }
 
@@ -32,7 +36,7 @@ public class DataFactory {
         String[] quoStr = VERTICAL.split(markets);
         Quotation quotation = new Quotation();
         quotation.setInstrumentId(quoStr[PropertiesUtil.MK_QUO_INSTRUMENTID]);
-        quotation.setLastPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LAST_PRICE]));
+        quotation.setLatestPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LAST_PRICE]));
         quotation.setOpenPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_OPEN_PRICE]));
         quotation.setHighestPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_HIGHEST_PRICE]));
         quotation.setLowestPrice(Double.parseDouble(quoStr[PropertiesUtil.MK_QUO_LOWEST_PRICE]));

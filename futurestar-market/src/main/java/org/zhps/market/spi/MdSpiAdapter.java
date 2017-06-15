@@ -94,12 +94,12 @@ public class MdSpiAdapter implements MdSpi {
                 .append(pDepthMarketData.getVolume()).append("|")
                 .append(pDepthMarketData.getOpenInterest()).toString();
 
+        System.out.println(markets);
+
 //        writeToKafka(markets);
 //        writeToDisk(markets);
 //        System.out.println(markets.toString());
         DataFactory.format(markets);
-
-        System.out.println(markets);
     }
 
     @Override

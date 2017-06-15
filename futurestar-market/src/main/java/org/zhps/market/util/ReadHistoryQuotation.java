@@ -60,7 +60,7 @@ public class ReadHistoryQuotation {
                             quotation.setOpenPrice(Double.parseDouble(strs[3].trim().replaceAll(",", "")));
                             quotation.setHighestPrice(Double.parseDouble(strs[4].trim().replaceAll(",", "")));
                             quotation.setLowestPrice(Double.parseDouble(strs[5].trim().replaceAll(",", "")));
-                            quotation.setLastPrice(Double.parseDouble(strs[6].trim().replaceAll(",", "")));
+                            quotation.setLatestPrice(Double.parseDouble(strs[6].trim().replaceAll(",", "")));
                             quotation.setTradingDay(strs[0].replaceAll("-", ""));
                             quotation.setVolume(Long.parseLong(strs[10].trim().replaceAll(",", "")));
                             quotation.setInterest((long)Double.parseDouble(strs[11].trim().replaceAll(",", "")));
@@ -110,7 +110,7 @@ public class ReadHistoryQuotation {
                                 quotation.setInstrumentId(type);
                                 quotation.setOpenPrice(open);
                                 quotation.setHighestPrice(highest);
-                                quotation.setLastPrice(last);
+                                quotation.setLatestPrice(last);
                                 quotation.setLowestPrice(lowest);
                                 quotation.setVolume(volume);
                                 quotation.setInterest(interest);
@@ -124,7 +124,7 @@ public class ReadHistoryQuotation {
                         quotation.setTradingDay(traday);
                         quotation.setOpenPrice(open);
                         quotation.setHighestPrice(highest);
-                        quotation.setLastPrice(last);
+                        quotation.setLatestPrice(last);
                         quotation.setLowestPrice(lowest);
                         quotation.setVolume(volume);
                         quotation.setInterest(interest);
@@ -142,8 +142,8 @@ public class ReadHistoryQuotation {
         Queue<Double> ave5d = new ArrayDeque<Double>();
         Queue<Double> ave10d = new ArrayDeque<Double>();
         for(Quotation quotation : quotations){
-            ave5d.add(quotation.getLastPrice());
-            ave10d.add(quotation.getLastPrice());
+            ave5d.add(quotation.getLatestPrice());
+            ave10d.add(quotation.getLatestPrice());
             if(ave5d.size() == 5){
                 double sum = 0;
                 for(double value : ave5d){
@@ -170,7 +170,7 @@ public class ReadHistoryQuotation {
             String open = String.valueOf(quotation.getOpenPrice());
             String highest = String.valueOf(quotation.getHighestPrice());
             String lowest = String.valueOf(quotation.getLowestPrice());
-            String last = String.valueOf(quotation.getLastPrice());
+            String last = String.valueOf(quotation.getLatestPrice());
             String ave5d = String.valueOf(quotation.getAve5d());
             String ave10d = String.valueOf(quotation.getAve10d());
             String volume = String.valueOf(quotation.getVolume());

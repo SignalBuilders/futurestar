@@ -36,9 +36,9 @@ public class TraderRun {
         new Thread(){
             @Override
             public void run() {
-                Iorder iorder = new Iorder("RM709", 2335, 1);
+                Iorder iorder = new Iorder("rb1710", 2940, 1);
 //                buyOpen(traderApi, iorder);
-//                buyClose(traderApi, iorder);
+                buyClose(traderApi, iorder);
 //                sellOpen(traderApi, iorder);
 //                sellClose(traderApi, iorder);
 

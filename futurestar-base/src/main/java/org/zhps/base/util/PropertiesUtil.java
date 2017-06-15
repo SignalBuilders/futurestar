@@ -49,6 +49,7 @@ public class PropertiesUtil {
     public static int MK_QUO_INTEREST;
     public static int MK_AVE_5D;
     public static int MK_AVE_10D;
+    public static String MK_ENV;
     //trader
     public static String TD_SIM_TEST;
     public static String TD_SIM_FIRM;
@@ -157,6 +158,7 @@ public class PropertiesUtil {
             MK_QUO_INTEREST = Integer.parseInt(prop.getProperty("mk_quotation_interest"));
             MK_AVE_5D = Integer.parseInt(prop.getProperty("mk_ave_5d"));
             MK_AVE_10D = Integer.parseInt(prop.getProperty("mk_ave_10d"));
+            MK_ENV = prop.getProperty("mk_env");
 
             TD_SIM_TEST = prop.getProperty("td_sim_test");
             TD_SIM_FIRM = prop.getProperty("td_sim_firm");
