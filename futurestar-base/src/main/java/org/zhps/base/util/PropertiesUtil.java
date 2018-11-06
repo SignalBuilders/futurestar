@@ -94,6 +94,7 @@ public class PropertiesUtil {
     //task interval
     public static long HOURS_24 = 24 * 60 * 60 * 1000l;
     public static long HOURS_12 = 12 * 60 * 60 * 1000l;
+    public static long HOURS_72 = 72 * 60 * 60 * 1000l;
     public static long MINUTES_1 = 60 * 1000L;
     //task date
     public static Date OPEN_MARKET_DATE;
@@ -202,7 +203,7 @@ public class PropertiesUtil {
 
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.HOUR_OF_DAY, 20);
-            calendar.set(Calendar.MINUTE, 55);
+            calendar.set(Calendar.MINUTE, 59);
             calendar.set(Calendar.SECOND, 0);
             OPEN_MARKET_DATE = calendar.getTime();
 

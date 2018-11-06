@@ -40,12 +40,13 @@ public class Quotation implements Serializable {
     }
 
     public void setInstrumentId(String instrumentId) {
-        Matcher matcher = pattern.matcher(instrumentId);
-        if(matcher.find()){
-            this.instrumentId = matcher.group(1).toUpperCase();
-        }else{
-            this.instrumentId = "UNKNOWN";
-        }
+//        Matcher matcher = pattern.matcher(instrumentId);
+//        if(matcher.find()){
+//            this.instrumentId = matcher.group(1).toUpperCase();
+//        }else{
+//            this.instrumentId = "UNKNOWN";
+//        }
+        this.instrumentId = instrumentId;
     }
 
     public double getLastPrice() {

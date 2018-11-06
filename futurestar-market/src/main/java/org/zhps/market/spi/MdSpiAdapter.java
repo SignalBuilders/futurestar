@@ -1,13 +1,21 @@
 package org.zhps.market.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.zhps.base.redis.BaseRedis;
 import org.zhps.base.util.PropertiesUtil;
+import org.zhps.hjctp.api.MdApi;
 import org.zhps.hjctp.entity.*;
 import org.zhps.hjctp.spi.MdSpi;
 import org.zhps.market.data.DataFactory;
 import org.zhps.market.producer.MarketProducer;
+import redis.clients.jedis.Jedis;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.Method;
 import java.util.Date;
 
 /**
@@ -16,6 +24,8 @@ import java.util.Date;
  * Created on 2016/12/7.
  */
 public class MdSpiAdapter implements MdSpi {
+
+    private Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     BufferedWriter bufWriter;
 
@@ -44,14 +54,17 @@ public class MdSpiAdapter implements MdSpi {
                                int nRequestID, boolean bIsLast) {
         StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay())
                 .append(" Date: ").append(new Date());
-//        final Jedis jedis = BaseRedis.getJedis();
-//        jedis.set("traday", pRspUserLogin.getTradingDay());
-        System.out.println(loginInfo.toString());
+        try(Jedis jedis = BaseRedis.getJedis()){
+            jedis.set("traday", pRspUserLogin.getTradingDay());
+            System.out.println(loginInfo.toString());
+        }catch (Exception e){
+            System.out.println("user login error......|error:" + e.getMessage());
+        }
     }
 
     @Override
     public void onRspUserLogout(CThostFtdcUserLogoutField pUserLogout, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-
+        System.out.println("Logout...");
     }
 
     @Override
@@ -95,6 +108,8 @@ public class MdSpiAdapter implements MdSpi {
                 .append(pDepthMarketData.getOpenInterest()).toString();
 
         System.out.println(markets);
+//        logger.info(markets);
+
 
 //        writeToKafka(markets);
 //        writeToDisk(markets);

@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>futurestar-market</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!-- futurestar hjctp -->
@@ -31,5 +32,66 @@
             <version>3.15</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!--<plugin>&lt;!&ndash;编译插件&ndash;&gt;-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<version>2.3.2</version>-->
+                <!--<configuration>-->
+                    <!--<source>1.7</source>-->
+                    <!--<target>1.7</target>-->
+                    <!--<encoding>UTF-8</encoding>-->
+                    <!--<compilerArguments>-->
+                        <!--<verbose />-->
+                        <!--<bootclasspath>${java.home}/lib/rt.jar</bootclasspath>-->
+                    <!--</compilerArguments>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+            <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <classesDirectory>target/classes/</classesDirectory>
+                    <archive>
+                        <manifest>
+                            <!-- 主函数的入口 -->
+                            <mainClass>org.zhps.market.main.MarketRun</mainClass>
+                            <!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>.</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <type>jar</type>
+                            <includeTypes>jar</includeTypes>
+                            <!--<useUniqueVersions>false</useUniqueVersions>-->
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

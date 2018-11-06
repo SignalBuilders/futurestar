@@ -70,7 +70,7 @@ public class F5mLine {
     }
 
     private static void store(Quotation quotation){
-        MemStorage.storage(quotation, f5mQuotation);
+//        MemStorage.storage(quotation, f5mQuotation);
     }
 }
 

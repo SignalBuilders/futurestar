@@ -20,10 +20,14 @@ public class DataFactory {
             String updateTime = quotation.getUpdateTime();
             int hour = Integer.parseInt(updateTime.split(":")[0]);
             if((hour >= 21 && hour <= 23) || (hour >= 9 && hour <= 15)){//open time
-                F5mLine.produce(quotation);
+//                F5mLine.produce(quotation);
+//                D1Line.produce(quotation);
+                D1Line.produce(quotation.getInstrumentId(), markets);
             }
         }else{
-            F5mLine.produce(quotation);
+//            F5mLine.produce(quotation);
+//            D1Line.produce(quotation);
+            D1Line.produce(quotation.getInstrumentId(), markets);
         }
     }
 

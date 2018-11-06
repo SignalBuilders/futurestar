@@ -1,5 +1,6 @@
 package org.zhps.strategy.main;
 
+import com.alibaba.fastjson.JSON;
 import org.hbase.async.HBaseClient;
 import org.hbase.async.KeyValue;
 import org.hbase.async.Scanner;
@@ -21,8 +22,20 @@ public class BacktrackingRun {
 //        ArrayList<Ave5d10dVO> ave5d10dVOs = new ArrayList<Ave5d10dVO>();
         HBaseClient hBaseClient = BaseHbase.gethBaseClient();
         Scanner scanner = hBaseClient.newScanner("close");
-        scanner.setStartKey("rb|79848769|20151231");
-        scanner.setStopKey("rb|79849895|20150105");
+        scanner.setStartKey("rb10|79819385|20180615");
+        scanner.setStopKey("rb10|79828880|20171120");
+//        scanner.setStartKey("rb|79838770|20161230");
+//        scanner.setStopKey("rb|79839899|20160101");
+//        scanner.setStartKey("rb|79848769|20151231");
+//        scanner.setStopKey("rb|79849895|20150105");
+//        scanner.setStartKey("rb|79858769|20141231");
+//        scanner.setStopKey("rb|79859899|20140101");
+//        scanner.setStartKey("rb|79868769|20131231");
+//        scanner.setStopKey("rb|79869899|20130101");
+//        scanner.setStartKey("rb|79878769|20121231");
+//        scanner.setStopKey("rb|79879899|20120101");
+//        scanner.setStartKey("rb|79888769|20111231");
+//        scanner.setStopKey("rb|79889899|20110101");
         ArrayList<ArrayList<KeyValue>> datas = null;
         try {
             datas = scanner.nextRows(10000).joinUninterruptibly();

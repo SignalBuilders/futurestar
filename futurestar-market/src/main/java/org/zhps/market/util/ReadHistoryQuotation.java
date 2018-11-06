@@ -25,7 +25,7 @@ import java.util.Queue;
 public class ReadHistoryQuotation {
     public static void main(String[] args) {
 //        List<Quotation> quotations = readFromTxt("D:\\work\\doc\\market\\history\\FutureDataHistory_2016.txt", "fg");
-        List<Quotation> quotations = readFromXml("D:\\work\\doc\\market\\history\\MarketData_Year_2015.xls", "rb");
+        List<Quotation> quotations = readFromXml("D:\\work\\doc\\market\\history\\shqh\\MarketData_Year_2014.xls", "rb");
         calculateAve5d10d(quotations);
         writeToHbase(quotations);
         for(Quotation quotation : quotations){

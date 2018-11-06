@@ -19,7 +19,7 @@ public class BaseRedis {
         config.setMaxWaitMillis(PropertiesUtil.REDIS_POOL_WAIT_MILLIS);
         config.setTestOnBorrow(PropertiesUtil.REDIS_POOL_BORROW);
         config.setTestOnReturn(PropertiesUtil.REDIS_POOL_RETURN);
-        jedisPool = new JedisPool(config, PropertiesUtil.REDIS_IP, PropertiesUtil.REDIS_PORT);
+        jedisPool = new JedisPool(config, PropertiesUtil.REDIS_IP, PropertiesUtil.REDIS_PORT, 1000);
     }
 
     public static Jedis getJedis(){

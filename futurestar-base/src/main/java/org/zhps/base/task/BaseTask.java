@@ -24,6 +24,18 @@ public class BaseTask {
         return timer;
     }
 
+    public static Timer startTask(TimerTask timerTask, Long delay, Long interval){
+        Timer timer = new Timer();
+        timer.schedule(timerTask, delay, interval);
+        return timer;
+    }
+
+    public static Timer startTask(TimerTask timerTask, Long delay){
+        Timer timer = new Timer();
+        timer.schedule(timerTask, delay);
+        return timer;
+    }
+
     public static int stopTask(TimerTask timer){
         try{
             timer.cancel();
