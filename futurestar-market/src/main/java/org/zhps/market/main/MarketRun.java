@@ -23,8 +23,12 @@ public class MarketRun {
     public static final Map<String, MdApi> mdApiMap = new HashMap<String, MdApi>();
 
     public static void main(String[] args) {
-        try(Jedis jedis = BaseRedis.getJedis()){
-            String[] rbContracts = jedis.get(PropertiesUtil.MK_VARIETIES[PropertiesUtil.MK_VARIETY_RB]).split(",");
+//        try(Jedis jedis = BaseRedis.getJedis()){
+//            String[] rbContracts = jedis.get(PropertiesUtil.MK_VARIETIES[PropertiesUtil.MK_VARIETY_RB]).split(",");
+            String[] contracts = new String[PropertiesUtil.MK_SUB_NUM];
+            for(int i = 0; i < PropertiesUtil.MK_SUB_NUM; i++){
+                contracts[i] = PropertiesUtil.MK_VARIETIES[i];
+            }
             final MdApi mdApi = new MdApi(PropertiesUtil.MK_FLOW_PATH, true, true);
             mdApiMap.put("mdApi", mdApi);
 
@@ -33,12 +37,12 @@ public class MarketRun {
             mdApi.registerFront(PropertiesUtil.MK_SIM_TEST);
             mdApi.registerLoginInfo("", "", "");
 //        mdApi.registerSubMarketData(PropertiesUtil.MK_CONTRACTS, PropertiesUtil.MK_SUB_NUM);
-            mdApi.registerSubMarketData(rbContracts, rbContracts.length);
-            startSchedule(mdApi, jedis);
+            mdApi.registerSubMarketData(contracts, contracts.length);
+//            startSchedule(mdApi, jedis);
             mdApi.connect();
-        }catch (Exception e){
-            System.out.println("market run error|error:" + e.getMessage());
-        }
+//        }catch (Exception e){
+//            System.out.println("market run error|error:" + e.getMessage());
+//        }
     }
 
     private static void startSchedule(final MdApi mdApi, final Jedis jedis){

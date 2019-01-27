@@ -54,12 +54,13 @@ public class MdSpiAdapter implements MdSpi {
                                int nRequestID, boolean bIsLast) {
         StringBuilder loginInfo = new StringBuilder("Login Success: ").append(pRspUserLogin.getTradingDay())
                 .append(" Date: ").append(new Date());
-        try(Jedis jedis = BaseRedis.getJedis()){
-            jedis.set("traday", pRspUserLogin.getTradingDay());
-            System.out.println(loginInfo.toString());
-        }catch (Exception e){
-            System.out.println("user login error......|error:" + e.getMessage());
-        }
+        System.out.println(loginInfo.toString());
+//        try(Jedis jedis = BaseRedis.getJedis()){
+//            jedis.set("traday", pRspUserLogin.getTradingDay());
+//            System.out.println(loginInfo.toString());
+//        }catch (Exception e){
+//            System.out.println("user login error......|error:" + e.getMessage());
+//        }
     }
 
     @Override
@@ -74,7 +75,7 @@ public class MdSpiAdapter implements MdSpi {
 
     @Override
     public void onRspSubMarketData(CThostFtdcSpecificInstrumentField pSpecificInstrument, CThostFtdcRspInfoField pRspInfo, int nRequestID, boolean bIsLast) {
-
+        System.out.println(pSpecificInstrument.toString());
     }
 
     @Override
@@ -114,7 +115,7 @@ public class MdSpiAdapter implements MdSpi {
 //        writeToKafka(markets);
 //        writeToDisk(markets);
 //        System.out.println(markets.toString());
-        DataFactory.format(markets);
+//        DataFactory.format(markets);
     }
 
     @Override
