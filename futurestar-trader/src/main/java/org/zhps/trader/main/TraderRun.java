@@ -14,14 +14,60 @@ import org.zhps.trader.spi.TraderSpiAdapter;
  * Created on 2017/1/8.
  */
 public class TraderRun {
+
     public static void main(String[] args) {
+        final TraderApi traderApi = new TraderApi(PropertiesUtil.MK_FLOW_PATH);
+        new Thread(){
+            @Override
+            public void run() {
+                TraderSpi traderSpi = new TraderSpiAdapter();
+                traderApi.registerSpi(traderSpi);
+                traderApi.registerFront(PropertiesUtil.TD_SIM_FIRM);
+                traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
+                traderApi.connect();
+            }
+        }.start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        new Thread(){
+            @Override
+            public void run() {
+                Iorder iorder = new Iorder("FG905", 1340, 1);
+//                buyOpen(traderApi, iorder);
+//                buyClose(traderApi, iorder);
+//                buyCloseToday(traderApi, iorder);
+//                sellOpen(traderApi, iorder);
+//                sellClose(traderApi, iorder);
+//                sellCloseToday(traderApi, iorder);
+
+//                Korder korder = new Korder("FG905", "CZCE", "      166118");
+//                kill(traderApi, korder);
+
+//                traderApi.queryTradingAccount();
+
+//                traderApi.queryInvestorPositionDetail();
+//
+                traderApi.queryInvestorPosition();
+
+//                query(traderApi);
+
+            }
+        }.start();
+    }
+
+   /* public static void main(String[] args) {
         final TraderApi traderApi = new TraderApi(PropertiesUtil.MK_FLOW_PATH);
 //        new Thread(){
 //            @Override
 //            public void run() {
                 TraderSpi traderSpi = new TraderSpiAdapter();
                 traderApi.registerSpi(traderSpi);
-                traderApi.registerFront(PropertiesUtil.TD_SIM_TEST);
+                traderApi.registerFront(PropertiesUtil.TD_PROD);
                 traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
                 traderApi.connect();
 //            }
@@ -36,7 +82,7 @@ public class TraderRun {
 //        new Thread(){
 //            @Override
 //            public void run() {
-                Iorder iorder = new Iorder("rb1905", 3408, 1);
+                Iorder iorder = new Iorder("FG905", 1350, 1);
 //                buyOpen(traderApi, iorder);
 //                buyClose(traderApi, iorder);
 //                buyCloseToday(traderApi, iorder);
@@ -44,8 +90,8 @@ public class TraderRun {
 //                sellClose(traderApi, iorder);
 //                sellCloseToday(traderApi, iorder);
 
-                Korder korder = new Korder("rb1905", "SHFE", "     7080883");
-                kill(traderApi, korder);
+//                Korder korder = new Korder("rb1905", "SHFE", "     7080883");
+//                kill(traderApi, korder);
 
 //                traderApi.queryTradingAccount();
 
@@ -57,7 +103,7 @@ public class TraderRun {
 
 //            }
 //        }.start();
-    }
+    }*/
 
     private static void query(TraderApi traderApi){
         Qorder qorder = new Qorder();
@@ -139,7 +185,7 @@ public class TraderRun {
 
     private static void kill(TraderApi traderApi, Korder korder){
         //0.delete, 1.modify
-        korder.setActionFlag(PropertiesUtil.TD_ACTION_FLAG_DELETE);
+        korder.setActionFlag(PropertiesUtil.TD_ACTION_FLAG_MODIFY);
         traderApi.killOrder(korder);
     }
 }
