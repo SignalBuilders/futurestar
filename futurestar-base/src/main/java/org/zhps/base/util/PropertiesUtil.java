@@ -54,6 +54,12 @@ public class PropertiesUtil {
     public static String TD_SIM_TEST;
     public static String TD_SIM_FIRM;
     public static String TD_PROD;
+    public static String TD_BROKER_ID_PROD;
+    public static String TD_ACCOUNT_ID_PROD;
+    public static String TD_PASSWORD_PROD;
+    public static String TD_BROKER_ID_SIMNOW;
+    public static String TD_ACCOUNT_ID_SIMNOW;
+    public static String TD_PASSWORD_SIMNOW;
     public static String TD_BROKER_ID;
     public static String TD_ACCOUNT_ID;
     public static String TD_PASSWORD;
@@ -164,6 +170,12 @@ public class PropertiesUtil {
             TD_SIM_TEST = prop.getProperty("td_sim_test");
             TD_SIM_FIRM = prop.getProperty("td_sim_firm");
             TD_PROD = prop.getProperty("td_prod");
+            TD_BROKER_ID_PROD = prop.getProperty("td_broker_id_prod");
+            TD_ACCOUNT_ID_PROD = prop.getProperty("td_account_id_prod");
+            TD_PASSWORD_PROD = prop.getProperty("td_password_prod");
+            TD_BROKER_ID_SIMNOW = prop.getProperty("td_broker_id_simnow");
+            TD_ACCOUNT_ID_SIMNOW = prop.getProperty("td_account_id_simnow");
+            TD_PASSWORD_SIMNOW = prop.getProperty("td_password_simnow");
             TD_BROKER_ID = prop.getProperty("td_broker_id");
             TD_ACCOUNT_ID = prop.getProperty("td_account_id");
             TD_PASSWORD = prop.getProperty("td_password");
@@ -243,6 +255,19 @@ public class PropertiesUtil {
             e.printStackTrace();
         }finally {
             IOUtils.closeQuietly(is);
+        }
+    }
+
+    public static void setTraderAccount(String traderEnv){
+        if(traderEnv.equalsIgnoreCase(PropertiesUtil.TD_PROD)){
+            PropertiesUtil.TD_BROKER_ID = PropertiesUtil.TD_BROKER_ID_PROD;
+            PropertiesUtil.TD_ACCOUNT_ID = PropertiesUtil.TD_ACCOUNT_ID_PROD;
+            PropertiesUtil.TD_PASSWORD = PropertiesUtil.TD_PASSWORD_PROD;
+        }else if(traderEnv.equalsIgnoreCase(PropertiesUtil.TD_SIM_FIRM)
+                || traderEnv.equalsIgnoreCase(PropertiesUtil.TD_SIM_TEST)){
+            PropertiesUtil.TD_BROKER_ID = PropertiesUtil.TD_BROKER_ID_SIMNOW;
+            PropertiesUtil.TD_ACCOUNT_ID = PropertiesUtil.TD_ACCOUNT_ID_SIMNOW;
+            PropertiesUtil.TD_PASSWORD = PropertiesUtil.TD_PASSWORD_SIMNOW;
         }
     }
 }

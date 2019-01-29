@@ -15,6 +15,10 @@ import org.zhps.trader.spi.TraderSpiAdapter;
  */
 public class TraderRun {
 
+//    private static String traderEnv = PropertiesUtil.TD_PROD;
+//    private static String traderEnv = PropertiesUtil.TD_SIM_FIRM;
+    private static String traderEnv = PropertiesUtil.TD_SIM_TEST;
+
     public static void main(String[] args) {
         final TraderApi traderApi = new TraderApi(PropertiesUtil.MK_FLOW_PATH);
         new Thread(){
@@ -22,7 +26,8 @@ public class TraderRun {
             public void run() {
                 TraderSpi traderSpi = new TraderSpiAdapter();
                 traderApi.registerSpi(traderSpi);
-                traderApi.registerFront(PropertiesUtil.TD_PROD);
+                traderApi.registerFront(traderEnv);
+                PropertiesUtil.setTraderAccount(traderEnv);
                 traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
                 traderApi.connect();
             }
@@ -37,7 +42,7 @@ public class TraderRun {
         new Thread(){
             @Override
             public void run() {
-                Iorder iorder = new Iorder("FG905", 1310, 1);
+                Iorder iorder = new Iorder("FG905", 1500, 1);
 //                buyOpen(traderApi, iorder);
 //                buyClose(traderApi, iorder);
 //                buyCloseToday(traderApi, iorder);
@@ -45,14 +50,14 @@ public class TraderRun {
 //                sellClose(traderApi, iorder);
 //                sellCloseToday(traderApi, iorder);
 
-                Korder korder = new Korder("FG905", "CZCE", "2019012905011548");
-                kill(traderApi, korder);
+//                Korder korder = new Korder("FG905", "CZCE", "2019012905011548");
+//                kill(traderApi, korder);
 
 //                traderApi.queryTradingAccount();
 
 //                traderApi.queryInvestorPositionDetail();
 //
-                traderApi.queryInvestorPosition();
+//                traderApi.queryInvestorPosition();
 
 //                query(traderApi);
 

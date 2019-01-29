@@ -21,6 +21,9 @@ import java.util.*;
  */
 public class MarketRun {
     public static final Map<String, MdApi> mdApiMap = new HashMap<String, MdApi>();
+//    private static String marketEnv = PropertiesUtil.MK_PROD;
+//    private static String marketEnv = PropertiesUtil.MK_SIM_FIRM;
+    private static String marketEnv = PropertiesUtil.MK_SIM_TEST;
 
     public static void main(String[] args) {
 //        try(Jedis jedis = BaseRedis.getJedis()){
@@ -30,7 +33,8 @@ public class MarketRun {
 
         final MdSpiAdapter mdSpiA = new MdSpiAdapter(new MarketProducer());
         mdApi.registerSpi(mdSpiA);
-        mdApi.registerFront(PropertiesUtil.MK_PROD);
+//        mdApi.registerFront(PropertiesUtil.MK_PROD);
+        mdApi.registerFront(marketEnv);
         mdApi.registerLoginInfo("", "", "");
         mdApi.registerSubMarketData(PropertiesUtil.MK_CONTRACTS, PropertiesUtil.MK_SUB_NUM);
 //            mdApi.registerSubMarketData(rbContracts, rbContracts.length);
