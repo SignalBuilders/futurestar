@@ -22,7 +22,7 @@ public class TraderRun {
             public void run() {
                 TraderSpi traderSpi = new TraderSpiAdapter();
                 traderApi.registerSpi(traderSpi);
-                traderApi.registerFront(PropertiesUtil.TD_SIM_FIRM);
+                traderApi.registerFront(PropertiesUtil.TD_PROD);
                 traderApi.registerLoginInfo(PropertiesUtil.TD_BROKER_ID,PropertiesUtil.TD_ACCOUNT_ID,PropertiesUtil.TD_PASSWORD);
                 traderApi.connect();
             }
@@ -37,7 +37,7 @@ public class TraderRun {
         new Thread(){
             @Override
             public void run() {
-                Iorder iorder = new Iorder("FG905", 1340, 1);
+                Iorder iorder = new Iorder("FG905", 1310, 1);
 //                buyOpen(traderApi, iorder);
 //                buyClose(traderApi, iorder);
 //                buyCloseToday(traderApi, iorder);
@@ -45,8 +45,8 @@ public class TraderRun {
 //                sellClose(traderApi, iorder);
 //                sellCloseToday(traderApi, iorder);
 
-//                Korder korder = new Korder("FG905", "CZCE", "      166118");
-//                kill(traderApi, korder);
+                Korder korder = new Korder("FG905", "CZCE", "2019012905011548");
+                kill(traderApi, korder);
 
 //                traderApi.queryTradingAccount();
 
@@ -185,7 +185,7 @@ public class TraderRun {
 
     private static void kill(TraderApi traderApi, Korder korder){
         //0.delete, 1.modify
-        korder.setActionFlag(PropertiesUtil.TD_ACTION_FLAG_MODIFY);
+        korder.setActionFlag(PropertiesUtil.TD_ACTION_FLAG_DELETE);
         traderApi.killOrder(korder);
     }
 }
